@@ -1,0 +1,6 @@
+{
+  "name": "SensorNine",
+  "description": "센서나인(주)의 고정밀 NTC 온도 및 감지 센서 솔루션 공식 웹사이트와 웹 빌더 관리자 콘솔",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
