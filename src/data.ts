@@ -3,8 +3,8 @@ import { CMSPost, CustomContent, SEOMetadata, Inquiry, ProductSpec, EquipmentSpe
 export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   companyNameKR: '센서나인(주)',
   companyNameEN: 'SensorNine Co., Ltd.',
-  logoUrl: '',
-  aboutImageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
+  logoUrl: '/images/sensor_company_logo_i2.png', // sensor_image_video_logo - [위치: 헤더(Header) & 푸터(Footer) 영역의 회사 브랜드 로고 이미지 파일 경로]
+  aboutImageUrl: '/images/sensor_company_i1.jpeg', // sensor_image_video_about - [위치: 웹사이트 메인 화면 내 '회사 소개(About Us)' 섹션의 대표 우측 레이아웃 사옥/장비 소개 배경 이미지]
   aboutFacilityBadgeKR: '신사옥 전경',
   aboutFacilityBadgeEN: 'CORPORATE FACILITY',
   aboutFacilityTitleKR: '센서나인(주) 본사 및 기술연구소',
@@ -99,8 +99,8 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   featuredProduct3Id: '',
 
   // R&D Custom Content
-  carouselVideoUrl: '',
-  rdHeroVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-mechanical-parts-of-a-robotic-arm-moving-41662-large.mp4',
+  carouselVideoUrl: '/videos/sensor_main_v1.mp4', // sensor_image_video_carousel - [위치: 홈(메인) 화면 슬라이드 쇼 바로 아래, '센서나인 주식회사 기술연구원...' 소개 글자가 적힌 영역의 대형 배경 비디오 파일 경로]
+  rdHeroVideoUrl: '/videos/sensor_R&D_v2.mp4', // sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지의 메인 최상단 배경 비디오 (기계 로봇팔 장치 동작 영상)]
   rdHeroSloganKR: '세상을 감지하는 정밀함, 센서나인(주)의 원천기술',
   rdHeroSloganEN: 'Sensing the World with Precision, SensorNine\'s Original R&D Tech',
   rdHeroSubSloganKR: '보일러 및 가전 시스템의 스마트 컨트롤러부터 고성능 EV 배터리 열폭주 차단까지, 타협 없는 철저한 품질과 신기술 개발로 앞서갑니다.',
@@ -110,20 +110,22 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   rdTech1TitleEN: 'High-Precision NTC Thermal Sensing',
   rdTech1DescKR: '특허받은 NTC 박막 써미스터 반도체 칩 기술을 활용하여, 비접촉식 및 가혹한 환경에서도 열대류 오차를 0.01°C 극소 범위 내에서 실시간 제어 및 추출하는 핵심 기술입니다.',
   rdTech1DescEN: 'Utilizing patented NTC thin-film semiconductor chips to extract real-time ambient thermal fluctuations within a 0.01°C error boundary even in hazardous high-pressure situations.',
-  rdTech1VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-lens-of-a-camera-with-moving-aperture-41589-large.mp4',
+  rdTech1VideoUrl: '/videos/sensor_R&D_v3.mp4', // sensor_image_video_tech1 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 1번 - 카메라 렌즈 조리개 장비 동작 비디오]
 
   rdTech2TitleKR: '스마트 노이즈 필터링 알고리즘',
   rdTech2TitleEN: 'Smart Noise Filtering Algorithm',
   rdTech2DescKR: '배관 진동 및 유류 화합물에서 발생하는 정전기적 고주파 아티팩트를 소프트웨어 필터로 전처리하여, 보정 회로를 거치지 않고도 균일하고 안정적인 실시간 시그널 출력을 보장합니다.',
   rdTech2DescEN: 'Pre-filters high-frequency vibration and electrostatic noise artifact through custom signal processing models, ensuring steady calibration outputs without complex wiring overhead.',
-  rdTech2VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4',
+  rdTech2VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4', // sensor_image_video_tech2 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 2번 - 모니터 화면 데이터 분석 시그널 비디오]
 
   rdTech3TitleKR: '초소형 MEMS 센서 패키징',
   rdTech3TitleEN: 'Ultra-miniature MEMS Packaging',
   rdTech3DescKR: '이중 장력 차폐 마이크로 시스 케이싱 기술을 통해 극도로 미세하고 좁은 가전 부속 공간이나 배터리 팩 유압 셀 구조물 내부에 완전 밀착 실장하여 방수 및 진동 충격을 원천 방어합니다.',
   rdTech3DescEN: 'Employs micro-sheath casing techniques allowing packaging into dense electronics and battery layout grids with robust waterproofing, thermal shielding, and shock resistance.',
-  rdTech3VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4',
-  certificatesJson: '[\n  {\n    "id": "cert-1",\n    "titleKR": "ISO 9001:2015 품질 경영 시스템 인증서",\n    "titleEN": "ISO 9001:2015 Quality Management System Certificate",\n    "imageUrl": "https://images.unsplash.com/photo-1589330694653-ded6df53f7eb?auto=format&fit=crop&q=80&w=600"\n  },\n  {\n    "id": "cert-2",\n    "titleKR": "CE 전기안전 적합성 적합인증서",\n    "titleEN": "CE Declaration of Conformity Certification",\n    "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600"\n  },\n  {\n    "id": "cert-3",\n    "titleKR": "NTC 써미스터 소자 접합 특허증",\n    "titleEN": "Patent: NTC thermistor element binding stability",\n    "imageUrl": "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600"\n  }\n]',
+  rdTech3VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4', // sensor_image_video_tech3 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 3번 - 반도체 회로 기판 분석 비디오]
+  
+  // sensor_image_video_certs - [위치: 메인 홈 화면 맨 하단 '품질 및 특허 인증(Certifications)' 갤러리 섹션의 인증서 이미지 3개 설정]
+  certificatesJson: '[\n  {\n    "id": "cert-1",\n    "titleKR": "KIMM 인증서",\n    "titleEN": "KIMM Certificate",\n    "imageUrl": "/images/sensor_certification_i3.jpg"\n  },\n  {\n    "id": "cert-2",\n    "titleKR": "CE 전기안전 적합성 적합인증서",\n    "titleEN": "CE Declaration of Conformity Certification",\n    "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600"\n  },\n  {\n    "id": "cert-3",\n    "titleKR": "NTC 써미스터 소자 접합 특허증",\n    "titleEN": "Patent: NTC thermistor element binding stability",\n    "imageUrl": "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600"\n  }\n]',
 };
 
 export const INITIAL_SEO_METADATA: SEOMetadata = {

@@ -252,7 +252,7 @@ function ScrollLinkedHeroAndVideo({
         }}
         referrerPolicy="no-referrer"
       >
-        <source src={resolvedVideos['rdHero'] || customContent.rdHeroVideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-mechanical-parts-of-a-robotic-arm-moving-41662-large.mp4"} type="video/mp4" />
+        <source src={resolvedVideos['rdHero'] || customContent.rdHeroVideoUrl || "/videos/sensor_R&D_v2.mp4" /* sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지 최상단 대형 메인 비디오 배경 (기계 로봇팔 장치 동작 영상)] */} type="video/mp4" />
       </video>
 
       {/* Text Container Box on Top - Non-reactive and fully visible statics */}
@@ -1075,7 +1075,7 @@ export default function WebsiteView({
                       className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none opacity-100"
                       referrerPolicy="no-referrer"
                     >
-                      <source src={resolvedVideos['carouselVideo'] || customContent.carouselVideoUrl} type="video/mp4" />
+                      <source src={resolvedVideos['carouselVideo'] || customContent.carouselVideoUrl} type="video/mp4" /* sensor_image_video_carousel - [위치: 홈(메인) 화면 슬라이드 쇼 바로 아래, '센서나인 주식회사 기술연구원...' 소개 글자가 적힌 영역의 대형 배경 비디오 파일 경로] */ />
                     </video>
                   )}
 
@@ -1509,7 +1509,7 @@ export default function WebsiteView({
                   <ScrollLinkedSlide direction="right">
                     <div className="relative group max-w-full rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-slate-50">
                       <img 
-                        src={customContent.aboutImageUrl || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200'} 
+                        src={customContent.aboutImageUrl || '/images/sensor_company_i1.jpeg' /* sensor_image_video_about - [위치: 메인 화면의 '회사 소개(About Us)' 섹션 우측 장비/신사옥 소개 배경 이미지] */} 
                         alt="Sensor Nine Corporate Headquarters Building" 
                         className="w-full h-auto block group-hover:scale-105 transition-all duration-700 ease-out"
                         referrerPolicy="no-referrer"
@@ -2278,7 +2278,7 @@ export default function WebsiteView({
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         >
-                          <source src={resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-lens-of-a-camera-with-moving-aperture-41589-large.mp4"} type="video/mp4" />
+                          <source src={resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "/videos/sensor_R&D_v3.mp4" /* sensor_image_video_tech1 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 1번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
                         </video>
                         {/* 100% unmodified video background - no dim overlays */}
                         <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-blue-600 text-white px-2 py-0.5 rounded shadow uppercase">
@@ -2306,7 +2306,7 @@ export default function WebsiteView({
                       </span>
                       <button
                         onClick={() => {
-                          setActiveRdVideoUrl(resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-lens-of-a-camera-with-moving-aperture-41589-large.mp4");
+                          setActiveRdVideoUrl(resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "/videos/sensor_R&D_v3.mp4" /* sensor_image_video_tech1_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 1번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
                           setActiveRdVideoTitle(isKR ? (customContent.rdTech1TitleKR || '고정밀 NTC 열적외선 감지 기술') : (customContent.rdTech1TitleEN || 'High-Precision NTC Thermal Sensing'));
                         }}
                         className="flex items-center gap-1 px-3 py-1 rounded text-[10px] font-bold text-white shadow-3xs cursor-pointer hover:opacity-90"
@@ -2332,7 +2332,7 @@ export default function WebsiteView({
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         >
-                          <source src={resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4"} type="video/mp4" />
+                          <source src={resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4" /* sensor_image_video_tech2 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 2번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
                         </video>
                         {/* 100% unmodified video background - no dim overlays */}
                         <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-[#10B981] text-white px-2 py-0.5 rounded shadow uppercase">
@@ -2360,7 +2360,7 @@ export default function WebsiteView({
                       </span>
                       <button
                         onClick={() => {
-                          setActiveRdVideoUrl(resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4");
+                          setActiveRdVideoUrl(resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4" /* sensor_image_video_tech2_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 2번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
                           setActiveRdVideoTitle(isKR ? (customContent.rdTech2TitleKR || '스마트 노이즈 필터링 알고리즘') : (customContent.rdTech2TitleEN || 'Smart Noise Filtering Algorithm'));
                         }}
                         className="flex items-center gap-1 px-3 py-1 rounded text-[10px] font-bold text-white shadow-3xs cursor-pointer hover:opacity-90"
@@ -2386,7 +2386,7 @@ export default function WebsiteView({
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         >
-                          <source src={resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4"} type="video/mp4" />
+                          <source src={resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4" /* sensor_image_video_tech3 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 3번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
                         </video>
                         {/* 100% unmodified video background - no dim overlays */}
                         <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-slate-700 text-white px-2 py-0.5 rounded shadow uppercase">
@@ -2414,7 +2414,7 @@ export default function WebsiteView({
                       </span>
                       <button
                         onClick={() => {
-                          setActiveRdVideoUrl(resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4");
+                          setActiveRdVideoUrl(resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4" /* sensor_image_video_tech3_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 3번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
                           setActiveRdVideoTitle(isKR ? (customContent.rdTech3TitleKR || '초소형 MEMS 센서 패키징') : (customContent.rdTech3TitleEN || 'Ultra-miniature MEMS Packaging'));
                         }}
                         className="flex items-center gap-1 px-3 py-1 rounded text-[10px] font-bold text-white shadow-3xs cursor-pointer hover:opacity-90"
@@ -2750,19 +2750,19 @@ export default function WebsiteView({
                 id: 'cert-1',
                 titleKR: 'ISO 9001:2015 품질 경영 시스템 인증서',
                 titleEN: 'ISO 9001:2015 Quality Management System Certificate',
-                imageUrl: 'https://images.unsplash.com/photo-1589330694653-ded6df53f7eb?auto=format&fit=crop&q=80&w=600'
+                imageUrl: 'https://images.unsplash.com/photo-1589330694653-ded6df53f7eb?auto=format&fit=crop&q=80&w=600' /* sensor_image_video_cert1 - [위치: 홈 화면 맨 하단 '품질 및 특허 인증' 갤러리 섹션의 1번째 인증서 이미지 파일 경로] */
               },
               {
                 id: 'cert-2',
                 titleKR: 'CE 전기안전 적합성 적합인증서',
                 titleEN: 'CE Declaration of Conformity Certification',
-                imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600'
+                imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600' /* sensor_image_video_cert2 - [위치: 홈 화면 맨 하단 '품질 및 특허 인증' 갤러리 섹션의 2번째 인증서 이미지 파일 경로] */
               },
               {
                 id: 'cert-3',
                 titleKR: 'NTC 써미스터 소자 접합 특허증',
                 titleEN: 'Patent: NTC thermistor element binding stability',
-                imageUrl: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600'
+                imageUrl: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600' /* sensor_image_video_cert3 - [위치: 홈 화면 맨 하단 '품질 및 특허 인증' 갤러리 섹션의 3번째 인증서 이미지 파일 경로] */
               }
             ] as Certificate[];
           })();
