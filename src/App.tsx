@@ -70,6 +70,15 @@ export default function App() {
     }
   }, [state]);
 
+  // Sync document title with SEO meta title based on current language
+  useEffect(() => {
+    try {
+      document.title = state.currentLang === 'KR' ? state.seo.metaTitleKR : state.seo.metaTitleEN;
+    } catch (e) {
+      console.error('Failed to set document title', e);
+    }
+  }, [state.currentLang, state.seo]);
+
   // Page Switcher
   const handlePageChange = (page: PageId) => {
     setState(prev => ({ ...prev, currentPage: page }));
