@@ -91,7 +91,7 @@ function ScrollFadeIn({ children, className = "" }: { children: React.ReactNode;
         setIsIntersecting(true);
         observer.unobserve(entry.target);
       }
-    }, { threshold: 0.25, rootMargin: '0px 0px -280px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -80px 0px' });
 
     if (ref.current) {
       observer.observe(ref.current);
@@ -102,8 +102,8 @@ function ScrollFadeIn({ children, className = "" }: { children: React.ReactNode;
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 transform ${
-        isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      className={`transition-all duration-500 transform ${
+        isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       } ${className}`}
     >
       {children}
@@ -122,7 +122,7 @@ function ScrollSlideIn({ children, className = "", direction = "right" }: { chil
         setIsIntersecting(true);
         observer.unobserve(entry.target);
       }
-    }, { threshold: 0.25, rootMargin: '0px 0px -280px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -80px 0px' });
 
     if (ref.current) {
       observer.observe(ref.current);
@@ -131,13 +131,13 @@ function ScrollSlideIn({ children, className = "", direction = "right" }: { chil
   }, []);
 
   const translateClass = direction === "right" 
-    ? (isIntersecting ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12')
-    : (isIntersecting ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12');
+    ? (isIntersecting ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6')
+    : (isIntersecting ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6');
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out transform ${translateClass} ${className}`}
+      className={`transition-all duration-600 ease-out transform ${translateClass} ${className}`}
     >
       {children}
     </div>
@@ -147,7 +147,7 @@ function ScrollSlideIn({ children, className = "", direction = "right" }: { chil
 
 function ScrollLinkedSlide({ children, direction = "right" }: { children: React.ReactNode; direction?: "left" | "right" }) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [translateX, setTranslateX] = useState(direction === "right" ? 180 : -180);
+  const [translateX, setTranslateX] = useState(direction === "right" ? 140 : -140);
   const [opacity, setOpacity] = useState(0);
   const [hasCompleted, setHasCompleted] = useState(false);
   const completedRef = React.useRef(false);
@@ -157,12 +157,11 @@ function ScrollLinkedSlide({ children, direction = "right" }: { children: React.
       if (completedRef.current) return;
       if (!ref.current) return;
       const rect = ref.current.getBoundingClientRect();
-      const elementHeight = rect.height;
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
       
-      // Only slide in when the element reaches further up into the screen (e.g. 45% of viewport height)
-      const startOffset = viewportHeight * 0.45;
-      const endOffset = viewportHeight * 0.20;
+      // Starts sliding when element is near the bottom (85% height) and finishes at 40% height for instant responsiveness
+      const startOffset = viewportHeight * 0.85;
+      const endOffset = viewportHeight * 0.40;
       
       let activePhase = 0;
       if (rect.top <= startOffset) {
@@ -343,6 +342,7 @@ export default function WebsiteView({
   const [productSearch, setProductSearch] = useState('');
   const [productViewMode, setProductViewMode] = useState<'grid' | 'table'>('grid');
   const [downloadingManual, setDownloadingManual] = useState<string | null>(null);
+  const [productsPage, setProductsPage] = useState<number>(1);
 
   // Equipment Page Filter & Selection State
   const [equipmentFilter, setEquipmentFilter] = useState<string>('All');
@@ -493,6 +493,7 @@ export default function WebsiteView({
 
   // Selected news notice item modal state
   const [selectedPost, setSelectedPost] = useState<CMSPost | null>(null);
+  const [noticesPage, setNoticesPage] = useState<number>(1);
 
   // Policy Modal state ('terms' or 'privacy' or 'email' or null)
   const [activePolicy, setActivePolicy] = useState<'privacy' | 'terms' | 'email' | null>(null);
@@ -1088,7 +1089,7 @@ export default function WebsiteView({
                           {isKR ? '센서나인 주식회사 기술연구원' : 'SENSOR NINE PRECISION LABS'}
                         </div>
 
-                        <h1 className="text-2xl sm:text-3xl lg:text-4.5xl font-black text-slate-950 leading-tight tracking-tight whitespace-pre-line">
+                        <h1 className="text-2xl sm:text-3xl lg:text-4.5xl font-black text-slate-950 leading-tight tracking-tight whitespace-normal sm:whitespace-nowrap">
                           {isKR ? customContent.heroTitleKR : customContent.heroTitleEN}
                         </h1>
 
@@ -1228,7 +1229,7 @@ export default function WebsiteView({
                     </div>
                     <h2 className="text-3xl sm:text-4.5xl font-black tracking-tight text-slate-930 italic">
                       {isKR 
-                        ? (customContent.homePortfolioTitleKR || '제품 라인업') 
+                        ? (customContent.homePortfolioTitleKR || '제품 소개') 
                         : (customContent.homePortfolioTitleEN || 'Product Lineup')}
                     </h2>
                   </div>
@@ -1377,38 +1378,54 @@ export default function WebsiteView({
                         {isKR ? '현재 등록된 게시물이 없습니다.' : 'There are currently no active posts.'}
                       </div>
                     ) : (
-                      posts.map((post) => (
-                        <div key={post.id} className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-xs hover:border-slate-300 transition-all duration-300 flex flex-col sm:flex-row justify-between sm:items-center gap-4 group">
-                          <div className="space-y-2 max-w-xl">
-                            <div className="flex items-center gap-3">
-                              <span className="text-[9px] font-black uppercase bg-slate-100 text-slate-500 px-2.5 py-1 rounded-md select-none">
-                                {isKR ? post.categoryKR : post.categoryEN}
-                              </span>
-                              <span className="text-[10px] text-slate-400 font-mono tracking-wider font-semibold">
-                                {post.date}
-                              </span>
+                      <>
+                        {posts.slice(0, 4).map((post) => (
+                          <div key={post.id} className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-xs hover:border-slate-300 transition-all duration-300 flex flex-col sm:flex-row justify-between sm:items-center gap-4 group">
+                            <div className="space-y-2 max-w-xl">
+                              <div className="flex items-center gap-3">
+                                <span className="text-[9px] font-black uppercase bg-slate-100 text-[#FF4E00] px-2.5 py-1 rounded-md select-none">
+                                  {isKR ? post.categoryKR : post.categoryEN}
+                                </span>
+                                <span className="text-[10px] text-slate-400 font-mono tracking-wider font-semibold">
+                                  {post.date}
+                                </span>
+                              </div>
+                              <h4 
+                                className="font-extrabold text-sm sm:text-base text-slate-930 group-hover:text-[#FF4E00] transition-colors cursor-pointer leading-tight" 
+                                onClick={() => setSelectedPost(post)}
+                              >
+                                {isKR ? post.titleKR : post.titleEN}
+                              </h4>
+                              <p className="text-xs text-slate-400 line-clamp-1 font-medium select-none">
+                                {isKR ? post.contentKR : post.contentEN}
+                              </p>
                             </div>
-                            <h4 
-                              className="font-extrabold text-sm sm:text-base text-slate-930 group-hover:text-blue-600 transition-colors cursor-pointer leading-tight" 
-                              onClick={() => setSelectedPost(post)}
-                            >
-                              {isKR ? post.titleKR : post.titleEN}
-                            </h4>
-                            <p className="text-xs text-slate-400 line-clamp-1 font-medium select-none">
-                              {isKR ? post.contentKR : post.contentEN}
-                            </p>
+                            <div className="flex items-center gap-4 shrink-0 text-xs text-slate-400">
+                              <button 
+                                onClick={() => setSelectedPost(post)}
+                                className="bg-slate-50 hover:bg-slate-900 hover:text-white p-2 px-3.5 rounded-md border border-slate-200 text-slate-600 font-black text-[10px] transition-all cursor-pointer shadow-3xs animate-none"
+                              >
+                                {isKR ? '더보기' : 'Read'}
+                              </button>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-4 shrink-0 text-xs text-slate-400">
-                            <span className="hidden sm:inline font-mono text-[10px] font-bold">Views: {post.views}</span>
-                            <button 
-                              onClick={() => setSelectedPost(post)}
-                              className="bg-slate-50 hover:bg-slate-900 hover:text-white p-2 px-3.5 rounded-md border border-slate-200 text-slate-600 font-black text-[10px] transition-all cursor-pointer shadow-3xs animate-none"
+                        ))}
+                        
+                        {posts.length > 4 && (
+                          <div className="flex justify-end pt-2">
+                            <button
+                              onClick={() => {
+                                onPageChange('notices');
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                              }}
+                              className="text-xs font-bold text-slate-700 hover:text-[#FF4E00] transition-all flex items-center gap-1 group cursor-pointer"
                             >
-                              {isKR ? '더보기' : 'Read'}
+                              <span>{isKR ? '전체 공지사항 보러가기' : 'View All Announcements'}</span>
+                              <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                             </button>
                           </div>
-                        </div>
-                      ))
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
@@ -1612,246 +1629,222 @@ export default function WebsiteView({
         )}
 
         {/* ==================== PAGE: PRODUCTS ==================== */}
-        {currentPage === 'products' && (
-          <div className="py-12 px-4 sm:px-8 max-w-6xl mx-auto animate-fade-in">
-            {/* Header */}
-            <div className="border-b border-slate-200 pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div>
-                <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: primaryColor }}>
-                  CATALOG & DATASHEETS
+        {currentPage === 'products' && (() => {
+          const filteredProducts = PRODUCTS_LIST.filter(prod => {
+            const matchesCategory = matchesProductCategory(prod, productFilter);
+            const matchesSearch = 
+              prod.model.toLowerCase().includes(productSearch.toLowerCase()) ||
+              prod.nameKR.toLowerCase().includes(productSearch.toLowerCase()) ||
+              prod.nameEN.toLowerCase().includes(productSearch.toLowerCase()) ||
+              prod.appKR.toLowerCase().includes(productSearch.toLowerCase()) ||
+              prod.appEN.toLowerCase().includes(productSearch.toLowerCase());
+            return matchesCategory && matchesSearch;
+          });
+
+          const PRODUCTS_PER_PAGE = 12;
+          const totalProductPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+          const activeProductPage = Math.min(Math.max(1, productsPage), Math.max(1, totalProductPages));
+          const startIndex = (activeProductPage - 1) * PRODUCTS_PER_PAGE;
+          const paginatedProducts = filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+
+          return (
+            <div className="py-12 px-4 sm:px-8 max-w-6xl mx-auto animate-fade-in">
+              {/* Header */}
+              <div className="border-b border-slate-200 pb-6 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: primaryColor }}>
+                    DATASHEETS
+                  </div>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 italic tracking-tight whitespace-nowrap">
+                    {isKR ? '제품 소개' : 'PRODUCTS'}
+                  </h1>
                 </div>
-                <h1 className="text-4xl font-bold text-slate-900 italic tracking-tight">
-                  {isKR ? '제품 라인업' : 'PRODUCTS'}
-                </h1>
-              </div>
 
-              {/* Advanced search/filters */}
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="relative">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
-                  <input
-                    type="text"
-                    placeholder={isKR ? "모델명 또는 용도 검색..." : "Search Model or Apps..."}
-                    value={productSearch}
-                    onChange={(e) => setProductSearch(e.target.value)}
-                    className="pl-9 pr-4 py-1.5 text-xs rounded-md border border-slate-300 w-48 sm:w-64 bg-white focus:outline-hidden focus:border-blue-500 placeholder-slate-400"
-                  />
-                </div>
+                {/* Advanced search/filters */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="relative">
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder={isKR ? "모델명 또는 용도 검색..." : "Search Model or Apps..."}
+                      value={productSearch}
+                      onChange={(e) => { setProductSearch(e.target.value); setProductsPage(1); }}
+                      className="pl-9 pr-4 py-1.5 text-xs rounded-md border border-slate-300 w-48 sm:w-64 bg-white focus:outline-hidden focus:border-blue-500 placeholder-slate-400"
+                    />
+                  </div>
 
-                {/* Dynamic Category Tabs */}
-                <div className="flex flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-lg border border-slate-200 shrink-0 select-none">
-                  {[
-                    { value: 'All', labelKR: '전체', labelEN: 'All' },
-                    { value: '온도센서', labelKR: '온도센서', labelEN: 'Temp Sensors' },
-                    { value: '배관용온도센서', labelKR: '배관용온도센서', labelEN: 'Pipe Temp Sensors' },
-                    { value: '외기용온도센서', labelKR: '외기용온도센서', labelEN: 'Outdoor Temp Sensors' },
-                    { value: '실내온도센서', labelKR: '실내온도센서', labelEN: 'Indoor Temp Sensors' },
-                    { value: 'K-TYPE센서', labelKR: 'K-TYPE센서', labelEN: 'K-Type Sensors' },
-                    { value: '바이메탈센서', labelKR: '바이메탈센서', labelEN: 'Bi-Metal Sensors' },
-                    { value: '불꽃감지센서', labelKR: '불꽃감지센서', labelEN: 'Flame Sensors' },
-                    { value: '수위감지센서', labelKR: '수위감지센서', labelEN: 'Water Level Sensors' },
-                    { value: '기타', labelKR: '기타', labelEN: 'Others' }
-                  ].map((cat) => (
-                    <button
-                      key={cat.value}
-                      onClick={() => setProductFilter(cat.value)}
-                      className={`text-[10px] px-3 py-1.5 rounded transition-all font-bold cursor-pointer ${
-                        productFilter === cat.value
-                          ? 'bg-white shadow-xs text-slate-800 border border-slate-200/50'
-                          : 'text-slate-400 hover:text-slate-700'
-                      }`}
-                      style={productFilter === cat.value ? { color: primaryColor } : {}}
-                    >
-                      {isKR ? cat.labelKR : cat.labelEN}
-                    </button>
-                  ))}
+                  {/* Dynamic Category Tabs */}
+                  <div className="flex flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-lg border border-slate-200 shrink-0 select-none">
+                    {[
+                      { value: 'All', labelKR: '전체', labelEN: 'All' },
+                      { value: '온도센서', labelKR: '온도센서', labelEN: 'Temp Sensors' },
+                      { value: '배관용온도센서', labelKR: '배관용온도센서', labelEN: 'Pipe Temp Sensors' },
+                      { value: '외기용온도센서', labelKR: '외기용온도센서', labelEN: 'Outdoor Temp Sensors' },
+                      { value: '실내온도센서', labelKR: '실내온도센서', labelEN: 'Indoor Temp Sensors' },
+                      { value: 'K-TYPE센서', labelKR: 'K-TYPE센서', labelEN: 'K-Type Sensors' },
+                      { value: '바이메탈센서', labelKR: '바이메탈센서', labelEN: 'Bi-Metal Sensors' },
+                      { value: '불꽃감지센서', labelKR: '불꽃감지센서', labelEN: 'Flame Sensors' },
+                      { value: '수위감지센서', labelKR: '수위감지센서', labelEN: 'Water Level Sensors' },
+                      { value: '기타', labelKR: '기타', labelEN: 'Others' }
+                    ].map((cat) => (
+                      <button
+                        key={cat.value}
+                        onClick={() => { setProductFilter(cat.value); setProductsPage(1); }}
+                        className={`text-[10px] px-3 py-1.5 rounded transition-all font-bold cursor-pointer ${
+                          productFilter === cat.value
+                            ? 'bg-white shadow-xs text-slate-800 border border-slate-200/50'
+                            : 'text-slate-400 hover:text-slate-700'
+                        }`}
+                        style={productFilter === cat.value ? { color: primaryColor } : {}}
+                      >
+                        {isKR ? cat.labelKR : cat.labelEN}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* View Mode & Count Row */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 select-none">
-              <div className="text-xs text-slate-500 font-medium">
-                {isKR ? '총' : 'Total'} <span className="font-bold text-slate-800 font-mono text-sm">{
-                  PRODUCTS_LIST.filter(prod => {
-                    const matchesCategory = matchesProductCategory(prod, productFilter);
-                    const matchesSearch = 
-                      prod.model.toLowerCase().includes(productSearch.toLowerCase()) ||
-                      prod.nameKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                      prod.nameEN.toLowerCase().includes(productSearch.toLowerCase()) ||
-                      prod.appKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                      prod.appEN.toLowerCase().includes(productSearch.toLowerCase());
-                    return matchesCategory && matchesSearch;
-                  }).length
-                }</span> {isKR ? '개의 고정밀 센서 규격 제공' : 'high-precision sensor specifications listed'}
+              {/* View Mode & Count Row */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 select-none">
+                <div className="text-xs text-slate-500 font-medium">
+                  {isKR ? '총' : 'Total'} <span className="font-bold text-slate-800 font-mono text-sm">{filteredProducts.length}</span> {isKR ? '개의 고정밀 센서 규격 제공' : 'high-precision sensor specifications listed'}
+                </div>
+
+                {/* Grid / Table Toggle Controls */}
+                <div className="bg-slate-100 p-0.5 rounded-md flex gap-0.5 border border-slate-200 shrink-0">
+                  <button
+                    onClick={() => setProductViewMode('grid')}
+                    className={`p-1 px-3 rounded transition-all flex items-center gap-1 text-[10px] font-bold cursor-pointer ${
+                      productViewMode === 'grid'
+                        ? 'bg-white border border-slate-200/40 text-slate-900 shadow-2xs'
+                        : 'text-slate-400 hover:text-slate-700'
+                    }`}
+                    style={productViewMode === 'grid' ? { color: primaryColor } : {}}
+                  >
+                    <LayoutGrid size={11} />
+                    {isKR ? '카탈로그형 (카드)' : 'Catalog (Grid)'}
+                  </button>
+                  <button
+                    onClick={() => setProductViewMode('table')}
+                    className={`p-1 px-3 rounded transition-all flex items-center gap-1 text-[10px] font-bold cursor-pointer ${
+                      productViewMode === 'table'
+                        ? 'bg-white border border-slate-200/40 text-slate-900 shadow-2xs'
+                        : 'text-slate-400 hover:text-slate-700'
+                    }`}
+                    style={productViewMode === 'table' ? { color: primaryColor } : {}}
+                  >
+                    <List size={11} />
+                    {isKR ? '전체 상세사양 (표)' : 'Specs List (Table)'}
+                  </button>
+                </div>
               </div>
 
-              {/* Grid / Table Toggle Controls */}
-              <div className="bg-slate-100 p-0.5 rounded-md flex gap-0.5 border border-slate-200 shrink-0">
-                <button
-                  onClick={() => setProductViewMode('grid')}
-                  className={`p-1 px-3 rounded transition-all flex items-center gap-1 text-[10px] font-bold cursor-pointer ${
-                    productViewMode === 'grid'
-                      ? 'bg-white border border-slate-200/40 text-slate-900 shadow-2xs'
-                      : 'text-slate-400 hover:text-slate-700'
-                  }`}
-                  style={productViewMode === 'grid' ? { color: primaryColor } : {}}
-                >
-                  <LayoutGrid size={11} />
-                  {isKR ? '카탈로그형 (카드)' : 'Catalog (Grid)'}
-                </button>
-                <button
-                  onClick={() => setProductViewMode('table')}
-                  className={`p-1 px-3 rounded transition-all flex items-center gap-1 text-[10px] font-bold cursor-pointer ${
-                    productViewMode === 'table'
-                      ? 'bg-white border border-slate-200/40 text-slate-900 shadow-2xs'
-                      : 'text-slate-400 hover:text-slate-700'
-                  }`}
-                  style={productViewMode === 'table' ? { color: primaryColor } : {}}
-                >
-                  <List size={11} />
-                  {isKR ? '전체 상세사양 (표)' : 'Specs List (Table)'}
-                </button>
-              </div>
-            </div>
+              {/* Display Products: Grid Mode */}
+              {productViewMode === 'grid' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in" id="product-grid-layout">
+                  {paginatedProducts.map((prod) => {
+                    const categoryName = getProductCategoryDisplay(prod);
+                    const isWaterLevel = categoryName.includes('수위');
+                    const isPipe = categoryName.includes('배관');
+                    const isAmbient = categoryName.includes('외기') || categoryName.includes('실내');
+                    const isHighTemp = categoryName.includes('K-TYPE') || categoryName.includes('바이메탈');
+                    const isAccessory = categoryName.includes('기타');
 
-            {/* Display Products: Grid Mode */}
-            {productViewMode === 'grid' && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in" id="product-grid-layout">
-                {PRODUCTS_LIST.filter(prod => {
-                  const matchesCategory = matchesProductCategory(prod, productFilter);
-                  const matchesSearch = 
-                    prod.model.toLowerCase().includes(productSearch.toLowerCase()) ||
-                    prod.nameKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                    prod.nameEN.toLowerCase().includes(productSearch.toLowerCase()) ||
-                    prod.appKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                    prod.appEN.toLowerCase().includes(productSearch.toLowerCase());
-                  return matchesCategory && matchesSearch;
-                }).map((prod) => {
-                  const categoryName = getProductCategoryDisplay(prod);
-                  const isWaterLevel = categoryName.includes('수위');
-                  const isPipe = categoryName.includes('배관');
-                  const isAmbient = categoryName.includes('외기') || categoryName.includes('실내');
-                  const isHighTemp = categoryName.includes('K-TYPE') || categoryName.includes('바이메탈');
-                  const isAccessory = categoryName.includes('기타');
+                    return (
+                      <div 
+                        key={prod.model} 
+                        className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
+                      >
+                        <div>
+                          {/* Image area with structured vector styling placeholders */}
+                          <div className="relative aspect-video w-full bg-slate-50 border-b border-slate-100 flex items-center justify-center overflow-hidden">
+                            {prod.imageUrl ? (
+                              <img 
+                                src={prod.imageUrl} 
+                                alt={isKR ? prod.nameKR : prod.nameEN} 
+                                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" 
+                                referrerPolicy="no-referrer"
+                              />
+                            ) : (
+                              <div className="flex flex-col items-center gap-2 select-none text-slate-400 p-4">
+                                {/* Category Specific SVG Icons */}
+                                {isPipe ? (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 9h18M3 15h18M12 3v12M12 9a2 2 0 110-4 2 2 0 010 4z" />
+                                  </svg>
+                                ) : isAmbient ? (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
+                                  </svg>
+                                ) : isHighTemp ? (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                  </svg>
+                                ) : isWaterLevel ? (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 .9-.6 1.6-1.5 1.6H5.25c-.9 0-1.5-.7-1.5-1.6v-4.25m16.5 0a2.25 2.25 0 00-2.25-2.25h-12a2.25 2.25 0 00-2.25 2.25" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m-3-12h6" />
+                                  </svg>
+                                ) : isAccessory ? (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593v18H9.594v-18z" />
+                                    <circle cx="12" cy="12" r="2" />
+                                  </svg>
+                                ) : (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v15m0 0a3 3 0 100 6 3 3 0 000-6zm-4-9h8" />
+                                  </svg>
+                                )}
+                                <span className="text-[10px] font-mono tracking-wider font-extrabold text-slate-400 uppercase mt-1">
+                                  {isKR ? '도면 사양 커스텀' : 'DESIGN ON REQUEST'}
+                                </span>
+                              </div>
+                            )}
+                          </div>
 
-                  return (
-                    <div 
-                      key={prod.model} 
-                      className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
-                    >
-                      <div>
-                        {/* Image area with structured vector styling placeholders */}
-                        <div className="relative aspect-video w-full bg-slate-50 border-b border-slate-100 flex items-center justify-center overflow-hidden">
-                          {prod.imageUrl ? (
-                            <img 
-                              src={prod.imageUrl} 
-                              alt={isKR ? prod.nameKR : prod.nameEN} 
-                              className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" 
-                              referrerPolicy="no-referrer"
-                            />
-                          ) : (
-                            <div className="flex flex-col items-center gap-2 select-none text-slate-400 p-4">
-                              {/* Semantic Category Specific SVG Line Icons */}
-                              {isPipe ? (
-                                <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 9h18M3 15h18M12 3v12M12 9a2 2 0 110-4 2 2 0 010 4z" />
-                                </svg>
-                              ) : isAmbient ? (
-                                <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
-                                </svg>
-                              ) : isHighTemp ? (
-                                <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                                </svg>
-                              ) : isWaterLevel ? (
-                                <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 .9-.6 1.6-1.5 1.6H5.25c-.9 0-1.5-.7-1.5-1.6v-4.25m16.5 0a2.25 2.25 0 00-2.25-2.25h-12a2.25 2.25 0 00-2.25 2.25" />
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m-3-12h6" />
-                                </svg>
-                              ) : isAccessory ? (
-                                <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593v18H9.594v-18z" />
-                                  <circle cx="12" cy="12" r="2" />
-                                </svg>
-                              ) : (
-                                <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v15m0 0a3 3 0 100 6 3 3 0 000-6zm-4-9h8" />
-                                </svg>
-                              )}
-                              <span className="text-[10px] font-mono tracking-wider font-extrabold text-slate-400 uppercase mt-1">
-                                {isKR ? '도면 사양 커스텀' : 'DESIGN ON REQUEST'}
+                          {/* Content description mapping */}
+                          <div className="p-5">
+                            <div className="flex items-center justify-between gap-2 mb-1.5">
+                              <span className="font-mono text-[10px] font-black text-slate-400 tracking-wider">
+                                {prod.model}
+                              </span>
+                              <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500 truncate max-w-40 border border-slate-200/40">
+                                {getProductCategoryDisplay(prod)}
                               </span>
                             </div>
-                          )}
+                            
+                            <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1 leading-snug mb-3">
+                              {isKR ? prod.nameKR : prod.nameEN}
+                            </h3>
 
-                          {/* Manual / Brochure Tag */}
-                          {prod.isManual && (
-                            <div className="absolute top-2.5 right-2.5 bg-red-500 text-white font-black text-[9px] px-2 py-0.5 rounded shadow-sm select-none flex items-center gap-1.5">
-                              <FileText size={10} />
-                              {isKR ? '지침서 / 설명서' : 'INSTRUCTION MANUAL'}
+                            {/* Specification Compact Matrix */}
+                            <div className="space-y-1.5 bg-slate-50 rounded-lg p-3 text-[11px] border border-slate-200/40 font-medium font-sans">
+                              <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                                <span className="text-slate-400 font-bold">{isKR ? '측정 범위' : 'Operating Range'}</span>
+                                <span className="font-mono text-slate-700 font-bold text-[10px]">{prod.range}</span>
+                              </div>
+                              <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
+                                <span className="text-slate-400 font-bold">{isKR ? '공차 정밀도' : 'Tolerance'}</span>
+                                <span className="font-mono text-emerald-600 font-black bg-emerald-50 px-1 py-0.2 rounded text-[10px]">
+                                  {prod.accuracy}
+                                </span>
+                              </div>
+                              <div className="flex flex-col gap-0.5 pt-1">
+                                <span className="text-slate-400 font-bold text-[10px]">{isKR ? '보호 등급 / 외경 설계' : 'Protection Rating'}</span>
+                                <span className="text-slate-600 text-[10px] truncate">{isKR ? prod.ratingKR : prod.ratingEN}</span>
+                              </div>
                             </div>
-                          )}
+
+                            {/* App Scope */}
+                            <div className="mt-3.5 text-[11px] text-slate-500 leading-relaxed font-medium">
+                              <span className="font-bold text-slate-700 block mb-0.5">{isKR ? '공정 적용분야:' : 'Core Application:'}</span>
+                              <p className="line-clamp-2 md:line-clamp-3">{isKR ? prod.appKR : prod.appEN}</p>
+                            </div>
+                          </div>
                         </div>
 
-                        {/* Content description mapping */}
-                        <div className="p-5">
-                          <div className="flex items-center justify-between gap-2 mb-1.5">
-                            <span className="font-mono text-[10px] font-black text-slate-400 tracking-wider">
-                              {prod.model}
-                            </span>
-                            <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500 truncate max-w-40 border border-slate-200/40">
-                              {getProductCategoryDisplay(prod)}
-                            </span>
-                          </div>
-                          
-                          <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1 leading-snug mb-3">
-                            {isKR ? prod.nameKR : prod.nameEN}
-                          </h3>
-
-                          {/* Specification Compact Matrix */}
-                          <div className="space-y-1.5 bg-slate-50 rounded-lg p-3 text-[11px] border border-slate-200/40 font-medium font-sans">
-                            <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
-                              <span className="text-slate-400 font-bold">{isKR ? '측정 범위' : 'Operating Range'}</span>
-                              <span className="font-mono text-slate-700 font-bold text-[10px]">{prod.range}</span>
-                            </div>
-                            <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
-                              <span className="text-slate-400 font-bold">{isKR ? '공차 정밀도' : 'Tolerance'}</span>
-                              <span className="font-mono text-emerald-600 font-black bg-emerald-50 px-1 py-0.2 rounded text-[10px]">
-                                {prod.accuracy}
-                              </span>
-                            </div>
-                            <div className="flex flex-col gap-0.5 pt-1">
-                              <span className="text-slate-400 font-bold text-[10px]">{isKR ? '보호 등급 / 외경 설계' : 'Protection Rating'}</span>
-                              <span className="text-slate-600 text-[10px] truncate">{isKR ? prod.ratingKR : prod.ratingEN}</span>
-                            </div>
-                          </div>
-
-                          {/* App Scope */}
-                          <div className="mt-3.5 text-[11px] text-slate-500 leading-relaxed font-medium">
-                            <span className="font-bold text-slate-700 block mb-0.5">{isKR ? '공정 적용분야:' : 'Core Application:'}</span>
-                            <p className="line-clamp-2 md:line-clamp-3">{isKR ? prod.appKR : prod.appEN}</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Footer Actions */}
-                      <div className="p-4 pt-0 border-t border-slate-100 mt-2 bg-slate-50/40 flex items-center justify-between gap-2.5">
-                        {prod.isManual ? (
-                          <button 
-                            onClick={() => {
-                              if (typeof setDownloadingManual === 'function') {
-                                setDownloadingManual(isKR ? prod.nameKR : prod.nameEN);
-                                setTimeout(() => setDownloadingManual(null), 3000);
-                              }
-                            }}
-                            className="w-full flex items-center justify-center gap-1.5 text-[11px] font-black p-2 rounded-lg border text-white transition-all bg-red-600 hover:bg-red-700 border-red-700 shadow-2xs cursor-pointer focus:outline-hidden"
-                          >
-                            <Download size={12} />
-                            {isKR ? '매뉴얼 PDF 다운로드' : 'Download Manual (PDF)'}
-                          </button>
-                        ) : (
+                        {/* Footer Actions */}
+                        <div className="p-4 pt-0 border-t border-slate-100 mt-2 bg-slate-50/40 flex items-center justify-between gap-2.5">
                           <div className="w-full flex items-center justify-between">
                             <span className="text-[10px] text-slate-400 font-bold italic">
                               {isKR ? '※ SUS 하우징 규격 설계 지원' : '※ Customized dimensions on request'}
@@ -1864,126 +1857,177 @@ export default function WebsiteView({
                               <ArrowRight size={10} />
                             </button>
                           </div>
-                        )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Display Products: Table Mode */}
-            {productViewMode === 'table' && (
-              <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-xs animate-fade-in" id="product-table-layout">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs border-collapse">
-                    <thead>
-                      <tr className="bg-slate-50 border-b border-slate-200 text-slate-400 uppercase tracking-widest font-black text-[10px]">
-                        <th className="p-4 pl-6 w-1/12">{isKR ? '모델명' : 'Model Code'}</th>
-                        <th className="p-4 w-3/12">{isKR ? '카테고리' : 'Category'}</th>
-                        <th className="p-4 w-3/12">{isKR ? '상세 제품명' : 'Specification Name'}</th>
-                        <th className="p-4 w-2/12">{isKR ? '측정 범위' : 'Operating Range'}</th>
-                        <th className="p-4 w-1/12">{isKR ? '공차 정밀도' : 'Tolerance'}</th>
-                        <th className="p-4 pr-6 w-2/12">{isKR ? '설계 공법 / 보호 등급' : 'Housing & Rating'}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {PRODUCTS_LIST.filter(prod => {
-                        const matchesCategory = matchesProductCategory(prod, productFilter);
-                        const matchesSearch = 
-                          prod.model.toLowerCase().includes(productSearch.toLowerCase()) ||
-                          prod.nameKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                          prod.nameEN.toLowerCase().includes(productSearch.toLowerCase()) ||
-                          prod.appKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                          prod.appEN.toLowerCase().includes(productSearch.toLowerCase());
-                        return matchesCategory && matchesSearch;
-                      }).map((prod, index) => (
-                        <tr 
-                          key={prod.model} 
-                          className={`border-b border-slate-100 hover:bg-slate-50/80 transition-colors ${
-                            index % 2 === 1 ? 'bg-slate-50/30' : ''
-                          }`}
-                        >
-                          <td className="p-4 pl-6 font-mono font-bold text-slate-900 whitespace-nowrap">
-                            {prod.model}
-                          </td>
-                          <td className="p-4">
-                            <span 
-                              className="font-bold text-[9px] px-2.5 py-1 rounded text-slate-600 bg-slate-100 border border-slate-200/50 block w-max truncate max-w-48"
-                            >
-                              {getProductCategoryDisplay(prod)}
-                            </span>
-                          </td>
-                          <td className="p-4 font-bold text-slate-800">
-                            <div className="flex items-center gap-2">
-                              {prod.imageUrl && (
-                                <div className="w-8 h-8 rounded border border-slate-200 bg-white/50 shrink-0 overflow-hidden shadow-2xs">
-                                  <img src={prod.imageUrl} alt={prod.nameKR} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                                </div>
-                              )}
-                              <span>{isKR ? prod.nameKR : prod.nameEN}</span>
-                            </div>
-                          </td>
-                          <td className="p-4 font-mono font-semibold text-slate-700">
-                            {prod.range}
-                          </td>
-                          <td className="p-4">
-                            <span className="font-mono text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">
-                              {prod.accuracy}
-                            </span>
-                          </td>
-                          <td className="p-4 pr-6 text-slate-500 whitespace-nowrap">
-                            {isKR ? prod.ratingKR : prod.ratingEN}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                    );
+                  })}
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Empty State Banner */}
-            {PRODUCTS_LIST.filter(prod => {
-              const matchesCategory = matchesProductCategory(prod, productFilter);
-              const matchesSearch = 
-                prod.model.toLowerCase().includes(productSearch.toLowerCase()) ||
-                prod.nameKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                prod.nameEN.toLowerCase().includes(productSearch.toLowerCase()) ||
-                prod.appKR.toLowerCase().includes(productSearch.toLowerCase()) ||
-                prod.appEN.toLowerCase().includes(productSearch.toLowerCase());
-              return matchesCategory && matchesSearch;
-            }).length === 0 && (
-              <div className="p-16 text-center text-slate-400 bg-white rounded-xl border border-slate-200 border-dashed">
-                <Search size={32} className="mx-auto mb-3 text-slate-300" />
-                <p className="font-bold text-slate-600 text-sm mb-1">
-                  {isKR ? '검색 필터와 일치하는 제품이 없습니다.' : 'No sensor models matched your query.'}
-                </p>
-                <p className="text-xs text-slate-400">
-                  {isKR ? '단어 철자를 확인해주시거나 다른 카테고리를 선택해보세요.' : 'Double-check spellings or try clearing the current filter.'}
-                </p>
-              </div>
-            )}
+              {/* Display Products: Table Mode */}
+              {productViewMode === 'table' && (
+                <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-xs animate-fade-in" id="product-table-layout">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-slate-50 border-b border-slate-200 text-slate-400 uppercase tracking-widest font-black text-[10px]">
+                          <th className="p-4 pl-6 w-1/12">{isKR ? '모델명' : 'Model Code'}</th>
+                          <th className="p-4 w-3/12">{isKR ? '카테고리' : 'Category'}</th>
+                          <th className="p-4 w-3/12">{isKR ? '상세 제품명' : 'Specification Name'}</th>
+                          <th className="p-4 w-2/12">{isKR ? '측정 범위' : 'Operating Range'}</th>
+                          <th className="p-4 w-1/12">{isKR ? '공차 정밀도' : 'Tolerance'}</th>
+                          <th className="p-4 pr-6 w-2/12">{isKR ? '설계 공법 / 보호 등급' : 'Housing & Rating'}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {paginatedProducts.map((prod, index) => (
+                          <tr 
+                            key={prod.model} 
+                            className={`border-b border-slate-100 hover:bg-slate-50/80 transition-colors ${
+                              index % 2 === 1 ? 'bg-slate-50/30' : ''
+                            }`}
+                          >
+                            <td className="p-4 pl-6 font-mono font-bold text-slate-900 whitespace-nowrap">
+                              {prod.model}
+                            </td>
+                            <td className="p-4">
+                              <span 
+                                className="font-bold text-[9px] px-2.5 py-1 rounded text-slate-600 bg-slate-100 border border-slate-200/50 block w-max truncate max-w-48"
+                              >
+                                {getProductCategoryDisplay(prod)}
+                              </span>
+                            </td>
+                            <td className="p-4 font-bold text-slate-800">
+                              <div className="flex items-center gap-2">
+                                {prod.imageUrl && (
+                                  <div className="w-8 h-8 rounded border border-slate-200 bg-white/50 shrink-0 overflow-hidden shadow-2xs">
+                                    <img src={prod.imageUrl} alt={prod.nameKR} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                                  </div>
+                                )}
+                                <span>{isKR ? prod.nameKR : prod.nameEN}</span>
+                              </div>
+                            </td>
+                            <td className="p-4 font-mono font-semibold text-slate-700">
+                              {prod.range}
+                            </td>
+                            <td className="p-4">
+                              <span className="font-mono text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">
+                                {prod.accuracy}
+                              </span>
+                            </td>
+                            <td className="p-4 pr-6 text-slate-500 whitespace-nowrap">
+                              {isKR ? prod.ratingKR : prod.ratingEN}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
 
-            {/* Industrial Quote */}
-            <div className="mt-8 bg-slate-100 rounded-lg p-6 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Custom Probe Manufacturing</span>
-                <p className="text-xs text-slate-700 font-medium">
-                  {isKR 
-                    ? '설비 도면 규격에 근거하여 SUS 등급 하우징, 리드선 코팅, 프로브 직경 등 일체형 맞춤 사양 커스텀을 지원합니다.' 
-                    : 'We fabricate fully customized physical housings, cabling options, and probe diameter metrics for direct integration.'}
-                </p>
+              {/* Pagination Control */}
+              {totalProductPages > 1 && (
+                <div className="flex items-center justify-center gap-1 mt-10 select-none">
+                  <button
+                    onClick={() => {
+                      setProductsPage(1);
+                      const scroller = document.getElementById("preview-viewport-scroller");
+                      if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    disabled={activeProductPage === 1}
+                    className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs"
+                  >
+                    &laquo;
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProductsPage(prev => Math.max(1, prev - 1));
+                      const scroller = document.getElementById("preview-viewport-scroller");
+                      if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    disabled={activeProductPage === 1}
+                    className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs mr-1"
+                  >
+                    &lsaquo;
+                  </button>
+
+                  {Array.from({ length: totalProductPages }, (_, i) => i + 1).map(num => (
+                    <button
+                      key={num}
+                      onClick={() => {
+                        setProductsPage(num);
+                        const scroller = document.getElementById("preview-viewport-scroller");
+                        if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className={`w-8 h-8 text-xs font-black transition-all rounded px-2 cursor-pointer ${
+                        activeProductPage === num 
+                          ? 'text-blue-600 text-sm border border-blue-105 bg-blue-50/50' 
+                          : 'text-slate-700 hover:text-blue-600'
+                      }`}
+                    >
+                      {num}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={() => {
+                      setProductsPage(prev => Math.min(totalProductPages, prev + 1));
+                      const scroller = document.getElementById("preview-viewport-scroller");
+                      if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    disabled={activeProductPage === totalProductPages}
+                    className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs ml-1"
+                  >
+                    &rsaquo;
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProductsPage(totalProductPages);
+                      const scroller = document.getElementById("preview-viewport-scroller");
+                      if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    disabled={activeProductPage === totalProductPages}
+                    className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs"
+                  >
+                    &raquo;
+                  </button>
+                </div>
+              )}
+
+              {/* Empty State Banner */}
+              {filteredProducts.length === 0 && (
+                <div className="p-16 text-center text-slate-400 bg-white rounded-xl border border-slate-200 border-dashed">
+                  <Search size={32} className="mx-auto mb-3 text-slate-300" />
+                  <p className="font-bold text-slate-600 text-sm mb-1">
+                    {isKR ? '검색 필터와 일치하는 제품이 없습니다.' : 'No sensor models matched your query.'}
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    {isKR ? '단어 철자를 확인해주시거나 다른 카테고리를 선택해보세요.' : 'Double-check spellings or try clearing the current filter.'}
+                  </p>
+                </div>
+              )}
+
+              {/* Industrial Quote */}
+              <div className="mt-8 bg-slate-100 rounded-lg p-6 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Custom Probe Manufacturing</span>
+                  <p className="text-xs text-slate-700 font-medium">
+                    {isKR 
+                      ? '설비 도면 규격에 근거하여 SUS 등급 하우징, 리드선 코팅, 프로브 직경 등 일체형 맞춤 사양 커스텀을 지원합니다.' 
+                      : 'We fabricate fully customized physical housings, cabling options, and probe diameter metrics for direct integration.'}
+                  </p>
+                </div>
+                <button 
+                  onClick={() => onPageChange('contact')}
+                  className="bg-white hover:bg-slate-50 px-4 py-2 border rounded-md font-bold text-xs shadow-2xs shrink-0 whitespace-nowrap"
+                >
+                  {isKR ? '사양 검토 문의' : 'Consult with Engineer'}
+                </button>
               </div>
-              <button 
-                onClick={() => onPageChange('contact')}
-                className="bg-white hover:bg-slate-50 px-4 py-2 border rounded-md font-bold text-xs shadow-2xs shrink-0 whitespace-nowrap"
-              >
-                {isKR ? '사양 검토 문의' : 'Consult with Engineer'}
-              </button>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* ==================== PAGE: EQUIPMENT (장비보유현황) ==================== */}
         {currentPage === 'equipment' && (
@@ -2931,12 +2975,12 @@ export default function WebsiteView({
 
         {/* ==================== PAGE: NOTICES ==================== */}
         {currentPage === 'notices' && (
-          <div className="animate-fade-in bg-white text-slate-800">
+          <div className="animate-fade-in bg-[#fbfcfd] text-slate-800">
             {/* Elegant Header */}
-            <section className="bg-slate-900 text-white min-h-[160px] flex items-center justify-center p-8 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,0.08),transparent_50%)]" />
+            <section className="bg-slate-900 text-white min-h-[180px] flex items-center justify-center p-8 text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,78,0,0.06),transparent_50%)]" />
               <div className="relative z-10 max-w-2xl mx-auto space-y-2">
-                <span className="text-[10px] font-black tracking-widest uppercase text-emerald-400">
+                <span className="text-[10px] font-black tracking-widest uppercase text-[#FF4E00]">
                   {isKR ? '센서나인 공지사항' : 'SensorNine Announcements'}
                 </span>
                 <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-none">
@@ -2950,48 +2994,149 @@ export default function WebsiteView({
               </div>
             </section>
 
-            {/* Content List */}
-            <section className="py-12 px-6 sm:px-12 max-w-5xl mx-auto">
-              <div className="space-y-4">
-                {posts.length === 0 ? (
-                  <div className="bg-slate-50 rounded-xl p-16 text-center text-slate-400 text-xs border border-slate-200 shadow-2xs">
-                    {isKR ? '현재 등록된 게시물이 없습니다.' : 'There are currently no active posts.'}
-                  </div>
-                ) : (
-                  posts.map((post) => (
-                    <div key={post.id} className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-xs hover:border-slate-300 transition-all duration-300 flex flex-col sm:flex-row justify-between sm:items-center gap-4 group">
-                      <div className="space-y-2 max-w-xl">
-                        <div className="flex items-center gap-3">
-                          <span className="text-[9px] font-black uppercase bg-slate-100 text-slate-500 px-2.5 py-1 rounded-md select-none">
-                            {isKR ? post.categoryKR : post.categoryEN}
-                          </span>
-                          <span className="text-[10px] text-slate-400 font-mono tracking-wider font-bold">
-                            {post.date}
-                          </span>
+            {/* Content Grid */}
+            <section className="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
+              {posts.length === 0 ? (
+                <div className="bg-slate-50 rounded-xl p-16 text-center text-slate-400 text-xs border border-slate-200 shadow-2xs">
+                  {isKR ? '현재 등록된 게시물이 없습니다.' : 'There are currently no active posts.'}
+                </div>
+              ) : (
+                (() => {
+                  const POSTS_PER_PAGE = 12;
+                  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+                  
+                  // Keep noticesPage bounded properly
+                  const activePage = Math.min(Math.max(1, noticesPage), Math.max(1, totalPages));
+                  const startIndex = (activePage - 1) * POSTS_PER_PAGE;
+                  const paginatedPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
+                  // Create page numbers to display
+                  const pageNumbers = [];
+                  for (let i = 1; i <= totalPages; i++) {
+                    pageNumbers.push(i);
+                  }
+
+                  return (
+                    <div>
+                      {/* Grid cards */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {paginatedPosts.map((post) => (
+                          <div 
+                            key={post.id} 
+                            onClick={() => setSelectedPost(post)}
+                            className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.07)] border border-slate-100/50 transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between group cursor-pointer"
+                          >
+                            <div className="flex flex-col">
+                              {/* Card Image Thumbnail */}
+                              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                                <img 
+                                  src={post.imageUrl || 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600'} 
+                                  alt={isKR ? post.titleKR : post.titleEN}
+                                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                  referrerPolicy="no-referrer"
+                                />
+                                <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                              </div>
+
+                              {/* Card Text Content */}
+                              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                                <div className="space-y-2">
+                                  {/* Custom Orange Badge "공지사항" */}
+                                  <span className="block text-[11px] font-bold text-[#FF4E00] tracking-wider uppercase">
+                                    {isKR ? post.categoryKR : post.categoryEN}
+                                  </span>
+                                  {/* Title with hover color change */}
+                                  <h4 className="font-extrabold text-[15px] sm:text-[16px] text-slate-900 group-hover:text-[#FF4E00] transition-colors duration-200 leading-snug tracking-tight line-clamp-2">
+                                    {isKR ? post.titleKR : post.titleEN}
+                                  </h4>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Footer Date Block */}
+                            <div className="px-6 pb-6 pt-0 mt-auto">
+                              <span className="text-[11px] text-slate-400 font-medium font-mono">
+                                {post.date}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Pagination Control (Matches mockup precisely) */}
+                      {totalPages > 1 && (
+                        <div className="flex items-center justify-center gap-1 mt-14 sm:mt-18 select-none">
+                          {/* First Page button */}
+                          <button
+                            onClick={() => {
+                              setNoticesPage(1);
+                              window.scrollTo({ top: 300, behavior: 'smooth' });
+                            }}
+                            disabled={activePage === 1}
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-slate-200/85 flex items-center justify-center text-slate-400 hover:text-[#FF4E00] hover:border-[#FF4E00] transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs"
+                          >
+                            &laquo;
+                          </button>
+
+                          {/* Prev Page button */}
+                          <button
+                            onClick={() => {
+                              setNoticesPage(prev => Math.max(1, prev - 1));
+                              window.scrollTo({ top: 300, behavior: 'smooth' });
+                            }}
+                            disabled={activePage === 1}
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-slate-200/85 flex items-center justify-center text-slate-400 hover:text-[#FF4E00] hover:border-[#FF4E00] transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs mr-2"
+                          >
+                            &lsaquo;
+                          </button>
+
+                          {/* Page Numbers */}
+                          {pageNumbers.map(num => (
+                            <button
+                              key={num}
+                              onClick={() => {
+                                setNoticesPage(num);
+                                window.scrollTo({ top: 300, behavior: 'smooth' });
+                              }}
+                              className={`w-8 h-8 sm:w-9 sm:h-9 text-xs font-black transition-all rounded-md cursor-pointer ${
+                                activePage === num 
+                                  ? 'text-[#FF4E00] text-sm' 
+                                  : 'text-slate-800 hover:text-[#FF4E00]'
+                              }`}
+                            >
+                              {num}
+                            </button>
+                          ))}
+
+                          {/* Next Page button */}
+                          <button
+                            onClick={() => {
+                              setNoticesPage(prev => Math.min(totalPages, prev + 1));
+                              window.scrollTo({ top: 300, behavior: 'smooth' });
+                            }}
+                            disabled={activePage === totalPages}
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-slate-200/85 flex items-center justify-center text-slate-400 hover:text-[#FF4E00] hover:border-[#FF4E00] transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs ml-2"
+                          >
+                            &rsaquo;
+                          </button>
+
+                          {/* Last Page button */}
+                          <button
+                            onClick={() => {
+                              setNoticesPage(totalPages);
+                              window.scrollTo({ top: 300, behavior: 'smooth' });
+                            }}
+                            disabled={activePage === totalPages}
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-slate-200/85 flex items-center justify-center text-slate-400 hover:text-[#FF4E00] hover:border-[#FF4E00] transition-all bg-white disabled:opacity-30 disabled:pointer-events-none cursor-pointer text-xs"
+                          >
+                            &raquo;
+                          </button>
                         </div>
-                        <h4 
-                          className="font-extrabold text-sm sm:text-base text-slate-930 group-hover:text-blue-600 transition-colors cursor-pointer leading-tight" 
-                          onClick={() => setSelectedPost(post)}
-                        >
-                          {isKR ? post.titleKR : post.titleEN}
-                        </h4>
-                        <p className="text-xs text-slate-400 line-clamp-1 font-medium select-none">
-                          {isKR ? post.contentKR : post.contentEN}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-4 shrink-0 text-xs text-slate-400">
-                        <span className="hidden sm:inline font-mono text-[10px] font-bold">Views: {post.views}</span>
-                        <button 
-                          onClick={() => setSelectedPost(post)}
-                          className="bg-slate-50 hover:bg-slate-900 hover:text-white p-2 px-3.5 rounded-md border border-slate-200 text-slate-600 font-black text-[10px] transition-all cursor-pointer shadow-3xs"
-                        >
-                          {isKR ? '더보기' : 'Read'}
-                        </button>
-                      </div>
+                      )}
                     </div>
-                  ))
-                )}
-              </div>
+                  );
+                })()
+              )}
             </section>
           </div>
         )}
@@ -3267,14 +3412,22 @@ export default function WebsiteView({
 
             {/* Modal Content */}
             <div className="flex-1 overflow-y-auto py-6 space-y-4 pr-1" id="news-detail-content">
+              {selectedPost.imageUrl && (
+                <div className="w-full aspect-[16/10] sm:aspect-[16/9] mb-4 bg-slate-100 rounded-xl overflow-hidden border border-slate-100/60 shadow-2xs">
+                  <img
+                    src={selectedPost.imageUrl}
+                    alt={isKR ? selectedPost.titleKR : selectedPost.titleEN}
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              )}
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">
                 {isKR ? selectedPost.titleKR : selectedPost.titleEN}
               </h3>
               
               <div className="flex items-center gap-4 text-xs text-slate-450 border-b border-slate-100 pb-4 font-medium" id="news-detail-meta">
                 <span>{isKR ? `작성자: ${selectedPost.author || '관리자'}` : `By: ${selectedPost.author || 'Admin'}`}</span>
-                <span>•</span>
-                <span>{isKR ? `조회수: ${selectedPost.views + 1}` : `Views: ${selectedPost.views + 1}`}</span>
               </div>
 
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed whitespace-pre-line text-justify pt-2 font-normal">

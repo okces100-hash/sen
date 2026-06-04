@@ -36,7 +36,8 @@ export interface CMSPost {
   categoryEN: string;
   date: string;
   author: string;
-  views: number;
+  views?: number;
+  imageUrl?: string;
 }
 
 export interface StylingConfig {

@@ -17,8 +17,8 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   aboutFacilityPoint2EN: 'Production Volume: Over 30M sensors annually',
   aboutFacilityPoint3KR: '품질 인증: ISO 9001 / ISO 14001 인증 사업장',
   aboutFacilityPoint3EN: 'Quality Auditing: ISO 9001 / ISO 14001 Registered',
-  heroTitleKR: '세상의 모든 온도를\n가장 정밀하게 읽다',
-  heroTitleEN: 'Reading Every Temperature\nWith Ultimate Precision',
+  heroTitleKR: '세상의 모든 온도를 가장 정밀하게 읽다',
+  heroTitleEN: 'Reading Every Temperature With Ultimate Precision',
   heroSubKR: '센서나인(주)은 독보적인 고신뢰성 NTC 써미스터 기술력을 바탕으로 초고정밀 온도센서 및 안전감지센서를 제조하여 글로벌 산업 표준을 선도합니다.',
   heroSubEN: 'SensorNine Co., Ltd. leads global industrial standards by manufacturing ultra-high precision temperature and safety detection sensors based on unique NTC thermistor technology.',
   aboutGreetingKR: '정밀한 감지, 완벽한 제어. 온도의 가치를 연결하는 센서나인',
@@ -103,8 +103,8 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   rdHeroVideoUrl: '/videos/sensor_R&D_v2.mp4', // sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지의 메인 최상단 배경 비디오 (기계 로봇팔 장치 동작 영상)]
   rdHeroSloganKR: '세상을 감지하는 정밀함, 센서나인(주)의 원천기술',
   rdHeroSloganEN: 'Sensing the World with Precision, SensorNine\'s Original R&D Tech',
-  rdHeroSubSloganKR: '보일러 및 가전 시스템의 스마트 컨트롤러부터 고성능 EV 배터리 열폭주 차단까지, 타협 없는 철저한 품질과 신기술 개발로 앞서갑니다.',
-  rdHeroSubSloganEN: 'From smart boiler controllers override to high-performance EV battery thermal runaway protection, leading with rigorous quality standards and patented sensory development.',
+  rdHeroSubSloganKR: '가전 및 다양한 제어 시스템의 핵심이 되는 정밀 센서 기술력으로, 타협 없는 철저한 품질 관리와 지속적인 기술 혁신을 통해 최적의 맞춤형 솔루션을 제공합니다.',
+  rdHeroSubSloganEN: 'With our precision sensor technology at the heart of home appliances and various control systems, we provide optimal customized solutions through uncompromising quality control and continuous technical innovation.',
   
   rdTech1TitleKR: '고정밀 NTC 열적외선 감지 기술',
   rdTech1TitleEN: 'High-Precision NTC Thermal Sensing',
@@ -140,43 +140,26 @@ export const INITIAL_SEO_METADATA: SEOMetadata = {
 export const INITIAL_CMS_POSTS: CMSPost[] = [
   {
     id: 'cms-1',
-    titleKR: '2026 하반기 초고온 내열성 NTC 센서 라인업 독점 공개',
-    titleEN: 'Exclusive Release of Second-half 2026 Ultra-high Temp NTC Sensors',
-    contentKR: '센서나인(주)의 신소재 연구소는 최대 450°C 고온 환경에서도 열적 드리프트가 0.05% 미만으로 억제되는 내열 하이브리드 NTC 프로브 시리즈 개발에 성공해 2026년 4분기부터 양산을 시작합니다. 화학 설비 및 고온 배반 기기에 최적의 안전성을 제공합니다.',
-    contentEN: 'SensorNine R&D Center has succeeded in developing a heat-resistant hybrid NTC probe series that maintains thermal drift below 0.05% even under 450°C high-temp conditions, starting mass production in Q4 2026. Excellent for chemical plants.',
-    categoryKR: '제품 뉴스',
-    categoryEN: 'Product News',
-    date: '2026-05-18',
-    author: '신소재연구소',
-    views: 142,
-  },
-  {
-    id: 'cms-2',
-    titleKR: 'ISO 9001:2015 / CE 국제 품질 환경 경영인증 갱신 완료',
-    titleEN: 'Completed Renewal of ISO 9001:2015 & CE Quality Certifications',
-    contentKR: '센서나인(주) 제조 전 공정에 대해 최신 ISO 9001 품질 관리 및 유럽연합(EU) CE 요구 규격을 모두 심사 통과 완료하였습니다. 엄격한 오차 교정 챔버(Chamber Testing) 절차를 통해 최상의 수율과 무결점을 유지하고 있음을 입증받았습니다.',
-    contentEN: 'SensorNine successfully passed the quality system audits for both ISO 9001 and EU CE directives. Achieving international standards confirms our rigorous multi-stage calibration yields supreme reliability.',
-    categoryKR: '인증/특허',
-    categoryEN: 'Certificates',
-    date: '2026-04-29',
-    author: '품질경영실',
-    views: 95,
-  },
-  {
-    id: 'cms-3',
-    titleKR: '독일 뮌헨 센서+테스트(Sensor+Test) 글로벌 박람회 성공적 참여',
-    titleEN: 'Successfully Exhibited at Sensor+Test 2026 Exposition in Munich',
-    contentKR: '독일에서 개최된 유럽 최대 규모의 센서 전시회에서 당사의 초소형 플렉시블(Flexible) NTC 온도 센서 모듈이 우수 기술 혁신 피칭 부문 Top 5에 선정되는 쾌거를 이루었습니다. 유럽 자동차 전장 협의체 핵심 바이어들과 샘플 공급을 협의 중에 있습니다.',
-    contentEN: 'At the largest European sensor exhibition held in Munich, Germany, our ultra-thin flexible NTC sensor module was ranked Top 5 in the Innovation Pitching. Currently in negotiations for supplier contracts with key automotive makers.',
-    categoryKR: '글로벌 뉴스',
-    categoryEN: 'Global News',
-    date: '2026-04-12',
-    author: '해외영업부',
-    views: 218,
+    titleKR: '센서나인(주) 공식 홈페이지 리뉴얼 오픈 안내',
+    titleEN: 'Notice of SensorNine Co., Ltd. Official Website Renewal',
+    contentKR: '센서나인(주)를 아껴주시는 고객 여러분께 진심으로 감사드립니다. 당사는 고객 여러분과의 소통을 강화하고, 저희의 주요 정밀 센서 및 제어 부품 라인업을 보다 직관적이고 상세하게 확인하실 수 있도록 전반적인 레이아웃과 제품 소개 페이지를 대폭 개선하였습니다. 또한, PC와 모바일 환경 어디서나 편리하게 제품 문의 및 고객 지원 서비스를 이용하실 수 있도록 접근성을 높였습니다. 많은 관심 부탁드립니다.',
+    contentEN: 'We would like to express our sincere gratitude to all our customers for your continued support for Sensor9 Co., Ltd. To enhance communication with you, we have significantly upgraded our overall layout and product pages, allowing you to browse our precision sensors and control components more intuitively and in detail. We have also improved accessibility, ensuring you can easily send product inquiries and access customer support on both desktop and mobile devices. Thank you for your continued interest and support.',
+    categoryKR: '공지사항',
+    categoryEN: 'Notice',
+    date: '2026년 06월 04일',
+    author: '관리자',
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600',
   }
 ];
 
 export const PRODUCTS_LIST: ProductSpec[] = [
+  // =========================================================================
+  // [제품 소개 이미지 수정 안내]
+  // 각 제품 객체 아래에 `imageUrl: '이미지경로'`를 입력하여 이미지를 설정할 수 있습니다.
+  // 예시: imageUrl: '/images/products/my-product-1.jpg' 기입 시 해당 이미지가 출력됩니다.
+  // 기본적으로 비워두거나 생략하면 각 카테고리에 맞는 고화질 벡터 아이콘이 자동으로 표시됩니다.
+  // =========================================================================
+
   // 1. 온도센서 (기본형 및 체결형)
   {
     id: 'prod-geo-14',
@@ -190,7 +173,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Hermetic dual-sensing SUS316L, IP68 Waterproof',
     appKR: '지중 열화 관리, 지열 냉난방 시스템 매립형 신뢰성 센싱',
     appEN: 'Geothermal heating & cooling systems ground burial sensing',
-    imageAlt: '지열센서'
+    imageAlt: '지열센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/products/sn-geo-14.png')를 입력하세요.
   },
   {
     id: 'prod-ac-13',
@@ -204,7 +188,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Brass-plated compact cap, molded resin waterproof seal',
     appKR: '상업용 시스템에어컨 증발기 및 배관 흡입 온도 모니터링',
     appEN: 'Commercial system air conditioner evaporator temperature tracking',
-    imageAlt: '에어컨용 온도센서'
+    imageAlt: '에어컨용 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-brk-12',
@@ -218,7 +203,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Flange mounting side-bracket metal housing',
     appKR: '공조기 하우징 내벽 고정, 모터 프레임 외부 열전달 모니터링',
     appEN: 'HVAC chamber interior casing, motor surface thermal supervision',
-    imageAlt: '브라켓 체결용 온도센서'
+    imageAlt: '브라켓 체결용 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-dbt-11',
@@ -232,7 +218,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'PT 1/2" thread tapered double-shielded design',
     appKR: '산업용 열 교환 매니폴드, 대류수 순환 압력 라인 피팅',
     appEN: 'Industrial heat exchanger manifolds, flow convection lines',
-    imageAlt: '이중관 소켓 체결용 온도센서'
+    imageAlt: '이중관 소켓 체결용 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-clp-10',
@@ -246,7 +233,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'High-elasticity stainless spring steel pipe snap-on clip',
     appKR: '가정용 보일러 냉온수 동관 배관 밀착 스냅 설치',
     appEN: 'Home boiler domestic water copper pipes snap attachment',
-    imageAlt: '클립형 온도센서'
+    imageAlt: '클립형 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-gen-9',
@@ -260,7 +248,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'SUS straight cylinder probe casing (L: 50mm, Ø: 5mm)',
     appKR: '소형 항온수조 챔버 가동 지표, HVAC 내부 대류 제어',
     appEN: 'Chamber water bath monitoring, internal air flow HVAC measurement',
-    imageAlt: '일반 온도센서 (no. 9)'
+    imageAlt: '일반 온도센서 (no. 9)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-gen-8',
@@ -274,7 +263,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'SUS straight cylinder probe casing (L: 40mm, Ø: 4mm)',
     appKR: '일반 가전 기기 제어반 온도 검출, 덕트 공정 수집',
     appEN: 'General home appliances electronics casing, duct sensing systems',
-    imageAlt: '일반 온도센서 (no. 8)'
+    imageAlt: '일반 온도센서 (no. 8)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-gen-5',
@@ -288,7 +278,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Shrink-sleeve polymer protection casing (L: 30mm, Ø: 3.5mm)',
     appKR: '의료기기 단순 소모품, 냉장고 김치 장독 제어 센싱',
     appEN: 'Simple medical storage cabinets, cooling appliances temperature control',
-    imageAlt: '일반 온도센서 (no. 5)'
+    imageAlt: '일반 온도센서 (no. 5)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-scr-4',
@@ -302,7 +293,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'PF 1/8" thread fitting hexagonal head bolt structure',
     appKR: '가스 압축 컴프레셔 측벽 하우징, 엔진 크랭크케이스',
     appEN: 'Air compressor sidewall housing, engine crankcase thermal monitoring',
-    imageAlt: '나사 체결용 온도센서 PF 1/8'
+    imageAlt: '나사 체결용 온도센서 PF 1/8',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-scr-2',
@@ -316,7 +308,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'PT 1/4" tapered male-thread fitting (L: 25mm)',
     appKR: '오토 클레이브 내화 기기 결합, 순환 열수 주입 배관 입구',
     appEN: 'Autoclave pressure chambers, hot water distribution pipe inlets',
-    imageAlt: '나사 체결용 온도센서 PT 1/4 (no. 2)'
+    imageAlt: '나사 체결용 온도센서 PT 1/4 (no. 2)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-scr-1',
@@ -330,25 +323,11 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'PT 1/4" tapered male-thread slim-head fitting (L: 15mm)',
     appKR: '공조 히터 방열 핀 표면 나사 직접 체결 제어',
     appEN: 'HVAC heater radiation fins direct-screw temperature assembly',
-    imageAlt: '나사 체결용 온도센서 PT 1/4 (no. 1)'
+    imageAlt: '나사 체결용 온도센서 PT 1/4 (no. 1)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
 
   // 2. 배관용 온도센서
-  {
-    id: 'prod-pipe-m4',
-    model: 'SN-PIPE-M04',
-    category: '배관용 온도센서',
-    nameKR: '배관용 온도센서 (대형) 설치 설명서 (no. 4)',
-    nameEN: 'Install Manual for Pipe Sensors - Large (no. 4)',
-    range: '설치 지침 및 수치 가이드',
-    accuracy: 'N/A',
-    ratingKR: '문서 사양: PDF 매뉴얼 제공',
-    ratingEN: 'Format standard: Manual PDF sheet included',
-    appKR: '대용량 지역난방 주수관 설치 지침, 최적 배관 삽입 깊이 계산법 수록',
-    appEN: 'Installation guide for large-budget hot water pipes, thermal well calculations',
-    imageAlt: '대형배관 설치설명서',
-    isManual: true
-  },
   {
     id: 'prod-pipe-3',
     model: 'SN-PIPE-03',
@@ -361,22 +340,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Heavy industrial thermo-well flange assembly, lock screw',
     appKR: '발전 설비 주 스팀 수송 전용관, 석유 화학 플랜트 고온 순출액 관',
     appEN: 'Power plant steam pipeline monitoring, petrochemical plant high-flow lines',
-    imageAlt: '대형 배관용 온도센서'
-  },
-  {
-    id: 'prod-pipe-m2',
-    model: 'SN-PIPE-M02',
-    category: '배관용 온도센서',
-    nameKR: '배관용 온도센서 (소형) 설치 설명서 (no. 2)',
-    nameEN: 'Install Manual for Pipe Sensors - Small (no. 2)',
-    range: '배관 피팅 정합 오차 제어',
-    accuracy: 'N/A',
-    ratingKR: '문서 사양: PDF 기술자료 수록',
-    ratingEN: 'Format standard: Technical PDF manual included',
-    appKR: '소형 매니폴드 및 동관 내 캘리브레이션 서모커플 고정 실무',
-    appEN: 'How to mount sensors inside micro manifolds and copper pipes',
-    imageAlt: '소형배관 설치설명서',
-    isManual: true
+    imageAlt: '대형 배관용 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-pipe-1',
@@ -390,25 +355,11 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'SUS316L compact screw-threaded hermetic protective sleeve',
     appKR: '가정용 보일러 분배기 상하수관, 냉각 제어 루프 배관',
     appEN: 'Residential boiler circulation manifolds, water cooler circulation pipe loops',
-    imageAlt: '소형 배관용 온도센서'
+    imageAlt: '소형 배관용 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
 
   // 3. 외기 및 실내용 온도센서
-  {
-    id: 'prod-out-m2',
-    model: 'SN-OUT-M02',
-    category: '외기 및 실내용 온도센서',
-    nameKR: '외기용 온도센서 설치 설명서 (no. 2)',
-    nameEN: 'Outdoor Sensor Mounting Manual (no. 2)',
-    range: '외풍 노출 루버 실장',
-    accuracy: 'N/A',
-    ratingKR: '문서 사양: 국영문 통합 매뉴얼 수록',
-    ratingEN: 'Format standard: Dual-lingual PDF manual included',
-    appKR: '태양광 방사 오차 최소화를 위한 외기 루버 및 그늘막 고정 지침',
-    appEN: 'Louver and weather shield installation guidelines to prevent radiation error',
-    imageAlt: '외기용 센서 설명서',
-    isManual: true
-  },
   {
     id: 'prod-out-1',
     model: 'SN-OUT-01',
@@ -421,7 +372,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Weatherproof UV-shielded outdoor plastic louver wall housing',
     appKR: '빌딩 스마트 공조 외풍 제어용, 스마트 농가 시설 원정 온도 검사',
     appEN: 'Commercial building outside air damper loops, smart farm greenhouse monitoring',
-    imageAlt: '외기용 온도센서'
+    imageAlt: '외기용 온도센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-in-w2',
@@ -435,7 +387,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Micro insulation FEP ribbon wire integrated probe',
     appKR: '정밀 전산 서버실 랙 장비 내부 공기 흡입구 틈새 마운트',
     appEN: 'Server rack cooling intake vent mounting, dynamic climate cabinet control',
-    imageAlt: '실내용 와이어 센서'
+    imageAlt: '실내용 와이어 센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-in-l1',
@@ -449,7 +402,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Classic white wall-mounted terminal housing',
     appKR: '상업 오피스 빌딩 중앙 집중식 난방 방 온도 제약 장비',
     appEN: 'Commercial workspace interior thermostat, climate-control ceiling vents',
-    imageAlt: '실내용 리드 센서'
+    imageAlt: '실내용 리드 센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
 
   // 4. 고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)
@@ -465,7 +419,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: '3-wire RTD system copper compensator, PT 1/2 Tap',
     appKR: '연구소 저온 냉동 보관 설비, 산업 스팀 라인 극오차 교정',
     appEN: 'Extremely low biochem cryo-chambers, steam calibration accuracy units',
-    imageAlt: 'PT100 3선식 PT 1/2'
+    imageAlt: 'PT100 3선식 PT 1/2',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-pt100-5',
@@ -479,7 +434,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'SUS head spring-loaded fitting probe, PT 1/4 thread',
     appKR: '공조기 히팅 열교환 덕트, 플랜트 오일 순환 매니폴드 주 탱크',
     appEN: 'Auxiliary duct coil heat loop detectors, industrial hydraulic systems',
-    imageAlt: 'PT100 3선식 PT 1/4'
+    imageAlt: 'PT100 3선식 PT 1/4',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-ktype-4',
@@ -493,7 +449,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'High-temp glass-wool braided insulator, PT 1/2 connector',
     appKR: '전기로 고열 노외 통제, 도자 소결 전력실 상시 진단',
     appEN: 'High-temp smelting electrical kilns, power stations heavy chambers',
-    imageAlt: 'K-TYPE 센서 PT 1/2'
+    imageAlt: 'K-TYPE 센서 PT 1/2',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-ktype-2',
@@ -507,7 +464,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Dual heat glass shield lead wire, PT 1/4 Tap',
     appKR: '플라스틱 압출기 가열 배럴 외부, 사출 금형 슬링 온도 지표',
     appEN: 'Plastic extrusion hot barrels, high-speed injection molds monitoring',
-    imageAlt: 'K-TYPE 센서 PT 1/4'
+    imageAlt: 'K-TYPE 센서 PT 1/4',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-ktype-1',
@@ -521,7 +479,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'L-Shape mounting plate bracket with custom secure screw eyelet',
     appKR: '산업용 대용량 건조기 덕트 매립, 고중량 프레스 성형 금형',
     appEN: 'Large-scale industrial dryers venting ducts, heavy press casting',
-    imageAlt: 'K-TYPE 브라켓형'
+    imageAlt: 'K-TYPE 브라켓형',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-bim-m4',
@@ -535,7 +494,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Manual-push safety reset micro button, brass faceplate',
     appKR: '온풍 난방기 화재 예방 배기 과열 셧다운 차단기',
     appEN: 'Industrial air heater exhaust fire safety override cutoff switch',
-    imageAlt: '수동 바이메탈'
+    imageAlt: '수동 바이메탈',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-bim-a3',
@@ -549,7 +509,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Auto-reset bimetallic disc (100,000 cycles rating)',
     appKR: '고속 열선 히터 전력 안정, 냉난방 모터 배압 차전 필터',
     appEN: 'High-speed radiant wire power control, HVAC blower motor protection',
-    imageAlt: '자동 바이메탈'
+    imageAlt: '자동 바이메탈',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-bim-h2',
@@ -563,7 +524,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Highly heat-stable ceramic enclosure body design',
     appKR: '가정용 전기 오븐 안쪽 조절실, 대형 상업 식기세척 건조기 브레이커',
     appEN: 'High-power compact electric stoves, commercial hot drying breakers',
-    imageAlt: '세라믹 바이메탈'
+    imageAlt: '세라믹 바이메탈',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
 
   // 5. 수위감지센서
@@ -579,7 +541,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Teflon coated insulation sleeve, PT 1/4 thread',
     appKR: '반도체 세정조 식각 슬러리 레벨 보존 정밀 수위 측정',
     appEN: 'Semiconductor clean tanks acid-slurry level tracking',
-    imageAlt: '수위감지센서 PT 1/4 (no. 9)'
+    imageAlt: '수위감지센서 PT 1/4 (no. 9)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-lev-8',
@@ -593,7 +556,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'SUS304 mechanical float rod sensor, PT 1/4 thread',
     appKR: '중형 빌딩 오배수 정화 수배조 수위 레벨 스캐닝',
     appEN: 'Wastewater drainage collecting sinks, greywater sumps',
-    imageAlt: '수위감지센서 PT 1/4 (no. 8)'
+    imageAlt: '수위감지센서 PT 1/4 (no. 8)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-lev-5',
@@ -607,7 +571,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Spring-loaded click sheet-clip temporary mounting',
     appKR: '정수 장비 가습 세척 내부 임시 정밀 수배수 스탠드',
     appEN: 'Water purification humidifying chambers temporary mount',
-    imageAlt: '클립형 수위센서 (no. 5)'
+    imageAlt: '클립형 수위센서 (no. 5)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-lev-4',
@@ -621,7 +586,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Mini circular plastic snap-clip framework',
     appKR: '일반 정수 탱크 세척 조내 실시간 넘침 수용 가동 검사',
     appEN: 'Water purifiers storage tanks smart anti-flooding overflow alarm',
-    imageAlt: '클립형 수위센서 (no. 4)'
+    imageAlt: '클립형 수위센서 (no. 4)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-lev-h2',
@@ -635,7 +601,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Fluorine-rubber seal shield & pure SUS316L mechanical float',
     appKR: '고온 압력 가열 스팀 보일러 내부 탕수 레벨 제어',
     appEN: 'Pressurized high-temp steam boilers internal hot-water level control',
-    imageAlt: '고온용 수위감지센서'
+    imageAlt: '고온용 수위감지센서',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-lev-1',
@@ -649,7 +616,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'PT 1/2 thread medium industrial level sensor',
     appKR: '공장 공업 용수 유류 분리 저장실, 농업 펌프장 순찰',
     appEN: 'Industrial oil separator reservoirs, farming pumping canals',
-    imageAlt: '수위감지센서 PT 1/2'
+    imageAlt: '수위감지센서 PT 1/2',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
 
   // 6. 기타 부속품 (케이스 및 소켓)
@@ -665,7 +633,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Detachable double-shielded protective outer sleeve case',
     appKR: '온도 센서 손상 방지 가이드, 정체 유체 배관 직접 매몰 체결',
     appEN: 'Prevents physical sensor fluid erosion, direct well pipeline burial',
-    imageAlt: '이중관 온도센서 케이스'
+    imageAlt: '이중관 온도센서 케이스',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-case-4',
@@ -679,7 +648,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Standard straight round-tip SUS tubing sheath',
     appKR: '다공성 대류 씰 내부 센서 조립 시 외형 포팅 웰',
     appEN: 'General multi-point thermocouple casing assembly, potting well',
-    imageAlt: '온도센서 케이스 (no. 4)'
+    imageAlt: '온도센서 케이스 (no. 4)',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-case-b3',
@@ -693,7 +663,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'C3604 brass custom lathe-turned fast-response outer case',
     appKR: '전도 열전달 극대화 기기 고온 마운트, 배관 표면 밀착 소켓',
     appEN: 'Maximizing surface thermal conduction speed, radiator side socket',
-    imageAlt: '온도센서 황동 케이스'
+    imageAlt: '온도센서 황동 케이스',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-case-s2',
@@ -707,7 +678,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Petrochemical grade SUS316L capillary outer tube',
     appKR: '강산성 세정 탱크 보호 덕트, 염분 바다 해수 측정관',
     appEN: 'Strong acids process shield conduit, marine saltwater storage guide',
-    imageAlt: 'SUS 온도센서 케이스'
+    imageAlt: 'SUS 온도센서 케이스',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'prod-sock-1',
@@ -721,7 +693,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     ratingEN: 'Hexagonal solid coupler reducer adapter block',
     appKR: '기존 배관 배관 나사산 규격 변환, 소형 센서 탈착 탭 보존',
     appEN: 'Reducing pipeline tapping diameter sizes, rapid sensor swaps',
-    imageAlt: '온도센서 소켓'
+    imageAlt: '온도센서 소켓',
+    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   }
 ];
 
@@ -805,6 +778,12 @@ export const INITIAL_INQUIRIES: Inquiry[] = [
 ];
 
 export const EQUIPMENT_LIST: EquipmentSpec[] = [
+  // =========================================================================
+  // [장비 보유 현황 이미지 수정 안내]
+  // 각 장비 객체 아래에 `imageUrl: '이미지경로'`를 입력하여 이미지를 설정할 수 있습니다.
+  // 예시: imageUrl: '/images/equipment/my-eq-1.jpg' 기입 시 해당 이미지가 출력됩니다.
+  // 기본적으로 비워두거나 생략하면 "보유 장비 실물 사진 준비중" 안내 카드가 표시됩니다.
+  // =========================================================================
   {
     id: 'eq-1',
     nameKR: '스코프코더 SL1400',
@@ -816,7 +795,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Metrology instrument scanning transient resistance state dynamic responses and recording high-speed temperature drift graphics over microsecond fractions.',
     count: 1,
     categoryKR: '계측/분석',
-    categoryEN: 'Measurement Scanner'
+    categoryEN: 'Measurement Scanner',
+    imageUrl: 'sensor_products_i4.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/equipment/eq-1.png')를 입력하세요.
   },
   {
     id: 'eq-2',
@@ -829,7 +809,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Inspects active density variances of high-purity sintered NTC ceramic blocks through precision water-immersion logic and precise micro-weight analyzers.',
     count: 1,
     categoryKR: '검사 설비',
-    categoryEN: 'Density Verification'
+    categoryEN: 'Density Verification',
+    imageUrl: 'sensor_products_i5.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-3',
@@ -842,7 +823,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Applies rigorous hydrostatic liquid pressure load to pipeline probes prior to final delivery, ensuring robust weld joints without any structural leaks.',
     count: 2,
     categoryKR: '안전성 테스트',
-    categoryEN: 'Pressure Leak Testing'
+    categoryEN: 'Pressure Leak Testing',
+    imageUrl: 'sensor_products_i13.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-4',
@@ -855,7 +837,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Extracts physical probe readings into high-visibility digits to assist testing engineers in managing real-time temperature fluctuations under primary references.',
     count: 4,
     categoryKR: '계측 장비',
-    categoryEN: 'Real-time Signal Indicator'
+    categoryEN: 'Real-time Signal Indicator',
+    imageUrl: 'sensor_products_i14.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-5',
@@ -868,7 +851,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Injects precision-metered volumes of highly conductive insulation epoxy into circular stainless sleeves, providing absolute electrical safety and high assembly yields.',
     count: 1,
     categoryKR: '생산 조립',
-    categoryEN: 'Automated Liquid Dispensing'
+    categoryEN: 'Automated Liquid Dispensing',
+    imageUrl: 'sensor_products_i6.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-6',
@@ -881,7 +865,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Industrial thermal-curing oven that removes trace trapped humidity under vacuum atmosphere, optimizing stability factors for long-reach thermistor packages.',
     count: 2,
     categoryKR: '환경 건조',
-    categoryEN: 'Vacuum Baking'
+    categoryEN: 'Vacuum Baking',
+    imageUrl: 'sensor_products_i7.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-7',
@@ -894,7 +879,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Applies continuous horizontal dry heated wind to restore and normalize metal probe tubes after engraving or machining to avoid dimensional bends.',
     count: 2,
     categoryKR: '환경 건조',
-    categoryEN: 'Convection Drying'
+    categoryEN: 'Convection Drying',
+    imageUrl: 'sensor_products_i17.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-8',
@@ -907,7 +893,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Primary calibration oil baths featuring low spatial thermal gradients, critical for obtaining absolute resistance coefficients against primary national metrics.',
     count: 3,
     categoryKR: '교정 설비',
-    categoryEN: 'Liquids Calibration Bath'
+    categoryEN: 'Liquids Calibration Bath',
+    imageUrl: 'sensor_products_i8.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-9',
@@ -920,20 +907,22 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Joins plastic sensor modules and sensor cap joints securely without adhesives through high-speed ultrasonic friction melting, guaranteeing permanent seal integrity.',
     count: 2,
     categoryKR: '생산 조립',
-    categoryEN: 'Ultrasonic Plastic Welding'
+    categoryEN: 'Ultrasonic Plastic Welding',
+    imageUrl: 'sensor_products_i9.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-10',
-    nameKR: '진공탈포기',
-    nameEN: 'Vacuum Bubble Degasser',
+    nameKR: '진공 믹서 탈포기',
+    nameEN: 'Vacuum Mixer & Defoamer',
     model: 'SN-VD-50-SYSTEM',
     specKR: '진공 흡풍 펌프 구동력 -0.098 MPa',
     specEN: 'Vacuum performance up to -0.098 MPa air-extraction rating',
-    descKR: '조립 주입하는 액상 원재료(에폭시 또는 실리콘 방수재) 내에 완전 혼입 체킹된 미세 미세 기포(Air Bubble)를 감압 진공 환경에서 완전 팽창 융합 탈포 배출시켜 영구 누전을 원천 방지합니다.',
-    descEN: 'Extracts microscopical trapped air bubbles out of viscous casting compounds prior to the baking cycle to eliminate internal voids and electrical arc risks.',
+    descKR: '조립 및 주입 공정에 사용되는 액상 원재료(에폭시 또는 실리콘 방수재)의 균일한 혼합(Mixing)과 미세 기포 제거(Defoaming)를 한 번에 해결합니다. 감압 진공 환경에서 원재료 내에 혼입된 미세 기포를 완전히 팽창·융합하여 탈포 배출함과 동시에, 최적의 교반 기술로 재료를 완벽하게 믹싱하여 제품의 절연 성능을 극대화하고 영구 누전을 원천 방지합니다.',
+    descEN: 'Seamlessly combines uniform mixing and micro-bubble removal (defoaming) for liquid raw materials (epoxy or silicone waterproofing agents) used in assembly and injection processes. In a reduced-pressure vacuum environment, it fully expands, coalesces, and discharges micro-bubbles trapped in the material while simultaneously achieving perfect agitation. This maximizes the product"s insulation performance and fundamentally prevents permanent electrical leakage.',
     count: 2,
     categoryKR: '생산 조립',
-    categoryEN: 'Vacuum Air Extraction'
+    categoryEN: 'Vacuum Air Extraction',
+    imageUrl: 'sensor_products_i21.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-11',
@@ -946,11 +935,12 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Removes trace industrial cutting oils, tooling chips, and micro dust from stainless sleeves utilizing robust dual-frequency micro ultrasonic cavitation blast waves.',
     count: 3,
     categoryKR: '생산 조립',
-    categoryEN: 'Micro-Ultrasonic Cleaning'
+    categoryEN: 'Micro-Ultrasonic Cleaning',
+    imageUrl: 'sensor_products_i22.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-12',
-    nameKR: 'AUTO CUTTING MACHINE',
+    nameKR: '자동절단기',
     nameEN: 'Automatic Tube Cutting Machine',
     model: 'SN-ACM-V2-PRO',
     specKR: '절단 분당 수율 120회 / 가공 정밀도 ±0.2mm',
@@ -959,7 +949,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'High-speed automated processing unit slicing polymer heat-shrink sleeves and wire jackets precisely based on customized software length presets.',
     count: 1,
     categoryKR: '정밀 가공',
-    categoryEN: 'Automated Tube Slicing'
+    categoryEN: 'Automated Tube Slicing',
+    imageUrl: 'sensor_products_i11.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-13',
@@ -972,7 +963,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Subjects finalized high-voltage sensor probes to high-pot electro-volt stress levels up to 5kV to certify total insulation leakage protection parameters.',
     count: 2,
     categoryKR: '안전성 테스트',
-    categoryEN: 'High-Pot Insulation Tester'
+    categoryEN: 'High-Pot Insulation Tester',
+    imageUrl: '', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-14',
@@ -985,7 +977,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Pneumatically compresses terminal pins and wire harnesses securely to rule out loose wiring connection risks, utilizing consistent high-load pneumatic force.',
     count: 2,
     categoryKR: '정밀 가공',
-    categoryEN: 'Pneumatic Connector Crimping'
+    categoryEN: 'Pneumatic Connector Crimping',
+    imageUrl: '', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-15',
@@ -998,7 +991,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'High-precision micro sliding wheel setup that cleanly shears fragile diagnostic capillary glass protective packages without introducing hair cracks or micro-shatters.',
     count: 1,
     categoryKR: '정밀 가공',
-    categoryEN: 'Capillary Glass Cutting'
+    categoryEN: 'Capillary Glass Cutting',
+    imageUrl: '', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-16',
@@ -1011,7 +1005,8 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     descEN: 'Simulates demanding environmental climates to track aging, chemical durability, and isolation resistance coefficients of sensors under extreme wet heat stress.',
     count: 2,
     categoryKR: '환경 테스트',
-    categoryEN: 'Climatic Stress Chamber'
+    categoryEN: 'Climatic Stress Chamber',
+    imageUrl: '', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   }
 ];
 
