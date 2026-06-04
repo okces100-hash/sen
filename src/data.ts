@@ -796,7 +796,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '계측/분석',
     categoryEN: 'Measurement Scanner',
-    imageUrl: 'sensor_products_i4.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/equipment/eq-1.png')를 입력하세요.
+    imageUrl: '/images/sensor_products_i4.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/equipment/eq-1.png')를 입력하세요.
   },
   {
     id: 'eq-2',
@@ -810,7 +810,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '검사 설비',
     categoryEN: 'Density Verification',
-    imageUrl: 'sensor_products_i5.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i5.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-3',
@@ -824,7 +824,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '안전성 테스트',
     categoryEN: 'Pressure Leak Testing',
-    imageUrl: 'sensor_products_i13.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i13.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-4',
@@ -838,7 +838,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 4,
     categoryKR: '계측 장비',
     categoryEN: 'Real-time Signal Indicator',
-    imageUrl: 'sensor_products_i14.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i14.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-5',
@@ -852,7 +852,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '생산 조립',
     categoryEN: 'Automated Liquid Dispensing',
-    imageUrl: 'sensor_products_i6.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i6.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-6',
@@ -866,7 +866,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '환경 건조',
     categoryEN: 'Vacuum Baking',
-    imageUrl: 'sensor_products_i7.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i7.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-7',
@@ -880,7 +880,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '환경 건조',
     categoryEN: 'Convection Drying',
-    imageUrl: 'sensor_products_i17.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i17.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-8',
@@ -894,7 +894,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 3,
     categoryKR: '교정 설비',
     categoryEN: 'Liquids Calibration Bath',
-    imageUrl: 'sensor_products_i8.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i8.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-9',
@@ -908,7 +908,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '생산 조립',
     categoryEN: 'Ultrasonic Plastic Welding',
-    imageUrl: 'sensor_products_i9.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i9.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-10',
@@ -922,7 +922,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '생산 조립',
     categoryEN: 'Vacuum Air Extraction',
-    imageUrl: 'sensor_products_i21.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i21.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-11',
@@ -936,7 +936,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 3,
     categoryKR: '생산 조립',
     categoryEN: 'Micro-Ultrasonic Cleaning',
-    imageUrl: 'sensor_products_i22.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i22.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-12',
@@ -950,7 +950,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '정밀 가공',
     categoryEN: 'Automated Tube Slicing',
-    imageUrl: 'sensor_products_i11.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i11.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-13',
