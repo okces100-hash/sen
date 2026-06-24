@@ -3052,7 +3052,13 @@ export default function WebsiteView({
           const certs = (() => {
             try {
               if (customContent.certificatesJson) {
-                return JSON.parse(customContent.certificatesJson) as Certificate[];
+                const parsed = JSON.parse(customContent.certificatesJson) as Certificate[];
+                return parsed.map((c) => ({
+                  ...c,
+                  imageUrl: (c.imageUrl && !c.imageUrl.startsWith('http') && !c.imageUrl.startsWith('/') && !c.imageUrl.startsWith('data:'))
+                    ? `/images/${c.imageUrl}`
+                    : c.imageUrl
+                }));
               }
             } catch (e) {
               // fall through
