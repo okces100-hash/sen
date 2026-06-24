@@ -13,8 +13,8 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   aboutFacilityDescEN: 'A state-of-the-art intelligent engineering hub equipped with full dust-free cleanroom facilities and advanced diagnostic instrumentation, supporting seamless sensor research through high-capacity manufacturing.',
   aboutFacilityPoint1KR: '연구소 인가: 기업부설 기술연구소 기술인정법인',
   aboutFacilityPoint1EN: 'Certified Corporate R&D Laboratory',
-  aboutFacilityPoint2KR: '생산 능력: NTC 써미스터센서 연간 약 3,000만 개 이상',
-  aboutFacilityPoint2EN: 'Production Volume: Over 30M sensors annually',
+  aboutFacilityPoint2KR: '생산 능력: NTC 써미스터센서 연간 약 500만 개 이상',
+  aboutFacilityPoint2EN: 'Production Volume: Over 5M sensors annually',
   aboutFacilityPoint3KR: '품질 인증: ISO 9001 / ISO 14001 인증 사업장',
   aboutFacilityPoint3EN: 'Quality Auditing: ISO 9001 / ISO 14001 Registered',
   heroTitleKR: '세상의 모든 온도를 가장 정밀하게 읽다',
@@ -23,23 +23,53 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   heroSubEN: 'SensorNine Co., Ltd. leads global industrial standards by manufacturing ultra-high precision temperature and safety detection sensors based on unique NTC thermistor technology.',
   aboutGreetingKR: '정밀한 감지, 완벽한 제어. 온도의 가치를 연결하는 센서나인',
   aboutGreetingEN: 'Precision Sensing, Perfect Control. Sensor9, Connecting the Value of Temperature.',
-  aboutIntroKR: `센서나인(주)은 고정밀 NTC 온도센서와 콘트롤러 등 가전 및 산업 현장의 핵심 제어 솔루션을 연구·개발하고 공급하는 생산 전문 기업입니다. 우리는 보일러용·에어컨용 온도센서부터 특수한 환경을 위한 이중관 소켓 및 브라켓 체결용 온도센서까지, 다양한 산업 스펙트럼에 최적화된 맞춤형 센서 기술력을 보유하고 있습니다. 이를 기반으로 가전 및 산업 장비 시스템의 정밀 콘트롤러 솔루션을 구축하여, 고객사 제품의 스마트화와 에너지 효율성, 그리고 안전성을 극대화하는 데 기여하고 있습니다. 제품의 전체 성능과 품질을 좌우하는 '핵심 부품'을 만드는 만큼, 센서나인은 타협 없는 기술력과 철저한 품질 관리를 기업의 최우선 가치로 삼습니다. 일상의 편리함을 돕는 스마트 가전부터 미래를 움직이는 첨단 산업 인프라까지, 최고의 품질과 신뢰를 바탕으로 상생 발전하는 든든한 비즈니스 파트너가 되겠습니다.`,
-  aboutIntroEN: `Sensor9 Co., Ltd. is a specialized manufacturing company dedicated to the research, development, and supply of core control solutions for both home appliances and industrial applications, including high-precision NTC temperature sensors and controllers. We possess tailored sensor technologies optimized across a wide industrial spectrum—ranging from temperature sensors for boilers and air conditioners to double-pipe socket and bracket-mounted sensors engineered for specialized environments. Based on this expertise, we deliver precision controller solutions for appliance and industrial equipment systems, helping maximize the smart integration, energy efficiency, and safety of our clients' products. Recognizing that we manufacture the 'core components' that dictate overall product performance and quality, Sensor9 prioritizes uncompromising technological capability and rigorous quality control above all else. From smart home appliances that bring convenience to daily life to the advanced industrial infrastructure driving the future, we will remain a dependable business partner committed to mutual growth built on premier quality and trust.`,
-  kpi1Value: '0.01°C',
-  kpi1TitleKR: '정밀 눈금 디그리 오차',
-  kpi1TitleEN: 'Precision Accuracy Limit',
-  kpi1DescKR: '정밀 오일교정 항온조에서 전수 전자기 신장 테스트를 통과한 초고위성 감도.',
-  kpi1DescEN: 'Unsurpassed tolerance limits verified through multi-day calibration chamber processes.',
-  kpi2Value: '45+',
-  kpi2TitleKR: '보유 지식 특허 및 실용신안',
-  kpi2TitleEN: 'Exclusive Global Patents',
-  kpi2DescKR: '박막 소자 응용, 하우징 패킹, 전장 절연 등 자체 특허 포트폴리오를 보유.',
-  kpi2DescEN: 'We own dynamic key patents securing electrical isolation and robust physical durability.',
-  kpi3Value: '24/7',
-  kpi3TitleKR: '무정전 열 모니터링 시스템',
-  kpi3TitleEN: 'Smart Fault Isolation',
-  kpi3DescKR: '가혹조건인 화학 공정, 전력 변전소, 전기배틀 등에서 반영구적 성능 획득.',
-  kpi3DescEN: 'Semi-permanent service lifespan demonstrated across dense chemical storage units.',
+  aboutIntroKR: `센서나인(주)은 고정밀 NTC 온도센서와 콘트롤러, 그리고 고신뢰성 점화트랜스를 중심으로 스마트 가전, 친환경 모빌리티, 스마트 팩토리, 그리고 미래 첨단 AI 로봇을 위한 핵심 제어 솔루션을 연구·개발하고 공급하는 제조 혁신 기업입니다.
+
+우리는 보일러 및 에어컨용 지능형 HVAC 센서부터 고난도 특수 환경을 위한 이중관 소켓 및 브라켓 체결용 센서까지, 폭넓은 산업 스펙트럼에 최적화된 맞춤형 센서 기술력을 보유하고 있습니다. 특히 고도화된 정밀성과 내구성이 요구되는 전기차(EV) 등 미래 모빌리티의 배터리 관리 시스템(BMS), AI 로봇의 구동부 및 열 제어 모듈에 최적화된 스마트 센싱 솔루션을 제공하며 차세대 기술 트렌드를 선도하고 있습니다.
+
+이에 더해, 안정적인 고전압 출력을 보장하는 점화트랜스(Ignition Transformer) 제조 역량을 바탕으로 가전 및 산업용 연소 시스템은 물론, 스마트 팩토리의 자동화 장비 및 특수 목적용 로봇 제어 시스템까지 사업 영역을 성공적으로 확장해 나가고 있습니다.
+
+이를 기반으로 가전, 첨단 산업 장비, 차세대 모빌리티 및 로봇 시스템의 정밀 콘트롤러 솔루션을 구축하여, 고객사 제품의 스마트화와 에너지 효율성, 그리고 안전성을 극대화하는 데 기여하고 있습니다.
+
+제품의 전체 성능과 품질을 좌우하는 '핵심 부품'을 만드는 만큼, 센서나인은 타협 없는 기술력과 철저한 품질 관리를 기업의 최우선 가치로 삼습니다.
+
+인간의 삶을 풍요롭게 하는 스마트 가전부터 미래 산업을 이끄는 AI 인프라와 첨단 모빌리티까지, 최고의 품질과 신뢰를 바탕으로 함께 상생 발전하는 가장 든든한 비즈니스 파트너가 되겠습니다.
+
+센서나인(주) 대표이사 이호균`,
+  aboutIntroEN: `Sensor9 Co., Ltd. is a manufacturing innovation enterprise that researches, develops, and supplies high-precision NTC temperature sensors, controllers, and high-reliability ignition transformers, providing core control solutions for smart home appliances, eco-friendly mobility, smart factories, and advanced AI robotics of the future.
+
+From intelligent HVAC sensors for boilers and air conditioners to specialized double-pipe socket and bracket-mounted sensors for harsh environments, we possess customized sensor technology optimized across a wide industrial spectrum. In particular, we lead next-generation technology trends by providing smart sensing solutions optimized for battery management systems (BMS) in electric vehicles (EVs) and future mobility, as well as drive units and thermal control modules in AI robots that demand sophisticated precision and durability.
+
+Furthermore, leveraging our manufacturing expertise in ignition transformers that guarantee stable high-voltage output, we have successfully expanded our business footprint. Our reach extends from home appliance and industrial combustion systems to automation equipment for smart factories and control systems for special-purpose robots.
+
+Based on these capabilities, we build precision controller solutions for home appliances, advanced industrial equipment, next-generation mobility, and robotic systems, contributing to maximizing the smartification, energy efficiency, and safety of our clients' products.
+
+As a creator of 'core components' that determine the overall performance and quality of products, Sensor9 places uncompromising technical prowess and rigorous quality control as our highest corporate values.
+
+From smart home appliances that enrich human lives to AI infrastructure and advanced mobility leading future industries, we commit to being your most reliable business partner, driving mutual growth through top-tier quality and trust.
+
+Ho-Kyun Lee, CEO of Sensor9 Co., Ltd.`,
+  kpi1Value: 'EV & AI',
+  kpi1SectTitleKR: '미래 모빌리티 & AI 로봇',
+  kpi1SectTitleEN: 'Future Mobility & AI Robotics',
+  kpi1TitleKR: '차세대 첨단 산업을 움직이는 초정밀 열 제어',
+  kpi1TitleEN: 'Ultra-Precision Thermal Control Driving Next-Generation Advanced Industries',
+  kpi1DescKR: '전기차 배터리 관리 시스템(BMS)부터 AI 로봇의 구동부까지, 미세한 열 변화를 완벽히 감지하여 시스템의 안전과 효율을 극대화합니다.',
+  kpi1DescEN: 'From Electric Vehicle Battery Management Systems (BMS) to the drive units of AI robots, we flawlessly detect micro-thermal changes to maximize system safety and efficiency.',
+  kpi2Value: 'SAFE & SMART',
+  kpi2SectTitleKR: '연소 제어 & 스마트 팩토리',
+  kpi2SectTitleEN: 'Combustion Control & Smart Factory',
+  kpi2TitleKR: '가혹한 산업 현장을 지키는 고신뢰성 안전 솔루션',
+  kpi2TitleEN: 'High-Reliability Safety Solutions Guarding Harsh Industrial Environments',
+  kpi2DescKR: '고전압 안정성을 보장하는 점화트랜스와 광학식 UV 화염감지 기술을 통해 가전 및 스마트 팩토리 연소 시스템의 안전을 빈틈없이 제어합니다.',
+  kpi2DescEN: 'Through ignition transformers that guarantee high-voltage stability and optical UV flame detection technology, we seamlessly control the safety of combustion systems in both home appliances and smart factories.',
+  kpi3Value: 'ECO-FRIENDLY',
+  kpi3SectTitleKR: '지능형 HVAC & 스마트 홈',
+  kpi3SectTitleEN: 'Intelligent HVAC & Smart Home',
+  kpi3TitleKR: '일상의 스마트화와 에너지를 아끼는 기술',
+  kpi3TitleEN: 'Smartifying Daily Life with Energy-Saving Technologies',
+  kpi3DescKR: '친환경 보일러 및 에어컨용 지능형 HVAC 센서 기술력으로 건물과 가정의 에너지를 절감하고 쾌적한 환경을 선사합니다.',
+  kpi3DescEN: 'With our intelligent HVAC sensor technology for eco-friendly boilers and air conditioners, we reduce energy consumption in buildings and homes while delivering a comfortable environment.',
 
   // Custom Slide 1
   slide1BadgeKR: 'STEADY / 최고인정 고신뢰성',
@@ -48,8 +78,8 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   slide1TitleEN: 'Extremely Precise, Stable Feedback with Accuracy Level to ±0.05°C',
   slide1SeriesKR: '이중관 소켓형 온도 센서 SN-DBT Series',
   slide1SeriesEN: 'Double-Well Threaded Thermistor (SN-DBT Series)',
-  slide1DescKR: '특허받은 NTC 써미스터 칩과 견고한 이중 차폐 격벽 소켓 기술을 결합하여, 화학 용매 대류와 초고압 배관 속에서도 유체 흐름 왜곡 없이 정밀 복사 열제어를 수행합니다.',
-  slide1DescEN: 'Patented NTC thermistor technology packed with rugged dual-wall protective sleeves, enabling precise digital thermal calibration under harsh flow speed and intense chemical pressure.',
+  slide1DescKR: '고정밀 NTC 칩과 센서나인만의 이중 보호벽(격벽) 기술을 하나로 묶었습니다. 화학 물질이 흐르거나 압력이 극도로 높은 배관 속에서도, 유체의 흐름을 방해하지 않고 흐트러짐 없는 완벽한 온도를 감지하고 제어합니다.',
+  slide1DescEN: 'Combining our high-precision NTC chips with SENSOR9’s proprietary double-shield technology, this sensor ensures seamless, flawless temperature detection and control without disrupting fluid flow—even inside high-pressure pipelines or corrosive chemical environments.',
   slide1ProductFilterValue: '온도센서',
 
   // Custom Slide 2
@@ -124,8 +154,8 @@ export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   rdTech3DescEN: 'Employs micro-sheath casing techniques allowing packaging into dense electronics and battery layout grids with robust waterproofing, thermal shielding, and shock resistance.',
   rdTech3VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4', // sensor_image_video_tech3 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 3번 - 반도체 회로 기판 분석 비디오]
   
-  // sensor_image_video_certs - [위치: 메인 홈 화면 맨 하단 '품질 및 특허 인증(Certifications)' 갤러리 섹션의 인증서 이미지 3개 설정]
-  certificatesJson: '[\n  {\n    "id": "cert-1",\n    "titleKR": "KIMM 인증서",\n    "titleEN": "KIMM Certificate",\n    "imageUrl": "/images/sensor_certification_i3.jpg"\n  },\n  {\n    "id": "cert-2",\n    "titleKR": "CE 전기안전 적합성 적합인증서",\n    "titleEN": "CE Declaration of Conformity Certification",\n    "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600"\n  },\n  {\n    "id": "cert-3",\n    "titleKR": "NTC 써미스터 소자 접합 특허증",\n    "titleEN": "Patent: NTC thermistor element binding stability",\n    "imageUrl": "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600"\n  }\n]',
+  // sensor_image_video_certs - [위치: 메인 홈 화면 맨 하단 '품질 및 특허 인증(Certifications)' 갤러리 섹션의 인증서 이미지 7개 설정]
+  certificatesJson: '[\n  {\n    "id": "cert-iso",\n    "titleKR": "ISO 인증서",\n    "titleEN": "ISO Certificate",\n    "imageUrl": "sensor_certification_i28.jpg"\n  },\n  {\n    "id": "cert-utility-model",\n    "titleKR": "실용신안등록증(온도감지센서)",\n    "titleEN": "Utility Model Registration (Temperature Sensor)",\n    "imageUrl": "sensor_certification_i27.jpg"\n  },\n  {\n    "id": "cert-venture",\n    "titleKR": "벤처기업확인서",\n    "titleEN": "Venture Business Confirmation",\n    "imageUrl": "sensor_certification_i26.jpg"\n  },\n  {\n    "id": "cert-rnd-center",\n    "titleKR": "기업부설연구서 인정서",\n    "titleEN": "Corporate R&D Center Recognition",\n    "imageUrl": "sensor_certification_i25.jpg"\n  },\n  {\n    "id": "cert-innobiz",\n    "titleKR": "이노비즈인증서",\n    "titleEN": "Inno-Biz Certificate",\n    "imageUrl": "sensor_certification_i24.jpg"\n  },\n  {\n    "id": "cert-kimm-ir",\n    "titleKR": "KIMM 인증서 - 적외선센서",\n    "titleEN": "KIMM Certificate - Infrared Sensor",\n    "imageUrl": "sensor_certification_i23.jpg"\n  },\n  {\n    "id": "cert-kimm-temp",\n    "titleKR": "KIMM 인증서 - 온도센서",\n    "titleEN": "KIMM Certificate - Temperature Sensor",\n    "imageUrl": "sensor_certification_i3.jpg"\n  }\n]',
 };
 
 export const INITIAL_SEO_METADATA: SEOMetadata = {
@@ -148,16 +178,83 @@ export const INITIAL_CMS_POSTS: CMSPost[] = [
     categoryEN: 'Notice',
     date: '2026년 06월 04일',
     author: '관리자',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600',
+    imageUrl: '/images/sensor_news_i33.jpg',
+  },
+  {
+    id: 'cms-2',
+    titleKR: 'World Hydrogen Expo 2025 (H2 MEET) 참가 및 수소 안전 솔루션 소개',
+    titleEN: 'Participation in World Hydrogen Expo 2025 (H2 MEET) & Hydrogen Safety Solutions',
+    contentKR: `안녕하세요, 센서나인(주)입니다.
+
+저희 센서나인(주)은 지난 2025년 12월 4일부터 12월 7일까지 개최된 '2025 세계 수소 엑스포(World Hydrogen Expo 2025 / H2 MEET)'에 참가하여 당사의 축적된 센서 기술력과 최신 수소 안전 솔루션을 성공적으로 선보였습니다.
+
+급성장하는 수소 인프라와 친환경 에너지 생태계 환경에 발맞추어, 센서나인(주)은 수소의 특성을 고려한 전용 안전 제품군을 대거 출품하여 국내외 바이어 및 파트너사분들께 큰 호응을 얻었습니다.
+
+[주요 출품 제품 라인업]
+
+수소 전용 안전 및 제어 시스템: 역화방지센서, 수소화염감지기 및 수소화염감지 컨트롤러
+
+고신뢰성 점화 시스템: 안정적인 초기 구동을 지원하는 수소 점화트랜스 및 일반 점화트랜스
+
+화재 및 불꽃 안전 센서: 고성능 화염감지기 및 화염감지센서
+
+정밀 온도감지센서: 배관용 온도센서, 외기 온도센서 및 고정밀 NTC 써미스터 기술
+
+전시 기간 동안 저희 센서나인(주)의 부스를 방문해 주시고 많은 관심을 보여주신 고객 및 파트너사 여러분께 깊은 감사의 말씀을 드립니다. 앞으로도 세계적인 수준의 정밀 센서 및 수소 안전 솔루션으로 보답하는 센서나인이 되겠습니다.
+
+전시회명: World Hydrogen Expo 2025 (H2 MEET)
+
+전시 기간: 2025년 12월 4일(목) ~ 12월 7일(일)
+
+전시 장소: 킨텍스(KINTEX)`,
+    contentEN: `Dear Customers and Partners,
+
+We are proud to announce that SENSOR9 Co., Ltd. successfully participated in the World Hydrogen Expo 2025 (H2 MEET), held from December 4th to December 7th, 2025, showcasing our advanced sensor technology and hydrogen safety solutions.
+
+In alignment with the rapidly growing hydrogen infrastructure and eco-friendly energy ecosystem, SENSOR9 presented a dedicated lineup of safety products optimized for hydrogen environments, receiving great acclaim from domestic and international buyers and partners.
+
+[Key Product Exhibits]
+
+Hydrogen-Specific Safety & Control Systems: Flashback Arrestor Sensors, Hydrogen Flame Detectors, and Hydrogen Flame Detection Controllers.
+
+High-Reliability Ignition Systems: Hydrogen Ignition Transformers and Standard Ignition Transformers for stable initial operation.
+
+Fire & Flame Safety Sensors: High-Performance Flame Detectors and Flame Sensors.
+
+Precision Temperature Sensors: Pipe Temperature Sensors, Outdoor Temperature Sensors, and High-Precision NTC Thermistors.
+
+We extend our deepest gratitude to all the customers and partners who visited the SENSOR9 booth and showed great interest during the exhibition. We will continue to move forward as a trusted leader in world-class precision sensors and hydrogen safety solutions.
+
+Event: World Hydrogen Expo 2025 (H2 MEET)
+
+Date: December 4 (Thu) – December 7 (Sun), 2025
+
+Venue: KINTEX
+
+Thank you.`,
+    categoryKR: '공지사항',
+    categoryEN: 'Notice',
+    date: '2025년 12월 07일',
+    author: '관리자',
+    imageUrl: '/images/sensor_news_i29.jpg',
+    images: [
+      '/images/sensor_news_i29.jpg',
+      '/images/sensor_news_i30.jpg',
+      '/images/sensor_news_i31.jpg',
+      '/images/sensor_news_i32.jpg'
+    ]
   }
 ];
 
 export const PRODUCTS_LIST: ProductSpec[] = [
   // =========================================================================
-  // [제품 소개 이미지 수정 안내]
-  // 각 제품 객체 아래에 `imageUrl: '이미지경로'`를 입력하여 이미지를 설정할 수 있습니다.
-  // 예시: imageUrl: '/images/products/my-product-1.jpg' 기입 시 해당 이미지가 출력됩니다.
-  // 기본적으로 비워두거나 생략하면 각 카테고리에 맞는 고화질 벡터 아이콘이 자동으로 표시됩니다.
+  // [제품 소개 이미지 및 브로슈어 수정 안내]
+  // 1. 이미지: 각 제품 객체 아래에 `imageUrl: '이미지경로'`를 입력하여 이미지를 설정할 수 있습니다.
+  //    예시: imageUrl: '/images/products/my-product-1.jpg' 기입 시 해당 이미지가 출력됩니다.
+  //          기본적으로 비워두거나 생략하면 각 카테고리에 맞는 고화질 벡터 아이콘이 자동으로 표시됩니다.
+  // 2. 브로슈어: 구글 드라이브 공유 주소나 카탈로그 파일 링크를 `brochureUrl: '공유링크'` 로 넣어주시면
+  //    제품군 카드와 상세 사양 표에 자동으로 "브로슈어 보기" 버튼이 렌더링됩니다.
+  //    예시: brochureUrl: 'https://drive.google.com/file/d/.../view?usp=sharing'
   // =========================================================================
 
   // 1. 온도센서 (기본형 및 체결형)
@@ -165,8 +262,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     id: 'prod-geo-14',
     model: 'SN-GEO-14',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '지열센서 (no. 14)',
-    nameEN: 'Geothermal Sensor (no. 14)',
+    nameKR: '지열센서',
+    nameEN: 'Geothermal Sensor',
     range: '-50°C to +120°C',
     accuracy: '±0.15°C',
     ratingKR: 'SUS316L 밀폐형 이중 센싱 프로브, IP68 완전방수',
@@ -174,14 +271,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '지중 열화 관리, 지열 냉난방 시스템 매립형 신뢰성 센싱',
     appEN: 'Geothermal heating & cooling systems ground burial sensing',
     imageAlt: '지열센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/products/sn-geo-14.png')를 입력하세요.
+    imageUrl: '/images/sensor_products_i34.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/products/sn-geo-14.png')를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입의 예시]
   },
   {
     id: 'prod-ac-13',
     model: 'SN-AC-13',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '에어컨용 온도센서 (no. 13)',
-    nameEN: 'AC Temperature Sensor (no. 13)',
+    nameKR: '에어컨용 온도센서',
+    nameEN: 'AC Temperature Sensor',
     range: '-30°C to +100°C',
     accuracy: '±0.1°C',
     ratingKR: '황동 도금 콤팩트 캡, 방수 실링 에폭시 사출',
@@ -189,14 +287,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '상업용 시스템에어컨 증발기 및 배관 흡입 온도 모니터링',
     appEN: 'Commercial system air conditioner evaporator temperature tracking',
     imageAlt: '에어컨용 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i35.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-brk-12',
     model: 'SN-BRK-12',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '브라켓 체결용 온도센서 (no. 12)',
-    nameEN: 'Bracket Mounting Temp Sensor (no. 12)',
+    nameKR: '브라켓 체결용 온도센서',
+    nameEN: 'Bracket Mounting Temp Sensor',
     range: '-40°C to +150°C',
     accuracy: '±0.15°C',
     ratingKR: '측면 고정용 플랜지식 금속 브라켓 장착 구조',
@@ -204,14 +303,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공조기 하우징 내벽 고정, 모터 프레임 외부 열전달 모니터링',
     appEN: 'HVAC chamber interior casing, motor surface thermal supervision',
     imageAlt: '브라켓 체결용 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i36.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-dbt-11',
     model: 'SN-DBT-11',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '이중관 소켓 체결용 온도센서 - PT 1/2 TAP 적용 (no. 11)',
-    nameEN: 'Double Well Sensor - PT 1/2 TAP (no. 11)',
+    nameKR: '이중관 소켓 체결용 온도센서 - PT 1/2 TAP 적용',
+    nameEN: 'Double Well Sensor - PT 1/2 TAP',
     range: '-50°C to +200°C',
     accuracy: '±0.05°C',
     ratingKR: 'PT 1/2 인치 규격 나사산 적용 이중관 일체 세트',
@@ -219,14 +319,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '산업용 열 교환 매니폴드, 대류수 순환 압력 라인 피팅',
     appEN: 'Industrial heat exchanger manifolds, flow convection lines',
     imageAlt: '이중관 소켓 체결용 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i37.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1WxbRKLp3fpRNTdCvi41b-CXrdxp4lRC2/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-clp-10',
     model: 'SN-CLP-10',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '클립형 온도센서 (no. 10)',
-    nameEN: 'Clip-on Temperature Sensor (no. 10)',
+    nameKR: '클립형 온도센서',
+    nameEN: 'Clip-on Temperature Sensor',
     range: '-20°C to +120°C',
     accuracy: '±0.2°C',
     ratingKR: '고탄성 스텐 서클릿 원형 파이프 스냅온 퀵 클립',
@@ -234,59 +335,63 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가정용 보일러 냉온수 동관 배관 밀착 스냅 설치',
     appEN: 'Home boiler domestic water copper pipes snap attachment',
     imageAlt: '클립형 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i38.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IeOvG4f24-w27iHLMGS0Gh7lH8c6k4M8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-gen-9',
     model: 'SN-GEN-09',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '일반 온도센서 (no. 9)',
-    nameEN: 'General Temperature Sensor (no. 9)',
+    nameKR: '일반 온도센서',
+    nameEN: 'General Temperature Sensor',
     range: '-40°C to +125°C',
     accuracy: '±0.1°C',
     ratingKR: 'SUS 원통 씰 튜브 (L: 50mm, Ø: 5mm)',
     ratingEN: 'SUS straight cylinder probe casing (L: 50mm, Ø: 5mm)',
     appKR: '소형 항온수조 챔버 가동 지표, HVAC 내부 대류 제어',
     appEN: 'Chamber water bath monitoring, internal air flow HVAC measurement',
-    imageAlt: '일반 온도센서 (no. 9)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '일반 온도센서',
+    imageUrl: '/images/sensor_products_i39.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-gen-8',
     model: 'SN-GEN-08',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '일반 온도센서 (no. 8)',
-    nameEN: 'General Temperature Sensor (no. 8)',
+    nameKR: '일반 온도센서',
+    nameEN: 'General Temperature Sensor',
     range: '-40°C to +125°C',
     accuracy: '±0.15°C',
     ratingKR: 'SUS 원통 씰 튜브 (L: 40mm, Ø: 4mm)',
     ratingEN: 'SUS straight cylinder probe casing (L: 40mm, Ø: 4mm)',
     appKR: '일반 가전 기기 제어반 온도 검출, 덕트 공정 수집',
     appEN: 'General home appliances electronics casing, duct sensing systems',
-    imageAlt: '일반 온도센서 (no. 8)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '일반 온도센서',
+    imageUrl: '/images/sensor_products_i40.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-gen-5',
     model: 'SN-GEN-05',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '일반 온도센서 (no. 5)',
-    nameEN: 'General Temperature Sensor (no. 5)',
+    nameKR: '일반 온도센서',
+    nameEN: 'General Temperature Sensor',
     range: '-40°C to +105°C',
     accuracy: '±0.2°C',
     ratingKR: '수축 튜브 방적 케이스 마감 (L: 30mm, Ø: 3.5mm)',
     ratingEN: 'Shrink-sleeve polymer protection casing (L: 30mm, Ø: 3.5mm)',
     appKR: '의료기기 단순 소모품, 냉장고 김치 장독 제어 센싱',
     appEN: 'Simple medical storage cabinets, cooling appliances temperature control',
-    imageAlt: '일반 온도센서 (no. 5)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '일반 온도센서',
+    imageUrl: '/images/sensor_products_i41.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-scr-4',
     model: 'SN-SCR-04',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '나사 체결용 온도센서 - PF 1/8 TAP 적용 (no. 4)',
-    nameEN: 'Thread Screw Sensor - PF 1/8 TAP (no. 4)',
+    nameKR: '나사 체결용 온도센서 - PF 1/8 TAP 적용',
+    nameEN: 'Thread Screw Sensor - PF 1/8 TAP',
     range: '-30°C to +150°C',
     accuracy: '±0.1°C',
     ratingKR: 'PF 1/8 고정 기밀 평행 수나사 적용',
@@ -294,37 +399,40 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가스 압축 컴프레셔 측벽 하우징, 엔진 크랭크케이스',
     appEN: 'Air compressor sidewall housing, engine crankcase thermal monitoring',
     imageAlt: '나사 체결용 온도센서 PF 1/8',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i42.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-scr-2',
     model: 'SN-SCR-02',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '나사 체결용 온도센서 - PT 1/4 TAP 적용 (no. 2)',
-    nameEN: 'Thread Screw Sensor - PT 1/4 TAP (no. 2)',
+    nameKR: '나사 체결용 온도센서 - PT 1/4 TAP 적용',
+    nameEN: 'Thread Screw Sensor - PT 1/4 TAP',
     range: '-40°C to +180°C',
     accuracy: '±0.1°C',
     ratingKR: 'PT 1/4 테이퍼 압력 나사 가공 (L: 25mm)',
     ratingEN: 'PT 1/4" tapered male-thread fitting (L: 25mm)',
     appKR: '오토 클레이브 내화 기기 결합, 순환 열수 주입 배관 입구',
     appEN: 'Autoclave pressure chambers, hot water distribution pipe inlets',
-    imageAlt: '나사 체결용 온도센서 PT 1/4 (no. 2)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '나사 체결용 온도센서 PT 1/4',
+    imageUrl: '/images/sensor_products_i43.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-scr-1',
     model: 'SN-SCR-01',
     category: '온도센서 (기본형 및 체결형)',
-    nameKR: '나사 체결용 온도센서 - PT 1/4 TAP 적용 (no. 1)',
-    nameEN: 'Thread Screw Sensor - PT 1/4 TAP (no. 1)',
+    nameKR: '나사 체결용 온도센서 - PT 1/4 TAP 적용',
+    nameEN: 'Thread Screw Sensor - PT 1/4 TAP',
     range: '-40°C to +180°C',
     accuracy: '±0.15°C',
     ratingKR: 'PT 1/4/ 테이퍼 나사 슬림 헤드 (L: 15mm)',
     ratingEN: 'PT 1/4" tapered male-thread slim-head fitting (L: 15mm)',
     appKR: '공조 히터 방열 핀 표면 나사 직접 체결 제어',
     appEN: 'HVAC heater radiation fins direct-screw temperature assembly',
-    imageAlt: '나사 체결용 온도센서 PT 1/4 (no. 1)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '나사 체결용 온도센서 PT 1/4',
+    imageUrl: '/images/sensor_products_i44.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
   // 2. 배관용 온도센서
@@ -332,8 +440,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     id: 'prod-pipe-3',
     model: 'SN-PIPE-03',
     category: '배관용 온도센서',
-    nameKR: '배관용 온도센서 - 대형 (no. 3)',
-    nameEN: 'Pipe Temperature Sensor - Large (no. 3)',
+    nameKR: '배관용 온도센서 - 대형',
+    nameEN: 'Pipe Temperature Sensor - Large',
     range: '-40°C to +250°C',
     accuracy: '±0.1°C',
     ratingKR: '웰 헤드 중량 플랜지 차폐 구조 및 서모웰 분리 세트',
@@ -341,14 +449,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '발전 설비 주 스팀 수송 전용관, 석유 화학 플랜트 고온 순출액 관',
     appEN: 'Power plant steam pipeline monitoring, petrochemical plant high-flow lines',
     imageAlt: '대형 배관용 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i45.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1VerXoLkBTItbC9K1PnoQZdCVIb8zVJUH/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-pipe-1',
     model: 'SN-PIPE-01',
     category: '배관용 온도센서',
-    nameKR: '배관용 온도센서 - 소형 (no. 1)',
-    nameEN: 'Pipe Temperature Sensor - Small (no. 1)',
+    nameKR: '배관용 온도센서 - 소형',
+    nameEN: 'Pipe Temperature Sensor - Small',
     range: '-40°C to +180°C',
     accuracy: '±0.15°C',
     ratingKR: 'SUS316L 소형 나사산 체결식 밀폐 슬리브',
@@ -356,7 +465,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가정용 보일러 분배기 상하수관, 냉각 제어 루프 배관',
     appEN: 'Residential boiler circulation manifolds, water cooler circulation pipe loops',
     imageAlt: '소형 배관용 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i46.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1ueFkurVzlDAyuyx4WihqEPpHXt44KvHG/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
   // 3. 외기 및 실내용 온도센서
@@ -364,8 +474,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     id: 'prod-out-1',
     model: 'SN-OUT-01',
     category: '외기 및 실내용 온도센서',
-    nameKR: '외기용 온도센서 (no. 1)',
-    nameEN: 'Outdoor Temperature Sensor (no. 1)',
+    nameKR: '외기용 온도센서',
+    nameEN: 'Outdoor Temperature Sensor',
     range: '-50°C to +80°C',
     accuracy: '±0.15°C',
     ratingKR: 'UV 내후성 코플라스틱 하우징 루버 플레이트',
@@ -373,14 +483,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '빌딩 스마트 공조 외풍 제어용, 스마트 농가 시설 원정 온도 검사',
     appEN: 'Commercial building outside air damper loops, smart farm greenhouse monitoring',
     imageAlt: '외기용 온도센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i47.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1TX8Q8PRp7Guggy2YJBbC9KrJKnHK9TBq/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-in-w2',
     model: 'SN-IN-W02',
     category: '외기 및 실내용 온도센서',
-    nameKR: '실내용 온도센서 (와이어 TYPE) (no. 2)',
-    nameEN: 'Indoor Room Sensor - Wire Type (no. 2)',
+    nameKR: '실내용 온도센서 (와이어 TYPE)',
+    nameEN: 'Indoor Room Sensor - Wire Type',
     range: '-20°C to +70°C',
     accuracy: '±0.1°C',
     ratingKR: '지방 극세 케이블 몰딩 전선 일체형 슬림 프로브',
@@ -388,14 +499,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '정밀 전산 서버실 랙 장비 내부 공기 흡입구 틈새 마운트',
     appEN: 'Server rack cooling intake vent mounting, dynamic climate cabinet control',
     imageAlt: '실내용 와이어 센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i48.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-in-l1',
     model: 'SN-IN-L01',
     category: '외기 및 실내용 온도센서',
-    nameKR: '실내용 온도센서 (리드 TYPE) (no. 1)',
-    nameEN: 'Indoor Room Sensor - Lead Type (no. 1)',
+    nameKR: '실내용 온도센서 (리드 TYPE)',
+    nameEN: 'Indoor Room Sensor - Lead Type',
     range: '-10°C to +60°C',
     accuracy: '±0.2°C',
     ratingKR: '벽 장착형 화이트 인클로저 케이스 패널',
@@ -403,7 +515,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '상업 오피스 빌딩 중앙 집중식 난방 방 온도 제약 장비',
     appEN: 'Commercial workspace interior thermostat, climate-control ceiling vents',
     imageAlt: '실내용 리드 센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i49.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
   // 4. 고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)
@@ -411,8 +524,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     id: 'prod-pt100-6',
     model: 'SN-PT100-06',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: 'PT100Ω 3선식 온도센서 (PT 1/2 TAP 적용) (no. 6)',
-    nameEN: 'PT100 3-Wire Sensor - PT 1/2 TAP (no. 6)',
+    nameKR: 'PT100Ω 3선식 온도센서 (PT 1/2 TAP 적용)',
+    nameEN: 'PT100 3-Wire Sensor - PT 1/2 TAP',
     range: '-200°C to +450°C',
     accuracy: 'Class A (±0.15°C)',
     ratingKR: '3선식 구리 보상 리드선 적용, PT 1/2 나사 커플러',
@@ -420,14 +533,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '연구소 저온 냉동 보관 설비, 산업 스팀 라인 극오차 교정',
     appEN: 'Extremely low biochem cryo-chambers, steam calibration accuracy units',
     imageAlt: 'PT100 3선식 PT 1/2',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i50.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1wFNcNHhY78vtiEpLxj8RcV0i926rcONs/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-pt100-5',
     model: 'SN-PT100-05',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: 'PT100Ω 3선식 온도센서 (PT 1/4 TAP 적용) (no. 5)',
-    nameEN: 'PT100 3-Wire Sensor - PT 1/4 TAP (no. 5)',
+    nameKR: 'PT100Ω 3선식 온도센서 (PT 1/4 TAP 적용)',
+    nameEN: 'PT100 3-Wire Sensor - PT 1/4 TAP',
     range: '-200°C to +350°C',
     accuracy: 'Class B (±0.3°C)',
     ratingKR: 'SUS 헤드 스프링 로디드 프로브, PT 1/4 나사',
@@ -435,14 +549,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공조기 히팅 열교환 덕트, 플랜트 오일 순환 매니폴드 주 탱크',
     appEN: 'Auxiliary duct coil heat loop detectors, industrial hydraulic systems',
     imageAlt: 'PT100 3선식 PT 1/4',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i51.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1wFNcNHhY78vtiEpLxj8RcV0i926rcONs/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-ktype-4',
     model: 'SN-KTYPE-04',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: 'K-TYPE 온도센서 (PT 1/2 TAP 적용) (no. 4)',
-    nameEN: 'K-Type Thermocouple - PT 1/2 TAP (no. 4)',
+    nameKR: 'K-TYPE 온도센서 (PT 1/2 TAP 적용)',
+    nameEN: 'K-Type Thermocouple - PT 1/2 TAP',
     range: '-100°C to +800°C',
     accuracy: '±1.5°C or 0.75%',
     ratingKR: '고온 내열 글래스 울 외장 보호 피복 및 PT 1/2 헤드',
@@ -450,14 +565,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '전기로 고열 노외 통제, 도자 소결 전력실 상시 진단',
     appEN: 'High-temp smelting electrical kilns, power stations heavy chambers',
     imageAlt: 'K-TYPE 센서 PT 1/2',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i52.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1XQtoftA8hFaOC5dK9-VwdR7IdwBHkZd8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-ktype-2',
     model: 'SN-KTYPE-02',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: 'K-TYPE 온도센서 (PT 1/4 TAP 적용) (no. 2)',
-    nameEN: 'K-Type Thermocouple - PT 1/4 TAP (no. 2)',
+    nameKR: 'K-TYPE 온도센서 (PT 1/4 TAP 적용)',
+    nameEN: 'K-Type Thermocouple - PT 1/4 TAP',
     range: '-50°C to +600°C',
     accuracy: '±2.2°C or 0.75%',
     ratingKR: '이중 유리 보호 실드 리드 케이블, PT 1/4 밀폐 탭',
@@ -465,14 +581,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '플라스틱 압출기 가열 배럴 외부, 사출 금형 슬링 온도 지표',
     appEN: 'Plastic extrusion hot barrels, high-speed injection molds monitoring',
     imageAlt: 'K-TYPE 센서 PT 1/4',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i53.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1XQtoftA8hFaOC5dK9-VwdR7IdwBHkZd8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-ktype-1',
     model: 'SN-KTYPE-01',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: 'K-TYPE 온도센서 (브라켓 체결용) (no. 1)',
-    nameEN: 'K-Type Thermocouple with Bracket (no. 1)',
+    nameKR: 'K-TYPE 온도센서 (브라켓 체결용)',
+    nameEN: 'K-Type Thermocouple with Bracket',
     range: '-40°C to +400°C',
     accuracy: '±2.2°C',
     ratingKR: 'L형 측벽 직립 체결 금속 플레이트 어레인지 브라켓',
@@ -480,14 +597,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '산업용 대용량 건조기 덕트 매립, 고중량 프레스 성형 금형',
     appEN: 'Large-scale industrial dryers venting ducts, heavy press casting',
     imageAlt: 'K-TYPE 브라켓형',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i54.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1XQtoftA8hFaOC5dK9-VwdR7IdwBHkZd8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-bim-m4',
     model: 'SN-BIM-M04',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: '수동 바이메탈 (no. 4)',
-    nameEN: 'Manual Reset Bimetal Switch (no. 4)',
+    nameKR: '수동 바이메탈',
+    nameEN: 'Manual Reset Bimetal Switch',
     range: '+60°C to +150°C (Cutout Preset)',
     accuracy: '±3.5°C trip',
     ratingKR: '화재 방지 전착용 수동 해제 조작 안전 기계식 버튼',
@@ -495,14 +613,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '온풍 난방기 화재 예방 배기 과열 셧다운 차단기',
     appEN: 'Industrial air heater exhaust fire safety override cutoff switch',
     imageAlt: '수동 바이메탈',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i55.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-bim-a3',
     model: 'SN-BIM-A03',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: '자동 바이메탈 (no. 3)',
-    nameEN: 'Auto Reset Bimetal Switch (no. 3)',
+    nameKR: '자동 바이메탈',
+    nameEN: 'Auto Reset Bimetal Switch',
     range: '+45°C to +130°C (Cycle Reset)',
     accuracy: '±3.0°C trip',
     ratingKR: '자동 복원 이중 원반 접점 (동급 수명 10만회 보장)',
@@ -510,14 +629,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '고속 열선 히터 전력 안정, 냉난방 모터 배압 차전 필터',
     appEN: 'High-speed radiant wire power control, HVAC blower motor protection',
     imageAlt: '자동 바이메탈',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i56.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-bim-h2',
     model: 'SN-BIM-H02',
     category: '고온 및 산업용 센서 (K-TYPE / PT100Ω / 바이메탈)',
-    nameKR: '자동 바이메탈 - 고온용 (세라믹 케이스) (no. 2)',
-    nameEN: 'High-Temp Auto Bimetal - Ceramic (no. 2)',
+    nameKR: '자동 바이메탈 - 고온용 (세라믹 케이스)',
+    nameEN: 'High-Temp Auto Bimetal - Ceramic',
     range: '100°C to 250°C',
     accuracy: '±4.0°C trip',
     ratingKR: '내열 세라믹 인클로저 프레임 사출 구조',
@@ -525,7 +645,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가정용 전기 오븐 안쪽 조절실, 대형 상업 식기세척 건조기 브레이커',
     appEN: 'High-power compact electric stoves, commercial hot drying breakers',
     imageAlt: '세라믹 바이메탈',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i57.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
   // 5. 수위감지센서
@@ -533,68 +654,72 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     id: 'prod-lev-9',
     model: 'SN-LEVEL-09',
     category: '수위감지센서',
-    nameKR: '수위 감지 센서 (PT 1/4 TAP 적용) (no. 9)',
-    nameEN: 'Water Level Sensor - PT 1/4 TAP (no. 9)',
+    nameKR: '수위 감지 센서 (PT 1/4 TAP 적용)',
+    nameEN: 'Water Level Sensor - PT 1/4 TAP',
     range: '0 to 2000mm 연속 검출',
     accuracy: '±1mm',
     ratingKR: '테플론 코팅 외장 방습, PT 1/4 고정 프레임',
     ratingEN: 'Teflon coated insulation sleeve, PT 1/4 thread',
     appKR: '반도체 세정조 식각 슬러리 레벨 보존 정밀 수위 측정',
     appEN: 'Semiconductor clean tanks acid-slurry level tracking',
-    imageAlt: '수위감지센서 PT 1/4 (no. 9)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '수위감지센서 PT 1/4',
+    imageUrl: '/images/sensor_products_i60.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-lev-8',
     model: 'SN-LEVEL-08',
     category: '수위감지센서',
-    nameKR: '수위 감지 센서 (PT 1/4 TAP 적용) (no. 8)',
-    nameEN: 'Water Level Sensor - PT 1/4 TAP (no. 8)',
+    nameKR: '수위 감지 센서 (PT 1/4 TAP 적용)',
+    nameEN: 'Water Level Sensor - PT 1/4 TAP',
     range: '0 to 1500mm',
     accuracy: '±1mm',
     ratingKR: 'SUS304 금속 리드 로드, PT 1/4 평행 가스 체결',
     ratingEN: 'SUS304 mechanical float rod sensor, PT 1/4 thread',
     appKR: '중형 빌딩 오배수 정화 수배조 수위 레벨 스캐닝',
     appEN: 'Wastewater drainage collecting sinks, greywater sumps',
-    imageAlt: '수위감지센서 PT 1/4 (no. 8)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '수위감지센서 PT 1/4',
+    imageUrl: '/images/sensor_products_i61.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-lev-5',
     model: 'SN-LEVEL-05',
     category: '수위감지센서',
-    nameKR: '수위 감지 센서 - 클립 체결용 (no. 5)',
-    nameEN: 'Water Level Sensor - Clip-on (no. 5)',
+    nameKR: '수위 감지 센서 - 클립 체결용',
+    nameEN: 'Water Level Sensor - Clip-on',
     range: '0 to 1000mm',
     accuracy: '±2mm',
     ratingKR: '스프링 클립 가건식 스냅 접착 판넬 고정형',
     ratingEN: 'Spring-loaded click sheet-clip temporary mounting',
     appKR: '정수 장비 가습 세척 내부 임시 정밀 수배수 스탠드',
     appEN: 'Water purification humidifying chambers temporary mount',
-    imageAlt: '클립형 수위센서 (no. 5)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '클립형 수위센서',
+    imageUrl: '/images/sensor_products_i62.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-lev-4',
     model: 'SN-LEVEL-04',
     category: '수위감지센서',
-    nameKR: '수위 감지 센서 - 클립 체결용 (no. 4)',
-    nameEN: 'Water Level Sensor - Clip-on (no. 4)',
+    nameKR: '수위 감지 센서 - 클립 체결용',
+    nameEN: 'Water Level Sensor - Clip-on',
     range: '0 to 800mm',
     accuracy: '±2mm',
     ratingKR: '소형 원형 원버 플라스틱 클립 프레임 구조',
     ratingEN: 'Mini circular plastic snap-clip framework',
     appKR: '일반 정수 탱크 세척 조내 실시간 넘침 수용 가동 검사',
     appEN: 'Water purifiers storage tanks smart anti-flooding overflow alarm',
-    imageAlt: '클립형 수위센서 (no. 4)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '클립형 수위센서',
+    imageUrl: '/images/sensor_products_i63.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-lev-h2',
     model: 'SN-LEVEL-H02',
     category: '수위감지센서',
-    nameKR: '수위 감지 센서 - 고온용 (PT 1/4 TAP 적용) (no. 2)',
-    nameEN: 'High-Temp Water Level Sensor - PT 1/4 (no. 2)',
+    nameKR: '수위 감지 센서 - 고온용 (PT 1/4 TAP 적용)',
+    nameEN: 'High-Temp Water Level Sensor - PT 1/4',
     range: '최고 +150°C 내열 대기',
     accuracy: '±1mm',
     ratingKR: '불소 고무 실링 처리 및 SUS316L 플로트 본체',
@@ -602,14 +727,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '고온 압력 가열 스팀 보일러 내부 탕수 레벨 제어',
     appEN: 'Pressurized high-temp steam boilers internal hot-water level control',
     imageAlt: '고온용 수위감지센서',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i64.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-lev-1',
     model: 'SN-LEVEL-01',
     category: '수위감지센서',
-    nameKR: '수위 감지 센서 (PT 1/2 TAP 적용) (no. 1)',
-    nameEN: 'Water Level Sensor - PT 1/2 TAP (no. 1)',
+    nameKR: '수위 감지 센서 (PT 1/2 TAP 적용)',
+    nameEN: 'Water Level Sensor - PT 1/2 TAP',
     range: '0 to 3000mm 대형 수로',
     accuracy: '±1mm',
     ratingKR: 'PT 1/2 인용 중형 나사산 사출 하이패스 하우징',
@@ -617,7 +743,129 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공장 공업 용수 유류 분리 저장실, 농업 펌프장 순찰',
     appEN: 'Industrial oil separator reservoirs, farming pumping canals',
     imageAlt: '수위감지센서 PT 1/2',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i65.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+  },
+
+  // 6. 역화감지센서
+  {
+    id: 'prod-flsh-1',
+    model: 'SN-FLSH-01',
+    category: '역화감지센서',
+    nameKR: '수소 역화감지센서 (수소 안전 및 제어용)',
+    nameEN: 'Hydrogen Flashback Arrestor Sensor',
+    range: '-40℃ ~ +125℃',
+    accuracy: '고압 및 고속 감지 반응',
+    ratingKR: 'SUS316L 하우징 / IP67 / 수소 가스 배관 전용 설계',
+    ratingEN: 'SUS316L Housing / IP67 / Hydrogen gas pipe specialized design',
+    appKR: '수소 충전소 디스펜서, 가스 연소 설비 역화 감지 및 차단 밸브 연동',
+    appEN: 'Hydrogen charging dispensers, gas combustion flashback detection & valve control',
+    imageAlt: '수소 역화감지센서',
+    imageUrl: '/images/sensor_products_i59_2.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+  },
+
+  // 7. 불꽃/화염 감지센서
+  {
+    id: 'prod-flm-case',
+    model: 'SN-FLM-CASE',
+    category: '불꽃/화염 감지센서',
+    nameKR: '불꽃감지센서_반도체방식_L형',
+    nameEN: 'Flame Sensor (L Type)',
+    range: '700nm ~ 1,000nm',
+    accuracy: '적외선 방식 (Infrared)',
+    ratingKR: '내열 엔지니어링 플라스틱 하우징 / IP65',
+    ratingEN: 'Heat-Resistant Plastic Housing / IP65',
+    appKR: '보일러 연소 제어 화염 감시, 가스 연소 설비 안전 연동',
+    appEN: 'Boiler combustion control flame monitoring, gas appliance safety interlock',
+    imageAlt: '불꽃감지센서_반도체방식_L형',
+    imageUrl: '/images/sensor_products_i58.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1oyfrkCbONIA3730-S-a4mQky7QuZI6jP/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+  },
+  {
+    id: 'prod-flm-wire',
+    model: 'SN-FLM-WIRE',
+    category: '불꽃/화염 감지센서',
+    nameKR: '불꽃감지센서_반도체방식_I형',
+    nameEN: 'Flame Sensor (I Type)',
+    range: '700nm ~ 1,000nm',
+    accuracy: '적외선 방식 (Infrared)',
+    ratingKR: '실리콘 고온 절연 리드 와이어 / IP65 맞춤식 설계',
+    ratingEN: 'Silicone High-Temp Lead Wire / IP65 Customized design',
+    appKR: '공간이 협소한 가스 온수기, 버너 노즐부 점화 직접 감지',
+    appEN: 'Compact gas water heaters, direct burner nozzle ignition detection',
+    imageAlt: '불꽃감지센서 와이어형',
+    imageUrl: '/images/sensor_products_i59.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1bsVy_SdbAzIRYDesQJMObaoF-c1NKuUp/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+  },
+  {
+    id: 'prod-flm-det',
+    model: 'SN-FLM-DET',
+    category: '화염감지센서',
+    nameKR: '화염감지센서',
+    nameEN: 'Flame Detector',
+    range: '700nm ~ 1,000nm',
+    accuracy: '적외선 방식 (Infrared)',
+    ratingKR: '알루미늄 견고한 아노다이징 케이스 / IP67 고정밀 감인',
+    ratingEN: 'Anodized Aluminum Solid Case / IP67 High-Precision Sensing',
+    appKR: '산업용 대형 연소로, 유리/금속 열처리 화염 모니터링, 방폭 영역 예방',
+    appEN: 'Industrial large furnaces, glass/metal heat-treatment flame monitoring',
+    imageAlt: '화염감지센서',
+    imageUrl: '/images/sensor_products_i59_1.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1odLsR5zvdeLqv6lp6rlOgDRiLfmRVEMg/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+  },
+
+  // 8. 점화트랜스
+  {
+    id: 'prod-ign-large',
+    model: 'SN-IGN-03',
+    category: '점화트랜스',
+    nameKR: '점화트랜스 대형',
+    nameEN: 'Ignition Transformer - Large',
+    range: '입력 220V / 출력 15kV',
+    accuracy: '고주파수 출력 안정성',
+    ratingKR: '고전압 몰딩 가공, 가스/오일 보일러 점화용 내후성 프레임',
+    ratingEN: 'High-voltage potted casting, heavy duty gas/oil boiler ignition frame',
+    appKR: '산업용 대형 연소기, 상업용 고용량 온수기 고전압 점화',
+    appEN: 'Industrial large burners, commercial high-capacity water heater ignition',
+    imageAlt: '점화트랜스 대형',
+    imageUrl: '/images/sensor_products_i71.png',
+    brochureUrl: 'https://drive.google.com/file/d/1qaaEE_xVH3cbz4XBO7FqBnWu7gu6ylOQ/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+    videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
+  },
+  {
+    id: 'prod-ign-medium',
+    model: 'SN-IGN-02',
+    category: '점화트랜스',
+    nameKR: '점화트랜스 중형',
+    nameEN: 'Ignition Transformer - Medium',
+    range: '입력 220V / 출력 12kV',
+    accuracy: '고주파수 출력 안정성',
+    ratingKR: '안정적인 방전 및 절연 에폭시 밀폐 구조',
+    ratingEN: 'Stable discharge and insulated epoxy-sealed encapsulation',
+    appKR: '중형 가정용/상업용 가스 보일러, 버너 버스팅 점화 제어',
+    appEN: 'Medium residential/commercial gas boilers, burner bursting controls',
+    imageAlt: '점화트랜스 중형',
+    imageUrl: '/images/sensor_products_i72.png',
+    brochureUrl: 'https://drive.google.com/file/d/1qaaEE_xVH3cbz4XBO7FqBnWu7gu6ylOQ/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+    videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
+  },
+  {
+    id: 'prod-ign-small',
+    model: 'SN-IGN-01',
+    category: '점화트랜스',
+    nameKR: '점화트랜스 소형',
+    nameEN: 'Ignition Transformer - Small',
+    range: '입력 220V / 출력 8kV',
+    accuracy: '고주파수 출력 안정성',
+    ratingKR: '컴팩트 초형량 설계, 고효율 점화 방전 기술 적용',
+    ratingEN: 'Compact lightweight design, high efficiency ignition discharge tech',
+    appKR: '소형 친환경 가정용 가스 프리믹스 보일러 점화 플러그 방전',
+    appEN: 'Small eco-friendly residential pre-mix gas boiler sparkling discharge',
+    imageAlt: '점화트랜스 소형',
+    imageUrl: '/images/sensor_products_i73.png',
+    brochureUrl: 'https://drive.google.com/file/d/1olzZLKzoHcZwuMUVw20Xk1EqEkixZ-ys/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+    videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
   },
 
   // 6. 기타 부속품 (케이스 및 소켓)
@@ -625,8 +873,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     id: 'prod-case-5',
     model: 'SN-CASE-05',
     category: '기타 부속품 (케이스 및 소켓)',
-    nameKR: '이중관 온도센서 케이스 (no. 5)',
-    nameEN: 'Double-Tube Protector Case (no. 5)',
+    nameKR: '이중관 온도센서 케이스',
+    nameEN: 'Double-Tube Protector Case',
     range: '보호 케이스 파트 (센서 무체)',
     accuracy: '외경 Ø: 8.0mm, 내경 Ø: 6.2mm',
     ratingKR: '이중 차폐 탈착형 정밀 삽입 전용 스틸 케이스',
@@ -634,29 +882,31 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '온도 센서 손상 방지 가이드, 정체 유체 배관 직접 매몰 체결',
     appEN: 'Prevents physical sensor fluid erosion, direct well pipeline burial',
     imageAlt: '이중관 온도센서 케이스',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i66.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-case-4',
     model: 'SN-CASE-04',
     category: '기타 부속품 (케이스 및 소켓)',
-    nameKR: '온도센서 케이스 (no. 4)',
-    nameEN: 'Temperature Sensor Case (no. 4)',
+    nameKR: '온도센서 케이스',
+    nameEN: 'Temperature Sensor Case',
     range: '보호 케이스 파트',
     accuracy: '외경 Ø: 6.0mm / 두께 0.5t',
     ratingKR: 'SUS 원형 둥근 마감 가동형 원형 슬리브 케이스',
     ratingEN: 'Standard straight round-tip SUS tubing sheath',
     appKR: '다공성 대류 씰 내부 센서 조립 시 외형 포팅 웰',
     appEN: 'General multi-point thermocouple casing assembly, potting well',
-    imageAlt: '온도센서 케이스 (no. 4)',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageAlt: '온도센서 케이스',
+    imageUrl: '/images/sensor_products_i67.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: 'https://drive.google.com/file/d/1WxbRKLp3fpRNTdCvi41b-CXrdxp4lRC2/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-case-b3',
     model: 'SN-CASE-B03',
     category: '기타 부속품 (케이스 및 소켓)',
-    nameKR: '온도센서 케이스 (황동 재질) (no. 3)',
-    nameEN: 'Brass Sensor Case (no. 3)',
+    nameKR: '온도센서 케이스 (황동 재질)',
+    nameEN: 'Brass Sensor Case',
     range: '열전도성 황동 가공',
     accuracy: '고속 열반응 레이아웃',
     ratingKR: '쾌삭 황동 재질 정밀 선반 원형 절삭 가공 하우징',
@@ -664,14 +914,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '전도 열전달 극대화 기기 고온 마운트, 배관 표면 밀착 소켓',
     appEN: 'Maximizing surface thermal conduction speed, radiator side socket',
     imageAlt: '온도센서 황동 케이스',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i68.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-case-s2',
     model: 'SN-CASE-S02',
     category: '기타 부속품 (케이스 및 소켓)',
-    nameKR: '온도센서 케이스 (SUS 재질) (no. 2)',
-    nameEN: 'Stainless Steel Sensor Case (no. 2)',
+    nameKR: '온도센서 케이스 (SUS 재질)',
+    nameEN: 'Stainless Steel Sensor Case',
     range: 'SUS316L 초강도',
     accuracy: '내압 최고 300 bar 테스트',
     ratingKR: '화학 내화 SUS316L 모세 가공 관 (Ø: 5.0mm)',
@@ -679,14 +930,15 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '강산성 세정 탱크 보호 덕트, 염분 바다 해수 측정관',
     appEN: 'Strong acids process shield conduit, marine saltwater storage guide',
     imageAlt: 'SUS 온도센서 케이스',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i69.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-sock-1',
     model: 'SN-SOCK-01',
     category: '기타 부속품 (케이스 및 소켓)',
-    nameKR: '온도센서 소켓 (no. 1)',
-    nameEN: 'Sensor Mounting Socket Tap (no. 1)',
+    nameKR: '온도센서 소켓',
+    nameEN: 'Sensor Mounting Socket Tap',
     range: '나사산 웰 소켓 어댑터',
     accuracy: 'PT 1/2 내경 - PT 1/4 암나사 대응',
     ratingKR: '육각 육면체 가공 황동/SUS 커플러 어댑터',
@@ -694,7 +946,8 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '기존 배관 배관 나사산 규격 변환, 소형 센서 탈착 탭 보존',
     appEN: 'Reducing pipeline tapping diameter sizes, rapid sensor swaps',
     imageAlt: '온도센서 소켓',
-    imageUrl: '', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: '/images/sensor_products_i70.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   }
 ];
 
@@ -761,6 +1014,27 @@ export const TIMELINE_ITEMS = [
     titleEN: 'Facility Expansion & Relocation to Incheon',
     descKR: '사업장 확장 이전 (인천광역시 서구 백범로 782)',
     descEN: 'Expanded and relocated headquarters to 782 Baegbeom-ro, Seo-gu, Incheon to enhance mass production'
+  },
+  {
+    year: '2018',
+    titleKR: 'CE 인증 획득 (적외선 센서, 점화트랜스)',
+    titleEN: 'CE Certification (Infrared Sensor, Ignition Transformer)',
+    descKR: '적외선 센서 및 점화트랜스 품목 CE 인증 획득',
+    descEN: 'Acquired CE Mark certification for infrared sensors and ignition transformers'
+  },
+  {
+    year: '2021',
+    titleKR: '소재·부품·장비 전문기업 인증',
+    titleEN: 'Material, Parts & Equipment Specialist Certification',
+    descKR: '산업통상자원부 지정 소재·부품·장비 전문기업 인증 획득',
+    descEN: 'Designated as a specialized business for materials, parts, and equipment'
+  },
+  {
+    year: '2022',
+    titleKR: '기술혁신형 중소기업(INNO-BIZ) 인증',
+    titleEN: 'INNO-BIZ Technology Innovation Certification',
+    descKR: '중소벤처기업부 인증 기술혁신형 중소기업(INNO-BIZ) 인증 획득',
+    descEN: 'Acquired INNO-BIZ certification for technology innovation'
   }
 ];
 

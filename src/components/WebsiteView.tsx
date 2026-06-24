@@ -13,6 +13,7 @@ import {
   ArrowRight, 
   CheckCircle2, 
   ChevronRight,
+  ChevronLeft,
   Sparkles,
   Search,
   Filter,
@@ -349,8 +350,52 @@ export default function WebsiteView({
   const [selectedEquipmentId, setSelectedEquipmentId] = useState<string>('eq-1');
 
   // Hero Product Showcase Carousel State
-  const [heroSlideIndex, setHeroSlideIndex] = useState<number>(0);
+  const [virtualIndex, setVirtualIndex] = useState<number>(1); // 1-4 correspond to slides 1-4, 0 is Clone of 4, 5 is Clone of 1
+  const [isTransitionDisabled, setIsTransitionDisabled] = useState<boolean>(false);
   const [heroSlidePlaying, setHeroSlidePlaying] = useState<boolean>(true);
+  const [slideProgress, setSlideProgress] = useState<number>(0);
+
+  const heroSlideIndex = virtualIndex === 0 ? 3 : virtualIndex === 5 ? 0 : virtualIndex - 1;
+
+  // Drag/Swipe Gesture Refs & Handlers
+  const dragStartRef = React.useRef<number | null>(null);
+  const [dragOffset, setDragOffset] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+    dragStartRef.current = clientX;
+    setIsDragging(true);
+    setDragOffset(0);
+    // Pause temporarily during active drag so it doesn't move suddenly
+    setHeroSlidePlaying(false);
+  };
+
+  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (dragStartRef.current === null) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+    const diff = clientX - dragStartRef.current;
+    setDragOffset(diff);
+  };
+
+  const handleDragEnd = () => {
+    if (dragStartRef.current === null) return;
+    const diff = dragOffset;
+    
+    // Threshold of 60px to trigger transition
+    if (diff > 60) {
+      // Swipe Right -> View Prev Slide
+      setVirtualIndex((prev) => prev - 1);
+    } else if (diff < -60) {
+      // Swipe Left -> View Next Slide
+      setVirtualIndex((prev) => prev + 1);
+    }
+    dragStartRef.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+    // Resume auto playing slideshow!
+    setHeroSlidePlaying(true);
+  };
 
   // R&D Interactive States
   const [activeRdStep, setActiveRdStep] = useState<number>(0);
@@ -410,13 +455,66 @@ export default function WebsiteView({
     customContent.rdTech3VideoUrl
   ]);
 
+  // 1. Progress ticking interval (purely updates slideProgress from 0 to 100)
   useEffect(() => {
     if (!heroSlidePlaying) return;
+    
+    const intervalTime = 50; // ms
+    const totalDuration = 5000; // 5 seconds
+    const increment = (intervalTime / totalDuration) * 100;
+
     const interval = setInterval(() => {
-      setHeroSlideIndex((prev) => (prev + 1) % 4);
-    }, 4500);
+      setSlideProgress((prev) => {
+        const next = prev + increment;
+        if (next >= 100) {
+          return 100;
+        }
+        return next;
+      });
+    }, intervalTime);
+
     return () => clearInterval(interval);
   }, [heroSlidePlaying]);
+
+  // 2. Separate side-effect when progress reaches 100
+  useEffect(() => {
+    if (slideProgress >= 100) {
+      setVirtualIndex((prevIdx) => prevIdx + 1);
+      setSlideProgress(0);
+    }
+  }, [slideProgress]);
+
+  // 3. Reset progress when user manually changes slide
+  useEffect(() => {
+    setSlideProgress(0);
+  }, [virtualIndex]);
+
+  useEffect(() => {
+    if (virtualIndex === 0) {
+      // Swipe/click backward into Clone of Slide 4 -> Jump back to real Slide 4 (index 4) without animation
+      const timer = setTimeout(() => {
+        setIsTransitionDisabled(true);
+        setVirtualIndex(4);
+      }, 500); // 500ms transition duration
+      return () => clearTimeout(timer);
+    } else if (virtualIndex === 5) {
+      // Swipe/click forward into Clone of Slide 1 -> Jump back to real Slide 1 (index 1) without animation
+      const timer = setTimeout(() => {
+        setIsTransitionDisabled(true);
+        setVirtualIndex(1);
+      }, 500); // 500ms transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [virtualIndex]);
+
+  useEffect(() => {
+    if (isTransitionDisabled) {
+      const frame = requestAnimationFrame(() => {
+        setIsTransitionDisabled(false);
+      });
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [isTransitionDisabled]);
 
   // Scroll viewport container to top on page switches/categories
   useEffect(() => {
@@ -441,17 +539,21 @@ export default function WebsiteView({
       case '배관용온도센서':
         return cat.includes('배관');
       case '외기용온도센서':
-        return cat.includes('외기') || name.includes('외기') || model.includes('out');
+        return (cat.includes('외기') || name.includes('외기') || model.includes('out')) && !name.includes('실내') && !model.includes('in-');
       case '실내온도센서':
         return cat.includes('실내') || name.includes('실내') || model.includes('in-');
       case 'K-TYPE센서':
         return cat.includes('k-type') || name.includes('k-type') || model.includes('ktype') || name.includes('pt100') || model.includes('pt100');
       case '바이메탈센서':
         return cat.includes('바이메탈') || name.includes('바이메탈') || model.includes('bim');
-      case '불꽃감지센서':
-        return cat.includes('불꽃') || name.includes('불꽃') || model.includes('flame');
+      case '불꽃/화염 감지센서':
+        return cat.includes('불꽃') || cat.includes('화염') || name.includes('불꽃') || name.includes('화염') || model.includes('flame') || model.includes('flm');
+      case '역화감지센서':
+        return cat.includes('역화') || name.includes('역화') || model.includes('flash') || model.includes('flsh');
       case '수위감지센서':
         return cat.includes('수위');
+      case '점화트랜스':
+        return cat.includes('점화') || name.includes('점화') || model.includes('trans') || model.includes('ign');
       case '기타':
         return cat.includes('기타') || cat.includes('부속품') || cat.includes('케이스') || cat.includes('소켓');
       default:
@@ -464,16 +566,19 @@ export default function WebsiteView({
     const name = (prod.nameKR || '').toLowerCase();
     const model = (prod.model || '').toLowerCase();
 
-    if (cat.includes('기본형') || (cat.includes('온도센서') && !cat.includes('배관') && !cat.includes('외기') && !cat.includes('실내') && !cat.includes('k-type') && !cat.includes('바이메탈') && !cat.includes('수위'))) {
+    if (cat.includes('기본형') || (cat.includes('온도센서') && !cat.includes('배관') && !cat.includes('외기') && !cat.includes('실내') && !cat.includes('k-type') && !cat.includes('바이메탈') && !cat.includes('수위') && !cat.includes('점화'))) {
       return isKR ? '온도센서' : 'Temp Sensor';
     }
     if (cat.includes('배관')) {
       return isKR ? '배관용온도센서' : 'Pipe Temp Sensor';
     }
+    if (name.includes('실내') || model.includes('in-')) {
+      return isKR ? '실내온도센서' : 'Indoor Temp Sensor';
+    }
     if (cat.includes('외기') || name.includes('외기') || model.includes('out')) {
       return isKR ? '외기용온도센서' : 'Outdoor Temp Sensor';
     }
-    if (cat.includes('실내') || name.includes('실내') || model.includes('in-')) {
+    if (cat.includes('실내')) {
       return isKR ? '실내온도센서' : 'Indoor Temp Sensor';
     }
     if (cat.includes('k-type') || name.includes('k-type') || model.includes('ktype') || name.includes('pt100') || model.includes('pt100')) {
@@ -482,18 +587,29 @@ export default function WebsiteView({
     if (cat.includes('바이메탈') || name.includes('바이메탈') || model.includes('bim')) {
       return isKR ? '바이메탈센서' : 'Bi-Metal Sensor';
     }
-    if (cat.includes('불꽃') || name.includes('불꽃') || model.includes('flame')) {
-      return isKR ? '불꽃감지센서' : 'Flame Sensor';
+    if (cat.includes('불꽃') || cat.includes('화염') || name.includes('불꽃') || name.includes('화염') || model.includes('flame') || model.includes('flm')) {
+      return isKR ? '불꽃/화염 감지센서' : 'Flame/Fire Sensor';
+    }
+    if (cat.includes('역화') || name.includes('역화') || model.includes('flash') || model.includes('flsh')) {
+      return isKR ? '역화감지센서' : 'Flashback Sensor';
     }
     if (cat.includes('수위')) {
       return isKR ? '수위감지센서' : 'Water Level Sensor';
+    }
+    if (cat.includes('점화') || name.includes('점화') || model.includes('trans') || model.includes('ign')) {
+      return isKR ? '점화트랜스' : 'Ignition Trans';
     }
     return isKR ? '기타 부속품' : 'Accessories';
   };
 
   // Selected news notice item modal state
   const [selectedPost, setSelectedPost] = useState<CMSPost | null>(null);
+  const [modalSlideIndex, setModalSlideIndex] = useState<number>(0);
   const [noticesPage, setNoticesPage] = useState<number>(1);
+
+  useEffect(() => {
+    setModalSlideIndex(0);
+  }, [selectedPost]);
 
   // Policy Modal state ('terms' or 'privacy' or 'email' or null)
   const [activePolicy, setActivePolicy] = useState<'privacy' | 'terms' | 'email' | null>(null);
@@ -713,9 +829,19 @@ export default function WebsiteView({
               <div className="flex flex-col w-full">
                 
                 {/* 1. Dynamic Product Showcase Slideshow / Carousel (Top block) */}
-                <div className="w-full bg-slate-50 relative border-b border-slate-200/50 overflow-hidden" id="hero-showcase-carousel">
+                <div 
+                  className="w-full bg-slate-50 relative border-b border-slate-200/50 overflow-hidden group/carousel select-none cursor-grab active:cursor-grabbing" 
+                  id="hero-showcase-carousel"
+                  onMouseDown={handleDragStart}
+                  onMouseMove={handleDragMove}
+                  onMouseUp={handleDragEnd}
+                  onMouseLeave={handleDragEnd}
+                  onTouchStart={handleDragStart}
+                  onTouchMove={handleDragMove}
+                  onTouchEnd={handleDragEnd}
+                >
 
-                  <div className="max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 items-center min-h-[440px] lg:min-h-[490px] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 relative z-10 gap-10">
+                  <div className="relative w-full z-10 overflow-hidden">
                     
                     {/* The state-driven sliding feature content */}
                     {(() => {
@@ -734,8 +860,8 @@ export default function WebsiteView({
                             EN: customContent.slide1SeriesEN || "Double-Well Threaded Thermistor (SN-DBT Series)" 
                           },
                           desc: { 
-                            KR: customContent.slide1DescKR || "특허받은 NTC 써미스터 칩과 견고한 이중 차폐 격벽 소켓 기술을 결합하여, 화학 용매 대류와 초고압 배관 속에서도 유체 흐름 왜곡 없이 정밀 복사 열제어를 수행합니다.", 
-                            EN: customContent.slide1DescEN || "Patented NTC thermistor technology packed with rugged dual-wall protective sleeves, enabling precise digital thermal calibration under harsh flow speed and intense chemical pressure." 
+                            KR: customContent.slide1DescKR || "고정밀 NTC 칩과 센서나인만의 이중 보호벽(격벽) 기술을 하나로 묶었습니다. 화학 물질이 흐르거나 압력이 극도로 높은 배관 속에서도, 유체의 흐름을 방해하지 않고 흐트러짐 없는 완벽한 온도를 감지하고 제어합니다.", 
+                            EN: customContent.slide1DescEN || "Combining our high-precision NTC chips with SENSOR9’s proprietary double-shield technology, this sensor ensures seamless, flawless temperature detection and control without disrupting fluid flow—even inside high-pressure pipelines or corrosive chemical environments." 
                           },
                           productFilterValue: customContent.slide1ProductFilterValue || "온도센서", image: customContent.slide1ImageUrl,
                           svg: (
@@ -953,114 +1079,179 @@ export default function WebsiteView({
                         }
                       ];
 
-                      const currentSlide = carouselSlides[heroSlideIndex];
+                      const slidesToRender = [
+                        carouselSlides[3], // index 0 (Clone of Slide 4)
+                        ...carouselSlides, // index 1 to 4
+                        carouselSlides[0]  // index 5 (Clone of Slide 1)
+                      ];
 
                       return (
-                        <div className="lg:col-span-12 w-full grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-14 animate-fade-in">
-                          
-                          {/* Inner Slide Left Hand Column */}
-                          <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                            <div className="mb-4">
-                              <span className="inline-flex items-center gap-1.5 bg-rose-600 text-[10px] font-black text-white uppercase tracking-widest px-3 py-1 rounded-md shadow-xs select-none">
-                                <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                                {currentSlide.badge[isKR ? 'KR' : 'EN']}
-                              </span>
-                            </div>
+                        <div 
+                          className="flex flex-row w-full"
+                          style={{ 
+                            transform: `translate3d(calc(-${virtualIndex * 100}% + ${dragOffset}px), 0, 0)`,
+                            transition: isDragging || isTransitionDisabled ? 'none' : 'transform 500ms ease-out'
+                          }}
+                        >
+                          {slidesToRender.map((slide, idx) => {
+                            const isCurrentHighlight = (idx === 0 && heroSlideIndex === 3) || 
+                                                       (idx === 5 && heroSlideIndex === 0) || 
+                                                       (idx - 1 === heroSlideIndex);
 
-                            <h2 className="text-xl sm:text-2xl lg:text-3.5xl font-black text-slate-900 leading-tight tracking-tight mb-5 min-h-[58px] sm:min-h-[72px] transition-all duration-300">
-                              {currentSlide.title[isKR ? 'KR' : 'EN']}
-                            </h2>
-
-                            {/* Divider strip */}
-                            <div className="w-14 h-[3px] mb-5 rounded-full" style={{ backgroundColor: secondaryColor }}></div>
-
-                            <div className="text-base sm:text-lg font-extrabold tracking-wide mb-3 flex items-center gap-2" style={{ color: secondaryColor }}>
-                              {currentSlide.series[isKR ? 'KR' : 'EN']}
-                            </div>
-
-                            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-8 max-w-xl min-h-[66px] transition-all duration-300 font-medium">
-                              {currentSlide.desc[isKR ? 'KR' : 'EN']}
-                            </p>
-
-                            {/* Bullet navigation dot control deck */}
-                            <div className="flex flex-wrap items-center gap-4 mt-2 select-none">
-                              {/* Slidable dots */}
-                              <div className="flex items-center gap-2 bg-slate-200/50 p-1.5 px-2.5 rounded-full border border-slate-300/30">
-                                {carouselSlides.map((_, idx) => (
-                                  <button
-                                    key={idx}
-                                    onClick={() => {
-                                      setHeroSlideIndex(idx);
-                                      setHeroSlidePlaying(false);
-                                    }}
-                                    className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
-                                      heroSlideIndex === idx
-                                        ? 'bg-slate-900 w-5 rounded-md'
-                                        : 'bg-slate-400/70 hover:bg-slate-600'
-                                    }`}
-                                  />
-                                ))}
-                              </div>
-
-                              {/* Play / Pause toggle icon */}
-                              <button
-                                onClick={() => setHeroSlidePlaying(!heroSlidePlaying)}
-                                className="p-1 px-1.5 h-8 w-8 rounded-full bg-slate-200/50 hover:bg-slate-300/60 border border-slate-300/30 cursor-pointer flex items-center justify-center text-slate-700 transition shadow-2xs"
-                                title={heroSlidePlaying ? 'Pause Slideshow' : 'Play Slideshow'}
-                              >
-                                {heroSlidePlaying ? <Pause size={9} className="fill-slate-700 stroke-none" /> : <Play size={9} className="fill-slate-700 stroke-none ml-[1px]" />}
-                              </button>
-
-                              {/* Target filter shortcut */}
-                              <button
-                                onClick={() => {
-                                  onPageChange('products');
-                                  setProductFilter(currentSlide.productFilterValue);
-                                  setProductSearch('');
-                                }}
-                                className="text-[10px] font-bold tracking-wider text-slate-700 hover:text-slate-950 flex items-center gap-1.5 transition uppercase ml-2 bg-white hover:bg-slate-50 border border-slate-300/50 px-3.5 py-1.5 rounded-md cursor-pointer shadow-2xs"
-                              >
-                                {isKR ? '해당 제품라인 바로가기' : 'Explore Series'}
-                                <ArrowRight size={11} strokeWidth={2.5} />
-                              </button>
-                            </div>
-                          </div>
-
-                          {/* Inner Slide Right Hand Column with Interactive Holographic Design */}
-                          <div className="lg:col-span-5 flex items-center justify-center p-6 bg-transparent rounded-2xl min-h-[240px] lg:min-h-auto transition-all duration-300">
-                            <div className="w-full h-full flex items-center justify-center relative">
-                              
-                              {/* Ambient Scanning Signal Rings */}
-                              <div className="absolute w-72 h-72 rounded-full bg-blue-500/5 blur-3xl animate-pulse pointer-events-none" />
-                              <div className="absolute w-44 h-44 rounded-full border border-blue-500/10 animate-[ping_3.5s_linear_infinite] pointer-events-none" />
-                              <div className="absolute w-56 h-56 rounded-full border border-teal-500/10 animate-[spin_16s_linear_infinite] border-dashed pointer-events-none" />
-
-                              {/* Transparent container for product view (supports background-removed cutouts) */}
-                              <div className="w-full max-w-[390px] aspect-[4/3] p-5 flex items-center justify-center hover:-translate-y-1 transition-all duration-500 group relative overflow-hidden">
-                                
-                                <div className="relative z-10 w-full h-full flex items-center justify-center">
-                                  {currentSlide.image ? (
-                                    <img
-                                      src={currentSlide.image}
-                                      alt={currentSlide.series[isKR ? 'KR' : 'EN']}
-                                      className="w-full max-w-[300px] max-h-[190px] sm:max-h-[220px] object-contain drop-shadow-[0_6px_12px_rgba(0,0,0,0.04)] group-hover:scale-[1.04] transition-all duration-500 ease-out"
-                                      referrerPolicy="no-referrer"
-                                    />
-                                  ) : (
-                                    <div className="w-full max-w-[300px] max-h-[190px] sm:max-h-[220px] flex items-center justify-center group-hover:scale-[1.04] transition-all duration-500 ease-out">
-                                      {currentSlide.svg}
+                            return (
+                              <div key={idx} className="w-full shrink-0 select-none">
+                                <div className="max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 items-center min-h-[440px] lg:min-h-[490px] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 gap-10">
+                                  
+                                  {/* Inner Slide Left Hand Column */}
+                                  <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                                    <div className="mb-4">
+                                      <span className="inline-flex items-center gap-1.5 bg-rose-600 text-[10px] font-black text-white uppercase tracking-widest px-3 py-1 rounded-md shadow-xs select-none">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                                        {slide.badge[isKR ? 'KR' : 'EN']}
+                                      </span>
                                     </div>
-                                  )}
+
+                                    <h2 className="text-xl sm:text-2xl lg:text-3.5xl font-black text-slate-900 leading-tight tracking-tight mb-5 min-h-[58px] sm:min-h-[72px] transition-all duration-300">
+                                      {slide.title[isKR ? 'KR' : 'EN']}
+                                    </h2>
+
+                                    {/* Divider strip representing 5-second progress bar */}
+                                    <div className="w-48 h-[4.5px] mb-5 bg-slate-200/50 rounded-full overflow-hidden relative" id="editorial-divider-progress-track">
+                                      <div 
+                                        className="h-full rounded-full transition-all duration-75 ease-linear"
+                                        style={{ 
+                                          width: isCurrentHighlight ? `${slideProgress}%` : '0%', 
+                                          backgroundColor: secondaryColor 
+                                        }}
+                                        id="editorial-divider-progress-fill"
+                                      />
+                                    </div>
+
+                                    <div className="text-base sm:text-lg font-extrabold tracking-wide mb-3 flex items-center gap-2" style={{ color: secondaryColor }}>
+                                      {slide.series[isKR ? 'KR' : 'EN']}
+                                    </div>
+
+                                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-8 max-w-xl min-h-[66px] transition-all duration-300 font-medium">
+                                      {slide.desc[isKR ? 'KR' : 'EN']}
+                                    </p>
+
+                                    {/* Bullet navigation dot control deck */}
+                                    <div className="flex flex-wrap items-center gap-4 mt-2 select-none">
+                                      {/* Slidable dots */}
+                                      <div className="flex items-center gap-2 bg-slate-200/50 p-1.5 px-2.5 rounded-full border border-slate-300/30">
+                                        {carouselSlides.map((_, dotIdx) => (
+                                          <button
+                                            key={dotIdx}
+                                            type="button"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              setVirtualIndex(dotIdx + 1);
+                                            }}
+                                            className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
+                                              heroSlideIndex === dotIdx
+                                                ? 'bg-slate-900 w-5 rounded-md'
+                                                : 'bg-slate-400/70 hover:bg-slate-600'
+                                            }`}
+                                          />
+                                        ))}
+                                      </div>
+
+                                      {/* Play / Pause toggle icon */}
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setHeroSlidePlaying(!heroSlidePlaying);
+                                        }}
+                                        className="p-1 px-1.5 h-8 w-8 rounded-full bg-slate-200/50 hover:bg-slate-300/60 border border-slate-300/30 cursor-pointer flex items-center justify-center text-slate-700 transition shadow-2xs"
+                                        title={heroSlidePlaying ? 'Pause Slideshow' : 'Play Slideshow'}
+                                      >
+                                        {heroSlidePlaying ? <Pause size={9} className="fill-slate-700 stroke-none" /> : <Play size={9} className="fill-slate-700 stroke-none ml-[1px]" />}
+                                      </button>
+
+                                      {/* Target filter shortcut */}
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          onPageChange('products');
+                                          setProductFilter(slide.productFilterValue);
+                                          setProductSearch('');
+                                        }}
+                                        className="text-[10px] font-bold tracking-wider text-slate-700 hover:text-slate-950 flex items-center gap-1.5 transition uppercase ml-2 bg-white hover:bg-slate-50 border border-slate-300/50 px-3.5 py-1.5 rounded-md cursor-pointer shadow-2xs"
+                                      >
+                                        {isKR ? '해당 제품라인 바로가기' : 'Explore Series'}
+                                        <ArrowRight size={11} strokeWidth={2.5} />
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  {/* Inner Slide Right Hand Column with Interactive Holographic Design */}
+                                  <div className="lg:col-span-5 flex items-center justify-center p-6 bg-transparent rounded-2xl min-h-[240px] lg:min-h-auto transition-all duration-300">
+                                    <div className="w-full h-full flex items-center justify-center relative">
+                                      
+                                      {/* Ambient Scanning Signal Rings */}
+                                      <div className="absolute w-72 h-72 rounded-full bg-blue-500/5 blur-3xl animate-pulse pointer-events-none" />
+                                      <div className="absolute w-44 h-44 rounded-full border border-blue-500/10 animate-[ping_3.5s_linear_infinite] pointer-events-none" />
+                                      <div className="absolute w-56 h-56 rounded-full border border-teal-500/10 animate-[spin_16s_linear_infinite] border-dashed pointer-events-none" />
+
+                                      {/* Transparent container for product view (supports background-removed cutouts) */}
+                                      <div className="w-full max-w-[390px] aspect-[4/3] p-5 flex items-center justify-center hover:-translate-y-1 transition-all duration-500 group relative overflow-hidden">
+                                        
+                                        <div className="relative z-10 w-full h-full flex items-center justify-center">
+                                          {slide.image ? (
+                                            <img
+                                              src={slide.image}
+                                              alt={slide.series[isKR ? 'KR' : 'EN']}
+                                              className="w-full max-w-[300px] max-h-[190px] sm:max-h-[220px] object-contain drop-shadow-[0_6px_12px_rgba(0,0,0,0.04)] group-hover:scale-[1.04] transition-all duration-500 ease-out"
+                                              referrerPolicy="no-referrer"
+                                              draggable={false}
+                                            />
+                                          ) : (
+                                            <div className="w-full max-w-[300px] max-h-[190px] sm:max-h-[220px] flex items-center justify-center group-hover:scale-[1.04] transition-all duration-500 ease-out">
+                                              {slide.svg}
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
                                 </div>
                               </div>
-                            </div>
-                          </div>
-
+                            );
+                          })}
                         </div>
                       );
                     })()}
                     
                   </div>
+
+                  {/* Left Navigation Arrow */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setVirtualIndex((prev) => prev - 1);
+                    }}
+                    className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 hover:bg-white border border-slate-200/50 shadow-md text-slate-700 flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+                    aria-label="Previous Slide"
+                  >
+                    <ChevronLeft size={20} className="stroke-slate-700" />
+                  </button>
+
+                  {/* Right Navigation Arrow */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setVirtualIndex((prev) => prev + 1);
+                    }}
+                    className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 hover:bg-white border border-slate-200/50 shadow-md text-slate-700 flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+                    aria-label="Next Slide"
+                  >
+                    <ChevronRight size={20} className="stroke-slate-700" />
+                  </button>
                 </div>
 
                 {/* 2. Hero Words Block (Moved to Bottom layout) */}
@@ -1135,82 +1326,97 @@ export default function WebsiteView({
                 {/* KPI Card 1 */}
                 <div className="p-10 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:bg-white bg-transparent">
                   {/* Soft Color Highlight strip & Background Blur mesh */}
-                  <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-rose-500 transition-all duration-300" />
-                  <div className="absolute -right-16 -bottom-16 w-32 h-32 rounded-full bg-rose-500/5 blur-xl pointer-events-none transition-transform duration-500 group-hover:scale-150" />
+                  <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-primary-custom transition-all duration-300" />
+                  <div className="absolute -right-16 -bottom-16 w-32 h-32 rounded-full blur-xl pointer-events-none transition-transform duration-500 group-hover:scale-150" style={{ backgroundColor: primaryColor + '08' }} />
                   
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="text-4xl lg:text-5xl font-black font-mono tracking-tight" style={{ color: primaryColor }}>
-                        {customContent.kpi1Value || '0.01°C'}
+                      <div className="text-3xl lg:text-4xl font-extrabold font-sans tracking-tight" style={{ color: primaryColor }}>
+                        {customContent.kpi1Value || 'EV & AI'}
                       </div>
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-rose-50 text-rose-600 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
-                        <Thermometer size={18} strokeWidth={2.5} />
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:rotate-12 group-hover:scale-110" style={{ backgroundColor: primaryColor + '12', color: primaryColor }}>
+                        <Cpu size={18} strokeWidth={2.5} />
                       </div>
                     </div>
                     
-                    <h4 className="font-bold text-xs uppercase text-slate-800 tracking-wider">
-                      {isKR ? (customContent.kpi1TitleKR || '정밀 눈금 디그리 오차') : (customContent.kpi1TitleEN || 'Precision Accuracy Limit')}
-                    </h4>
+                    <div className="space-y-1.5 pt-2">
+                      <span className="block text-[11px] font-black uppercase tracking-wider font-mono" style={{ color: primaryColor }}>
+                        {isKR ? (customContent.kpi1SectTitleKR || '미래 모빌리티 & AI 로봇') : (customContent.kpi1SectTitleEN || 'Future Mobility & AI Robotics')}
+                      </span>
+                      <h4 className="font-extrabold text-base text-slate-900 tracking-tight leading-snug">
+                        {isKR ? (customContent.kpi1TitleKR || '차세대 첨단 산업을 움직이는 초정밀 열 제어') : (customContent.kpi1TitleEN || 'Ultra-Precision Thermal Control Driving Next-Generation Advanced Industries')}
+                      </h4>
+                    </div>
                   </div>
                   
                   <p className="text-xs text-slate-400 mt-6 leading-relaxed font-semibold">
                     {isKR 
-                      ? (customContent.kpi1DescKR || '정밀 오일교정 항온조에서 전수 전자기 신장 테스트를 통과한 초고위성 감도.') 
-                      : (customContent.kpi1DescEN || 'Unsurpassed tolerance limits verified through multi-day calibration chamber processes.')}
+                      ? (customContent.kpi1DescKR || '전기차 배터리 관리 시스템(BMS)부터 AI 로봇의 구동부까지, 미세한 열 변화를 완벽히 감지하여 시스템의 안전과 효율을 극대화합니다.') 
+                      : (customContent.kpi1DescEN || 'From Electric Vehicle Battery Management Systems (BMS) to the drive units of AI robots, we flawlessly detect micro-thermal changes to maximize system safety and efficiency.')}
                   </p>
                 </div>
 
                 {/* KPI Card 2 */}
                 <div className="p-10 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:bg-white bg-transparent">
-                  <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-teal-500 transition-all duration-300" />
-                  <div className="absolute -right-16 -bottom-16 w-32 h-32 rounded-full bg-teal-500/5 blur-xl pointer-events-none transition-transform duration-500 group-hover:scale-150" />
+                  <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-slate-900 transition-all duration-300" />
+                  <div className="absolute -right-16 -bottom-16 w-32 h-32 rounded-full bg-slate-900/10 blur-xl pointer-events-none transition-transform duration-500 group-hover:scale-150" />
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="text-4xl lg:text-5xl font-black font-mono tracking-tight" style={{ color: secondaryColor }}>
-                        {customContent.kpi2Value || '45+'}
+                      <div className="text-3xl lg:text-4xl font-extrabold font-sans tracking-tight text-slate-900">
+                        {customContent.kpi2Value || 'SAFE & SMART'}
                       </div>
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-teal-50 text-teal-600 transition-all duration-500 group-hover:scale-115">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 text-slate-800 transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
                         <ShieldCheck size={18} strokeWidth={2.5} />
                       </div>
                     </div>
 
-                    <h4 className="font-bold text-xs uppercase text-slate-800 tracking-wider">
-                      {isKR ? (customContent.kpi2TitleKR || '보유 지식 특허 및 실용신안') : (customContent.kpi2TitleEN || 'Exclusive Global Patents')}
-                    </h4>
+                    <div className="space-y-1.5 pt-2">
+                      <span className="block text-[11px] font-black uppercase tracking-wider text-slate-800 font-mono">
+                        {isKR ? (customContent.kpi2SectTitleKR || '연소 제어 & 스마트 팩토리') : (customContent.kpi2SectTitleEN || 'Combustion Control & Smart Factory')}
+                      </span>
+                      <h4 className="font-extrabold text-base text-slate-900 tracking-tight leading-snug">
+                        {isKR ? (customContent.kpi2TitleKR || '가혹한 산업 현장을 지키는 고신뢰성 안전 솔루션') : (customContent.kpi2TitleEN || 'High-Reliability Safety Solutions Guarding Harsh Industrial Environments')}
+                      </h4>
+                    </div>
                   </div>
 
                   <p className="text-xs text-slate-400 mt-6 leading-relaxed font-semibold">
                     {isKR 
-                      ? (customContent.kpi2DescKR || '박막 소자 응용, 하우징 패킹, 전장 절연 등 자체 특허 포트폴리오를 보유.') 
-                      : (customContent.kpi2DescEN || 'We own dynamic key patents securing electrical isolation and robust physical durability.')}
+                      ? (customContent.kpi2DescKR || '고전압 안정성을 보장하는 점화트랜스와 광학식 UV 화염감지 기술을 통해 가전 및 스마트 팩토리 연소 시스템의 안전을 빈틈없이 제어합니다.') 
+                      : (customContent.kpi2DescEN || 'Through ignition transformers that guarantee high-voltage stability and optical UV flame detection technology, we seamlessly control the safety of combustion systems in both home appliances and smart factories.')}
                   </p>
                 </div>
 
                 {/* KPI Card 3 */}
                 <div className="p-10 flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden group hover:bg-white bg-transparent">
-                  <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-slate-800 transition-all duration-300" />
-                  <div className="absolute -right-16 -bottom-16 w-32 h-32 rounded-full bg-slate-800/5 blur-xl pointer-events-none transition-transform duration-500 group-hover:scale-150" />
+                  <div className="absolute top-0 left-0 w-2 h-0 group-hover:h-full bg-emerald-500 transition-all duration-300" />
+                  <div className="absolute -right-16 -bottom-16 w-32 h-32 rounded-full bg-emerald-500/10 blur-xl pointer-events-none transition-transform duration-500 group-hover:scale-150" />
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="text-4xl lg:text-5xl font-black font-mono tracking-tight text-slate-800">
-                        {customContent.kpi3Value || '24/7'}
+                      <div className="text-3xl lg:text-4xl font-extrabold font-sans tracking-tight text-emerald-600">
+                        {customContent.kpi3Value || 'ECO-FRIENDLY'}
                       </div>
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100/90 text-slate-600 transition-all duration-500 group-hover:-rotate-12 group-hover:scale-110">
-                        <Cpu size={18} strokeWidth={2.5} />
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-emerald-50 text-emerald-600 transition-all duration-500 group-hover:scale-115">
+                        <Award size={18} strokeWidth={2.5} />
                       </div>
                     </div>
 
-                    <h4 className="font-bold text-xs uppercase text-slate-800 tracking-wider">
-                      {isKR ? (customContent.kpi3TitleKR || '무정전 열 모니터링 시스템') : (customContent.kpi3TitleEN || 'Smart Fault Isolation')}
-                    </h4>
+                    <div className="space-y-1.5 pt-2">
+                      <span className="block text-[11px] font-black uppercase tracking-wider text-emerald-600 font-mono">
+                        {isKR ? (customContent.kpi3SectTitleKR || '지능형 HVAC & 스마트 홈') : (customContent.kpi3SectTitleEN || 'Intelligent HVAC & Smart Home')}
+                      </span>
+                      <h4 className="font-extrabold text-base text-slate-900 tracking-tight leading-snug">
+                        {isKR ? (customContent.kpi3TitleKR || '일상의 스마트화와 에너지를 아끼는 기술') : (customContent.kpi3TitleEN || 'Smartifying Daily Life with Energy-Saving Technologies')}
+                      </h4>
+                    </div>
                   </div>
 
                   <p className="text-xs text-slate-400 mt-6 leading-relaxed font-semibold">
                     {isKR 
-                      ? (customContent.kpi3DescKR || '가혹조건인 화학 공정, 전력 변전소, 전기배틀 등에서 반영구적 성능 획득.') 
-                      : (customContent.kpi3DescEN || 'Semi-permanent service lifespan demonstrated across dense chemical storage units.')}
+                      ? (customContent.kpi3DescKR || '친환경 보일러 및 에어컨용 지능형 HVAC 센서 기술력으로 건물과 가정의 에너지를 절감하고 쾌적한 환경을 선사합니다.') 
+                      : (customContent.kpi3DescEN || 'With our intelligent HVAC sensor technology for eco-friendly boilers and air conditioners, we reduce energy consumption in buildings and homes while delivering a comfortable environment.')}
                   </p>
                 </div>
 
@@ -1324,17 +1530,19 @@ export default function WebsiteView({
                           <button 
                             onClick={() => {
                               onPageChange('products');
-                              const categories = [
-                                '온도센서',
-                                '배관용온도센서',
-                                '외기용온도센서',
-                                '실내온도센서',
-                                'K-TYPE센서',
-                                '바이메탈센서',
-                                '불꽃감지센서',
-                                '수위감지센서',
-                                '기타'
-                              ];
+                                const categories = [
+                                  '온도센서',
+                                  '배관용온도센서',
+                                  '외기용온도센서',
+                                  '실내온도센서',
+                                  'K-TYPE센서',
+                                  '바이메탈센서',
+                                  '수위감지센서',
+                                  '불꽃/화염 감지센서',
+                                  '역화감지센서',
+                                  '점화트랜스',
+                                  '기타'
+                                ];
                               const matchedCat = categories.find(cat => matchesProductCategory(prod, cat)) || 'All';
                               setProductFilter(matchedCat);
                               setProductSearch('');
@@ -1402,7 +1610,10 @@ export default function WebsiteView({
                             </div>
                             <div className="flex items-center gap-4 shrink-0 text-xs text-slate-400">
                               <button 
-                                onClick={() => setSelectedPost(post)}
+                                onClick={() => {
+                                  onPageChange('notices');
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
                                 className="bg-slate-50 hover:bg-slate-900 hover:text-white p-2 px-3.5 rounded-md border border-slate-200 text-slate-600 font-black text-[10px] transition-all cursor-pointer shadow-3xs animate-none"
                               >
                                 {isKR ? '더보기' : 'Read'}
@@ -1512,7 +1723,7 @@ export default function WebsiteView({
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#243f90]" />
-                      <span>{isKR ? (customContent.aboutFacilityPoint2KR || '생산 능력: NTC 써미스터센서 연간 약 3,000만 개 이상') : (customContent.aboutFacilityPoint2EN || 'Production Volume: Over 30M sensors annually')}</span>
+                      <span>{isKR ? (customContent.aboutFacilityPoint2KR || '생산 능력: NTC 써미스터센서 연간 약 500만 개 이상') : (customContent.aboutFacilityPoint2EN || 'Production Volume: Over 5M sensors annually')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#243f90]" />
@@ -1631,7 +1842,7 @@ export default function WebsiteView({
         {/* ==================== PAGE: PRODUCTS ==================== */}
         {currentPage === 'products' && (() => {
           const filteredProducts = PRODUCTS_LIST.filter(prod => {
-            const matchesCategory = matchesProductCategory(prod, productFilter);
+            const matchesCategory = productSearch.trim() ? true : matchesProductCategory(prod, productFilter);
             const matchesSearch = 
               prod.model.toLowerCase().includes(productSearch.toLowerCase()) ||
               prod.nameKR.toLowerCase().includes(productSearch.toLowerCase()) ||
@@ -1683,8 +1894,10 @@ export default function WebsiteView({
                       { value: '실내온도센서', labelKR: '실내온도센서', labelEN: 'Indoor Temp Sensors' },
                       { value: 'K-TYPE센서', labelKR: 'K-TYPE센서', labelEN: 'K-Type Sensors' },
                       { value: '바이메탈센서', labelKR: '바이메탈센서', labelEN: 'Bi-Metal Sensors' },
-                      { value: '불꽃감지센서', labelKR: '불꽃감지센서', labelEN: 'Flame Sensors' },
                       { value: '수위감지센서', labelKR: '수위감지센서', labelEN: 'Water Level Sensors' },
+                      { value: '불꽃/화염 감지센서', labelKR: '불꽃/화염 감지센서', labelEN: 'Flame/Fire Sensors' },
+                      { value: '역화감지센서', labelKR: '역화감지센서', labelEN: 'Flashback Sensors' },
+                      { value: '점화트랜스', labelKR: '점화트랜스', labelEN: 'Ignition Transformers' },
                       { value: '기타', labelKR: '기타', labelEN: 'Others' }
                     ].map((cat) => (
                       <button
@@ -1707,7 +1920,7 @@ export default function WebsiteView({
               {/* View Mode & Count Row */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 select-none">
                 <div className="text-xs text-slate-500 font-medium">
-                  {isKR ? '총' : 'Total'} <span className="font-bold text-slate-800 font-mono text-sm">{filteredProducts.length}</span> {isKR ? '개의 고정밀 센서 규격 제공' : 'high-precision sensor specifications listed'}
+                  {isKR ? '총' : 'Total'} <span className="font-bold text-slate-800 font-mono text-sm">{filteredProducts.length}</span> {isKR ? '개의 제품군' : 'products'}
                 </div>
 
                 {/* Grid / Table Toggle Controls */}
@@ -1748,6 +1961,7 @@ export default function WebsiteView({
                     const isPipe = categoryName.includes('배관');
                     const isAmbient = categoryName.includes('외기') || categoryName.includes('실내');
                     const isHighTemp = categoryName.includes('K-TYPE') || categoryName.includes('바이메탈');
+                    const isIgnition = categoryName.includes('점화');
                     const isAccessory = categoryName.includes('기타');
 
                     return (
@@ -1757,7 +1971,7 @@ export default function WebsiteView({
                       >
                         <div>
                           {/* Image area with structured vector styling placeholders */}
-                          <div className="relative aspect-video w-full bg-slate-50 border-b border-slate-100 flex items-center justify-center overflow-hidden">
+                          <div className="relative aspect-video w-full bg-white border-b border-slate-100 flex items-center justify-center overflow-hidden">
                             {prod.imageUrl ? (
                               <img 
                                 src={prod.imageUrl} 
@@ -1784,6 +1998,10 @@ export default function WebsiteView({
                                   <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 .9-.6 1.6-1.5 1.6H5.25c-.9 0-1.5-.7-1.5-1.6v-4.25m16.5 0a2.25 2.25 0 00-2.25-2.25h-12a2.25 2.25 0 00-2.25 2.25" />
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m-3-12h6" />
+                                  </svg>
+                                ) : isIgnition ? (
+                                  <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                   </svg>
                                 ) : isAccessory ? (
                                   <svg className="w-10 h-10 stroke-slate-300 group-hover:stroke-blue-400 transition-colors" fill="none" strokeWidth="1.2" viewBox="0 0 24 24">
@@ -1844,14 +2062,37 @@ export default function WebsiteView({
                         </div>
 
                         {/* Footer Actions */}
-                        <div className="p-4 pt-0 border-t border-slate-100 mt-2 bg-slate-50/40 flex items-center justify-between gap-2.5">
-                          <div className="w-full flex items-center justify-between">
+                        <div className="p-4 pt-3 border-t border-slate-100 mt-2 bg-slate-50/40 flex flex-col gap-2">
+                          <a
+                            href={prod.brochureUrl || 'https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J?usp=sharing'}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full h-8 rounded text-center text-[11px] font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all flex items-center justify-center gap-1 cursor-pointer select-none border border-transparent shadow-xs"
+                            id={`btn-brochure-${prod.model}`}
+                          >
+                            <FileText size={12} strokeWidth={2.5} />
+                            {isKR ? '브로슈어 보기' : 'View Brochure'}
+                          </a>
+                          {prod.videoUrl !== undefined && (
+                            <a
+                              href={prod.videoUrl || 'https://drive.google.com'}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full h-8 rounded text-center text-[11px] font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 transition-all flex items-center justify-center gap-1.5 cursor-pointer select-none shadow-xs border border-transparent"
+                              id={`btn-video-${prod.model}`}
+                            >
+                              <Play size={11} className="fill-current" />
+                              {isKR ? '동작 영상 보기' : 'Watch Video'}
+                            </a>
+                          )}
+                          <div className="w-full flex items-center justify-between pt-0.5">
                             <span className="text-[10px] text-slate-400 font-bold italic">
                               {isKR ? '※ SUS 하우징 규격 설계 지원' : '※ Customized dimensions on request'}
                             </span>
                             <button
                               onClick={() => onPageChange('contact')}
                               className="text-[10px] font-bold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-0.5"
+                              id={`btn-quote-${prod.model}`}
                             >
                               {isKR ? '상담' : 'Quote'}
                               <ArrowRight size={10} />
@@ -1870,13 +2111,14 @@ export default function WebsiteView({
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs border-collapse">
                       <thead>
-                        <tr className="bg-slate-50 border-b border-slate-200 text-slate-400 uppercase tracking-widest font-black text-[10px]">
+                                        <tr className="bg-slate-50 border-b border-slate-200 text-slate-400 uppercase tracking-widest font-black text-[10px]">
                           <th className="p-4 pl-6 w-1/12">{isKR ? '모델명' : 'Model Code'}</th>
-                          <th className="p-4 w-3/12">{isKR ? '카테고리' : 'Category'}</th>
+                          <th className="p-4 w-2/12">{isKR ? '카테고리' : 'Category'}</th>
                           <th className="p-4 w-3/12">{isKR ? '상세 제품명' : 'Specification Name'}</th>
                           <th className="p-4 w-2/12">{isKR ? '측정 범위' : 'Operating Range'}</th>
                           <th className="p-4 w-1/12">{isKR ? '공차 정밀도' : 'Tolerance'}</th>
-                          <th className="p-4 pr-6 w-2/12">{isKR ? '설계 공법 / 보호 등급' : 'Housing & Rating'}</th>
+                          <th className="p-4 w-2/12">{isKR ? '설계 공법 / 보호 등급' : 'Housing & Rating'}</th>
+                          <th className="p-4 pr-6 w-1/12 text-center">{isKR ? '브로슈어' : 'Brochure'}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1915,8 +2157,34 @@ export default function WebsiteView({
                                 {prod.accuracy}
                               </span>
                             </td>
-                            <td className="p-4 pr-6 text-slate-500 whitespace-nowrap">
+                            <td className="p-4 text-slate-500 whitespace-nowrap">
                               {isKR ? prod.ratingKR : prod.ratingEN}
+                            </td>
+                            <td className="p-4 pr-6 text-center whitespace-nowrap">
+                              <div className="flex flex-col items-center justify-center gap-1">
+                                <a
+                                  href={prod.brochureUrl || 'https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J?usp=sharing'}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-800 hover:text-blue-600 border border-slate-200 hover:border-blue-400 bg-white hover:bg-slate-50 shadow-3xs rounded px-2 py-1 transition-all cursor-pointer w-16 justify-center"
+                                  id={`table-brochure-${prod.model}`}
+                                >
+                                  <FileText size={11} strokeWidth={2.5} />
+                                  <span>{isKR ? '보기' : 'View'}</span>
+                                </a>
+                                {prod.videoUrl !== undefined && (
+                                  <a
+                                    href={prod.videoUrl || 'https://drive.google.com'}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 text-[10px] font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 shadow-3xs rounded px-2 py-1 transition-all cursor-pointer w-16 justify-center"
+                                    id={`table-video-${prod.model}`}
+                                  >
+                                    <Play size={10} className="fill-current" />
+                                    <span>{isKR ? '영상' : 'Video'}</span>
+                                  </a>
+                                )}
+                              </div>
                             </td>
                           </tr>
                         ))}
@@ -2172,7 +2440,7 @@ export default function WebsiteView({
                       </div>
 
                       {/* Photo Representation / Equipment Status Image Area */}
-                      <div className="bg-slate-50 aspect-video w-full relative sm:h-80 flex items-center justify-center p-6 select-none overflow-hidden shrink-0 border-b border-slate-200">
+                      <div className="bg-white aspect-video w-full relative sm:h-80 flex items-center justify-center p-6 select-none overflow-hidden shrink-0 border-b border-slate-200">
                         {eq.imageUrl ? (
                           <div className="relative w-full h-full flex items-center justify-center bg-transparent overflow-hidden">
                             <img 
@@ -2769,7 +3037,7 @@ export default function WebsiteView({
                       className="w-full py-2.5 rounded-xl text-xs font-semibold text-white leading-none hover:opacity-90 transition-all cursor-pointer shadow-sm text-center"
                       style={{ backgroundColor: primaryColor }}
                     >
-                      {isKR ? '확인 및 닫기' : 'Acknowledge Document'}
+                      {isKR ? '닫기' : 'Close Document'}
                     </button>
                   </div>
                 </div>
@@ -2791,22 +3059,46 @@ export default function WebsiteView({
             }
             return [
               {
-                id: 'cert-1',
-                titleKR: 'ISO 9001:2015 품질 경영 시스템 인증서',
-                titleEN: 'ISO 9001:2015 Quality Management System Certificate',
-                imageUrl: 'https://images.unsplash.com/photo-1589330694653-ded6df53f7eb?auto=format&fit=crop&q=80&w=600' /* sensor_image_video_cert1 - [위치: 홈 화면 맨 하단 '품질 및 특허 인증' 갤러리 섹션의 1번째 인증서 이미지 파일 경로] */
+                id: 'cert-iso',
+                titleKR: 'ISO 인증서',
+                titleEN: 'ISO Certificate',
+                imageUrl: 'https://images.unsplash.com/photo-1589330694653-ded6df53f7eb?auto=format&fit=crop&q=80&w=600'
               },
               {
-                id: 'cert-2',
-                titleKR: 'CE 전기안전 적합성 적합인증서',
-                titleEN: 'CE Declaration of Conformity Certification',
-                imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600' /* sensor_image_video_cert2 - [위치: 홈 화면 맨 하단 '품질 및 특허 인증' 갤러리 섹션의 2번째 인증서 이미지 파일 경로] */
+                id: 'cert-utility-model',
+                titleKR: '실용신안등록증(온도감지센서)',
+                titleEN: 'Utility Model Registration (Temperature Sensor)',
+                imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600'
               },
               {
-                id: 'cert-3',
-                titleKR: 'NTC 써미스터 소자 접합 특허증',
-                titleEN: 'Patent: NTC thermistor element binding stability',
-                imageUrl: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600' /* sensor_image_video_cert3 - [위치: 홈 화면 맨 하단 '품질 및 특허 인증' 갤러리 섹션의 3번째 인증서 이미지 파일 경로] */
+                id: 'cert-venture',
+                titleKR: '벤처기업확인서',
+                titleEN: 'Venture Business Confirmation',
+                imageUrl: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80&w=600'
+              },
+              {
+                id: 'cert-rnd-center',
+                titleKR: '기업부설연구서 인정서',
+                titleEN: 'Corporate R&D Center Recognition',
+                imageUrl: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=600'
+              },
+              {
+                id: 'cert-innobiz',
+                titleKR: '이노비즈인증서',
+                titleEN: 'Inno-Biz Certificate',
+                imageUrl: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=600'
+              },
+              {
+                id: 'cert-kimm-ir',
+                titleKR: 'KIMM 인증서 - 적외선센서',
+                titleEN: 'KIMM Certificate - Infrared Sensor',
+                imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600'
+              },
+              {
+                id: 'cert-kimm-temp',
+                titleKR: 'KIMM 인증서 - 온도센서',
+                titleEN: 'KIMM Certificate - Temperature Sensor',
+                imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600'
               }
             ] as Certificate[];
           })();
@@ -2964,7 +3256,7 @@ export default function WebsiteView({
                       className="w-full py-3 rounded-xl text-xs font-bold text-white tracking-widest leading-none hover:opacity-95 transition-all cursor-pointer shadow-md text-center shrink-0 uppercase"
                       style={{ backgroundColor: primaryColor }}
                     >
-                      {isKR ? '확인 및 닫기' : 'Close Document'}
+                      {isKR ? '닫기' : 'Close Document'}
                     </button>
                   </div>
                 </div>
@@ -3412,7 +3704,74 @@ export default function WebsiteView({
 
             {/* Modal Content */}
             <div className="flex-1 overflow-y-auto py-6 space-y-4 pr-1" id="news-detail-content">
-              {selectedPost.imageUrl && (
+              {selectedPost.images && selectedPost.images.length > 0 ? (
+                <div className="w-full aspect-[16/10] sm:aspect-[16/9] mb-4 bg-slate-950 rounded-xl overflow-hidden border border-slate-200/60 shadow-md relative group/modal-slider select-none">
+                  {/* Sliding Container */}
+                  <div 
+                    className="flex w-full h-full transition-transform duration-500 ease-out"
+                    style={{ transform: `translate3d(-${modalSlideIndex * 100}%, 0, 0)` }}
+                  >
+                    {selectedPost.images.map((imgUrl, imgIdx) => (
+                      <div key={imgIdx} className="w-full h-full shrink-0 flex items-center justify-center bg-slate-900 relative">
+                        <img
+                          src={imgUrl}
+                          alt={`${isKR ? selectedPost.titleKR : selectedPost.titleEN} - ${imgIdx + 1}`}
+                          className="w-full h-full object-cover select-none pointer-events-none"
+                          referrerPolicy="no-referrer"
+                        />
+                        {/* Image index overlay */}
+                        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded font-mono z-10 select-none">
+                          {imgIdx + 1} / {selectedPost.images?.length}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Left Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModalSlideIndex((prev) => (prev - 1 + selectedPost.images!.length) % selectedPost.images!.length);
+                    }}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-white border border-slate-200/50 shadow-sm text-slate-800 flex items-center justify-center opacity-0 group-hover/modal-slider:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft size={16} className="stroke-slate-800 stroke-[2.5]" />
+                  </button>
+
+                  {/* Right Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModalSlideIndex((prev) => (prev + 1) % selectedPost.images!.length);
+                    }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-white border border-slate-200/50 shadow-sm text-slate-800 flex items-center justify-center opacity-0 group-hover/modal-slider:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight size={16} className="stroke-slate-800 stroke-[2.5]" />
+                  </button>
+
+                  {/* Thumbnail Strip / Bullets */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 bg-black/45 backdrop-blur-xs p-1.5 rounded-full px-2.5">
+                    {selectedPost.images.map((_, bulletIdx) => (
+                      <button
+                        key={bulletIdx}
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setModalSlideIndex(bulletIdx);
+                        }}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          modalSlideIndex === bulletIdx ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/85'
+                        }`}
+                        aria-label={`Go to slide ${bulletIdx + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : selectedPost.imageUrl ? (
                 <div className="w-full aspect-[16/10] sm:aspect-[16/9] mb-4 bg-slate-100 rounded-xl overflow-hidden border border-slate-100/60 shadow-2xs">
                   <img
                     src={selectedPost.imageUrl}
@@ -3421,7 +3780,7 @@ export default function WebsiteView({
                     referrerPolicy="no-referrer"
                   />
                 </div>
-              )}
+              ) : null}
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">
                 {isKR ? selectedPost.titleKR : selectedPost.titleEN}
               </h3>

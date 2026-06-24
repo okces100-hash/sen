@@ -24,6 +24,8 @@ export interface ProductSpec {
   imageAlt: string;
   imageUrl?: string;
   isManual?: boolean;
+  brochureUrl?: string;
+  videoUrl?: string;
 }
 
 export interface CMSPost {
@@ -38,6 +40,7 @@ export interface CMSPost {
   author: string;
   views?: number;
   imageUrl?: string;
+  images?: string[];
 }
 
 export interface StylingConfig {
@@ -93,16 +96,22 @@ export interface CustomContent {
   aboutFacilityPoint3KR?: string;
   aboutFacilityPoint3EN?: string;
   kpi1Value?: string;
+  kpi1SectTitleKR?: string;
+  kpi1SectTitleEN?: string;
   kpi1TitleKR?: string;
   kpi1TitleEN?: string;
   kpi1DescKR?: string;
   kpi1DescEN?: string;
   kpi2Value?: string;
+  kpi2SectTitleKR?: string;
+  kpi2SectTitleEN?: string;
   kpi2TitleKR?: string;
+  kpi3Value?: string; // Preserve original positioning if necessary, but writing standard CustomContent members
   kpi2TitleEN?: string;
   kpi2DescKR?: string;
   kpi2DescEN?: string;
-  kpi3Value?: string;
+  kpi3SectTitleKR?: string;
+  kpi3SectTitleEN?: string;
   kpi3TitleKR?: string;
   kpi3TitleEN?: string;
   kpi3DescKR?: string;
