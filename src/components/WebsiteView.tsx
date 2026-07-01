@@ -475,14 +475,21 @@ export default function WebsiteView({
 
   // Drag/Swipe Gesture Refs & Handlers
   const dragStartRef = React.useRef<number | null>(null);
+  const wasPlayingRef = React.useRef<boolean>(true);
   const [dragOffset, setDragOffset] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('button') || target.closest('a') || target.closest('input')) {
+      return;
+    }
     const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
     dragStartRef.current = clientX;
     setIsDragging(true);
     setDragOffset(0);
+    // Remember play state to restore on drag end
+    wasPlayingRef.current = heroSlidePlaying;
     // Pause temporarily during active drag so it doesn't move suddenly
     setHeroSlidePlaying(false);
   };
@@ -509,8 +516,10 @@ export default function WebsiteView({
     dragStartRef.current = null;
     setIsDragging(false);
     setDragOffset(0);
-    // Resume auto playing slideshow!
-    setHeroSlidePlaying(true);
+    // Restore original play state
+    if (wasPlayingRef.current) {
+      setHeroSlidePlaying(true);
+    }
   };
 
   // R&D Interactive States
@@ -893,14 +902,7 @@ export default function WebsiteView({
               </button>
             </div>
             
-            <button 
-              id="mobile-nav-action-btn"
-              onClick={() => onPageChange('contact')}
-              style={{ backgroundColor: secondaryColor }}
-              className="hidden lg:inline-block text-[11px] text-white px-3.5 py-1.5 rounded-md font-bold tracking-wider hover:opacity-95 transition-opacity"
-            >
-              {isKR ? '빠른 문의' : 'QUICK INQUIRY'}
-            </button>
+
           </div>
         </div>
       </header>
@@ -1089,16 +1091,16 @@ export default function WebsiteView({
                             EN: customContent.slide3BadgeEN || "ULTRA HIGH TEMP" 
                           },
                           title: { 
-                            KR: customContent.slide3TitleKR || "최대 1200°C 화염의 초고온 가열로 및 고압 용사 로재 내벽에 대응하는", 
-                            EN: customContent.slide3TitleEN || "Extremely Resilient K-TYPE Sensors Certified up to +1200°C" 
+                            KR: customContent.slide3TitleKR || "-270℃ 극저온부터 1370℃ 초고온까지 완벽 대응\n가혹한 가열로 환경을 위한 초고속 반응 K-TYPE 온도 센서", 
+                            EN: customContent.slide3TitleEN || "Flawlessly responding from -270°C cryogenic to 1370°C ultra-high temperatures, the ultra-fast response K-TYPE temperature sensor is built for harsh heating furnace environments." 
                           },
                           series: { 
                             KR: customContent.slide3SeriesKR || "초고속 반응 K-TYPE 및 고온 전주 센서 SN-KTYPE Series", 
                             EN: customContent.slide3SeriesEN || "Heavy Industrial K-Type Probe (SN-KTYPE Series)" 
                           },
                           desc: { 
-                            KR: customContent.slide3DescKR || "진보한 세라믹 인슐레이터 격막과 하스텔로이 보호 공법을 입혀 산화 부식을 철저히 극소화하였으며, 금속 제련 연구 및 가마 연소 환경 최상단에서 수명을 온전히 유지합니다.", 
-                            EN: customContent.slide3DescEN || "High-level magnesium oxide mineral insulation encased within heat-resistant Superalloy protective sheathing. Built for steel mills, glass foundries, and incinerators." 
+                            KR: customContent.slide3DescKR || "K-TYPE은 광범위한 온도 측정 영역을 자랑합니다. 특수 세라믹 격막과 하스텔로이 보호 공법을 적용하여, 가열로 내벽의 초고온 화염과 가혹한 부식 환경에서도 산화를 극소화하고 최고의 내구성을 유지합니다.", 
+                            EN: customContent.slide3DescEN || "The K-TYPE boasts an exceptionally wide temperature range. By applying a specialized ceramic diaphragm and Hastelloy protection sheathing, it minimizes oxidation and maintains ultimate durability even in the ultra-high temperature flames and harsh corrosive environments of furnace inner walls." 
                           },
                           productFilterValue: customContent.slide3ProductFilterValue || "K-TYPE센서", image: customContent.slide3ImageUrl,
                           svg: (
@@ -1149,16 +1151,16 @@ export default function WebsiteView({
                             EN: customContent.slide4BadgeEN || "SAFETY LEVEL WATCH" 
                           },
                           title: { 
-                            KR: customContent.slide4TitleKR || "액밀 고강도 프리즘과 다중 정전 전극으로 침전 오동작 방지하는 수위 감지", 
-                            EN: customContent.slide4TitleEN || "Smart Non-contact Level Tracking Prevents False Failures" 
+                            KR: customContent.slide4TitleKR || "찌꺼기가 쌓여도 오작동 없는 정확함\n오일·혼합액 맞춤형 고정밀 수위 감지 센서", 
+                            EN: customContent.slide4TitleEN || "Accurate detection with zero false alarms even with residue buildup\nHigh-precision water level sensors customized for oil and mixed liquids" 
                           },
                           series: { 
-                            KR: customContent.slide4SeriesKR || "수위 감지 및 특수 산업 보안 센서 SN-SAFETY Series", 
-                            EN: customContent.slide4SeriesEN || "Intelligent Water Level Casing (SN-SAFETY Series)" 
+                            KR: customContent.slide4SeriesKR || "수위 감지 및 산업 현장의 사고를 막는 누수/유출 방지 센서", 
+                            EN: customContent.slide4SeriesEN || "Water level sensing and leak/spill prevention sensors preventing industrial accidents" 
                           },
                           desc: { 
-                            KR: customContent.slide4DescKR || "진보한 광전 센싱 소자와 전극 감도를 내장하여, 오일-물 믹서기 등 복잡한 잔여 세정액 조건에서도 침전물 오작동 없이 정확한 레벨 및 유출 소화 조각을 감지 방어합니다.", 
-                            EN: customContent.slide4DescEN || "Applies patented impedance vector analysis algorithms filters out build-up scales or persistent fluid bubbles, ensuring zero alarm faults in oil-water mixers, bio chambers, and tank walls." 
+                            KR: customContent.slide4DescKR || "진보한 광전 센싱 기술과 다중 전극 감도 제어로 오일, 물, 세정액이 섞인 복잡한 환경에서도 침전물로 인한 오류 없이 정확한 수위 및 유출을 감지합니다.", 
+                            EN: customContent.slide4DescEN || "With advanced photoelectric sensing technology and multi-electrode sensitivity control, it accurately detects water level and leakage without errors caused by sediments even in complex environments containing mixtures of oil, water, and washing liquid." 
                           },
                           productFilterValue: customContent.slide4ProductFilterValue || "수위감지센서", image: customContent.slide4ImageUrl,
                           svg: (
@@ -1267,6 +1269,7 @@ export default function WebsiteView({
                                                 setVirtualIndex(dotIdx + 1);
                                               }
                                             }}
+                                            onMouseDown={(e) => e.stopPropagation()}
                                             className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
                                               heroSlideIndex === dotIdx
                                                 ? 'bg-slate-900 w-5 rounded-md'
@@ -1283,6 +1286,7 @@ export default function WebsiteView({
                                           e.stopPropagation();
                                           setHeroSlidePlaying(!heroSlidePlaying);
                                         }}
+                                        onMouseDown={(e) => e.stopPropagation()}
                                         className="p-1 px-1.5 h-8 w-8 rounded-full bg-slate-200/50 hover:bg-slate-300/60 border border-slate-300/30 cursor-pointer flex items-center justify-center text-slate-700 transition shadow-2xs"
                                         title={heroSlidePlaying ? 'Pause Slideshow' : 'Play Slideshow'}
                                       >
@@ -1298,6 +1302,7 @@ export default function WebsiteView({
                                           setProductFilter(slide.productFilterValue);
                                           setProductSearch('');
                                         }}
+                                        onMouseDown={(e) => e.stopPropagation()}
                                         className="text-[10px] font-bold tracking-wider text-slate-700 hover:text-slate-950 flex items-center gap-1.5 transition uppercase ml-2 bg-white hover:bg-slate-50 border border-slate-300/50 px-3.5 py-1.5 rounded-md cursor-pointer shadow-2xs"
                                       >
                                         {isKR ? '해당 제품라인 바로가기' : 'Explore Series'}
@@ -1418,7 +1423,7 @@ export default function WebsiteView({
                             setProductSearch('');
                           }}
                           style={{ backgroundColor: primaryColor }}
-                          className="text-xs text-white px-6 py-4 rounded-lg font-bold hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm w-full sm:w-auto lg:w-48 cursor-pointer text-center animate-pulse"
+                          className="text-xs text-white px-6 py-4 rounded-lg font-bold hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm w-full sm:w-auto lg:w-52 whitespace-nowrap cursor-pointer text-center animate-pulse"
                           id="hero-products-btn"
                         >
                           {isKR ? '전체 제품라인 둘러보기' : 'Browse All Products'}
@@ -1426,10 +1431,10 @@ export default function WebsiteView({
                         </button>
                         <button 
                           onClick={() => onPageChange('contact')}
-                          className="text-xs text-slate-700 bg-slate-50 hover:bg-slate-100 px-6 py-4 rounded-lg font-bold transition-all border border-slate-200/80 w-full sm:w-auto lg:w-48 text-center cursor-pointer hover:shadow-2xs active:scale-[0.99]"
+                          className="text-xs text-slate-700 bg-slate-50 hover:bg-slate-100 px-6 py-4 rounded-lg font-bold transition-all border border-slate-200/80 w-full sm:w-auto lg:w-52 whitespace-nowrap text-center cursor-pointer hover:shadow-2xs active:scale-[0.99]"
                           id="hero-contact-btn"
                         >
-                          {isKR ? '설계 컨설팅 문의' : 'Consultation Request'}
+                          {isKR ? '제조 상담 문의' : 'Manufacturing Consultation'}
                         </button>
                       </div>
                     </div>
@@ -3522,7 +3527,7 @@ export default function WebsiteView({
                 ENGINEERING ASSISTANCE
               </div>
               <h1 className="text-4xl font-bold text-slate-900 italic tracking-tight">
-                {isKR ? '비즈니스 및 도면 문의' : 'CONTACT US'}
+                {isKR ? '비즈니스 및 상담 문의' : 'CONTACT US'}
               </h1>
             </div>
 
@@ -3589,7 +3594,7 @@ export default function WebsiteView({
                 ) : (
                   <form onSubmit={handleContactSubmit} className="space-y-4" id="contact-form-portal">
                     <h3 className="font-bold text-sm text-slate-800 uppercase tracking-wider mb-2">
-                      {isKR ? '센서 맞춤 설계 문의서' : 'Technical Specifications Request'}
+                      {isKR ? '문의 신청서' : 'Technical Specifications Request'}
                     </h3>
 
                     {formError && (
@@ -3675,7 +3680,7 @@ export default function WebsiteView({
                     >
                       {isSubmitting 
                         ? (isKR ? '전송 중...' : 'Submitting...') 
-                        : (isKR ? '맞춤 센서 상담 신청서 접수' : 'Submit Core Specifications')}
+                        : (isKR ? '문의 신청서 접수' : 'Submit Core Specifications')}
                     </button>
                   </form>
                 )}
