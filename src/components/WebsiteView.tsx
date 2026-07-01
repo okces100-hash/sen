@@ -29,7 +29,6 @@ import {
 } from 'lucide-react';
 import { AppState, PageId, Language, CMSPost, ProductSpec, EquipmentSpec, Certificate } from '../types';
 import { getVideo } from './videoDb';
-import { KakaoMap } from './KakaoMap';
 import { PRODUCTS_LIST as STATIC_PRODUCTS_LIST, CERTIFICATES_LIST, TIMELINE_ITEMS, EQUIPMENT_LIST as STATIC_EQUIPMENT_LIST } from '../data';
 
 interface BrandLogoProps {
@@ -3554,8 +3553,19 @@ export default function WebsiteView({
                   </div>
                 </div>
 
-                {/* Real interactive Kakao/Daum Roughmap */}
-                <KakaoMap />
+                {/* Real interactive Google Map (Embed without API key for simplicity & security) */}
+                <div className="border border-slate-200 rounded-lg overflow-hidden bg-slate-100 relative h-60 shadow-2xs">
+                  <iframe
+                    title="SensorNine Location Map"
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent('인천광역시 서구 백범로 782')}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
               </div>
 
               {/* Right Column: Contact Us Input Form */}
