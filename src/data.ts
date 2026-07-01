@@ -3,8 +3,8 @@ import { CMSPost, CustomContent, SEOMetadata, Inquiry, ProductSpec, EquipmentSpe
 export const INITIAL_CUSTOM_CONTENT: CustomContent = {
   companyNameKR: '센서나인(주)',
   companyNameEN: 'SensorNine Co., Ltd.',
-  logoUrl: '/images/sensor_company_logo_i2.png', // sensor_image_video_logo - [위치: 헤더(Header) & 푸터(Footer) 영역의 회사 브랜드 로고 이미지 파일 경로]
-  aboutImageUrl: '/images/sensor_company_i1.jpeg', // sensor_image_video_about - [위치: 웹사이트 메인 화면 내 '회사 소개(About Us)' 섹션의 대표 우측 레이아웃 사옥/장비 소개 배경 이미지]
+  logoUrl: 'https://okces100-hash.github.io/my-media/sensor_company_logo_i2.png', // sensor_image_video_logo - [위치: 헤더(Header) & 푸터(Footer) 영역의 회사 브랜드 로고 이미지 파일 경로]
+  aboutImageUrl: 'https://okces100-hash.github.io/my-media/sensor_company_v4.mp4', // sensor_image_video_about - [위치: 웹사이트 메인 화면 내 '회사 소개(About Us)' 섹션의 대표 우측 레이아웃 사옥/장비 소개 배경 이미지]
   aboutFacilityBadgeKR: '신사옥 전경',
   aboutFacilityBadgeEN: 'CORPORATE FACILITY',
   aboutFacilityTitleKR: '센서나인(주) 본사 및 기술연구소',
@@ -129,33 +129,33 @@ Ho-Kyun Lee, CEO of Sensor9 Co., Ltd.`,
   featuredProduct3Id: '',
 
   // R&D Custom Content
-  carouselVideoUrl: '/videos/sensor_main_v1.mp4', // sensor_image_video_carousel - [위치: 홈(메인) 화면 슬라이드 쇼 바로 아래, '센서나인 주식회사 기술연구원...' 소개 글자가 적힌 영역의 대형 배경 비디오 파일 경로]
-  rdHeroVideoUrl: '/videos/sensor_R&D_v2.mp4', // sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지의 메인 최상단 배경 비디오 (기계 로봇팔 장치 동작 영상)]
-  rdHeroSloganKR: '세상을 감지하는 정밀함, 센서나인(주)의 원천기술',
+  carouselVideoUrl: 'https://okces100-hash.github.io/my-media/sensor_main_v1.mp4', // sensor_image_video_carousel - [위치: 홈(메인) 화면 슬라이드 쇼 바로 아래, '센서나인 주식회사 기술연구원...' 소개 글자가 적힌 영역의 대형 배경 비디오 파일 경로]
+  rdHeroVideoUrl: 'https://okces100-hash.github.io/my-media/sensor_R&D_v2.mp4', // sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지의 메인 최상단 배경 비디오 (기계 로봇팔 장치 동작 영상)]
+  rdHeroSloganKR: '세상을 감지하는 정밀함, 센서나인의 원천기술',
   rdHeroSloganEN: 'Sensing the World with Precision, SensorNine\'s Original R&D Tech',
   rdHeroSubSloganKR: '가전 및 다양한 제어 시스템의 핵심이 되는 정밀 센서 기술력으로, 타협 없는 철저한 품질 관리와 지속적인 기술 혁신을 통해 최적의 맞춤형 솔루션을 제공합니다.',
   rdHeroSubSloganEN: 'With our precision sensor technology at the heart of home appliances and various control systems, we provide optimal customized solutions through uncompromising quality control and continuous technical innovation.',
   
   rdTech1TitleKR: '고정밀 NTC 열적외선 감지 기술',
   rdTech1TitleEN: 'High-Precision NTC Thermal Sensing',
-  rdTech1DescKR: '특허받은 NTC 박막 써미스터 반도체 칩 기술을 활용하여, 비접촉식 및 가혹한 환경에서도 열대류 오차를 0.01°C 극소 범위 내에서 실시간 제어 및 추출하는 핵심 기술입니다.',
+  rdTech1DescKR: 'NTC 박막 써미스터 반도체 칩 기술을 활용하여, 비접촉식 및 가혹한 환경에서도 열대류 오차를 0.01°C 극소 범위 내에서 실시간 제어 및 추출하는 핵심 기술입니다.',
   rdTech1DescEN: 'Utilizing patented NTC thin-film semiconductor chips to extract real-time ambient thermal fluctuations within a 0.01°C error boundary even in hazardous high-pressure situations.',
-  rdTech1VideoUrl: '/videos/sensor_R&D_v3.mp4', // sensor_image_video_tech1 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 1번 - 카메라 렌즈 조리개 장비 동작 비디오]
+  rdTech1VideoUrl: 'https://okces100-hash.github.io/my-media/sensor_R&D_v3.mp4', // sensor_image_video_tech1 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 1번 - 카메라 렌즈 조리개 장비 동작 비디오]
 
-  rdTech2TitleKR: '스마트 노이즈 필터링 알고리즘',
-  rdTech2TitleEN: 'Smart Noise Filtering Algorithm',
-  rdTech2DescKR: '배관 진동 및 유류 화합물에서 발생하는 정전기적 고주파 아티팩트를 소프트웨어 필터로 전처리하여, 보정 회로를 거치지 않고도 균일하고 안정적인 실시간 시그널 출력을 보장합니다.',
-  rdTech2DescEN: 'Pre-filters high-frequency vibration and electrostatic noise artifact through custom signal processing models, ensuring steady calibration outputs without complex wiring overhead.',
-  rdTech2VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4', // sensor_image_video_tech2 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 2번 - 모니터 화면 데이터 분석 시그널 비디오]
+  rdTech2TitleKR: '수소 및 가스 화염 노이즈 필터링 알고리즘',
+  rdTech2TitleEN: 'Hydrogen & Gas Flame Noise Filtering Algorithm',
+  rdTech2DescKR: '연소 기기 구동 시 배관 진동이나 불꽃 주변의 유류 화합물 노이즈를 하드웨어 및 소프트웨어 필터로 전처리합니다. 오작동을 유발하는 가짜 신호를 걸러내어, 화염감지기 및 수소화염감지 컨트롤러가 오보 없이 균일하고 안정적인 실시간 시그널 출력을 보장하도록 만듭니다.',
+  rdTech2DescEN: 'Pre-filters piping vibrations and oil compound noise near the flame using hardware and software filters during combustion equipment operation. By filtering out false signals that cause malfunctions, it ensures uniform and stable real-time signal output without false alarms for flame detectors and hydrogen flame detection controllers.',
+  rdTech2VideoUrl: 'https://okces100-hash.github.io/my-media/sensor_R&D_v5.mp4', // sensor_image_video_tech2 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 2번 - 모니터 화면 데이터 분석 시그널 비디오]
 
-  rdTech3TitleKR: '초소형 MEMS 센서 패키징',
-  rdTech3TitleEN: 'Ultra-miniature MEMS Packaging',
-  rdTech3DescKR: '이중 장력 차폐 마이크로 시스 케이싱 기술을 통해 극도로 미세하고 좁은 가전 부속 공간이나 배터리 팩 유압 셀 구조물 내부에 완전 밀착 실장하여 방수 및 진동 충격을 원천 방어합니다.',
-  rdTech3DescEN: 'Employs micro-sheath casing techniques allowing packaging into dense electronics and battery layout grids with robust waterproofing, thermal shielding, and shock resistance.',
-  rdTech3VideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4', // sensor_image_video_tech3 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 3번 - 반도체 회로 기판 분석 비디오]
+  rdTech3TitleKR: '초소형 고내열 센서 패키징',
+  rdTech3TitleEN: 'Ultra-compact High-heat Resistant Sensor Packaging',
+  rdTech3DescKR: '이중 장력 차폐 케이싱 기술을 통해 공간이 극도로 협소한 가전 부속품 내부나 진동이 심한 배관 등 까다로운 구조물 내부에 센서를 유격 없이 완전 밀착하여 장착합니다. 수분 침투를 완벽히 막아내는 강력한 방수 성능으로, 가혹한 진동 충격과 고열 환경 속에서도 수분으로 인한 오작동 없이 센서를 원천 보호합니다.',
+  rdTech3DescEN: 'Utilizing dual-tension shielding casing technology, sensors are mounted in complete contact with no clearance inside extremely narrow appliance parts or demanding structures such as highly vibrating pipes. With powerful waterproofing performance that completely blocks moisture penetration, it fundamentally protects sensors from malfunctions caused by moisture, even under harsh vibration impacts and high-temperature environments.',
+  rdTech3VideoUrl: 'https://okces100-hash.github.io/my-media/sensor_R&D_v6.mp4', // sensor_image_video_tech3 - [위치: '연구개발(R&D)' 페이지의 핵심 원천 기술 카드 3번 - 반도체 회로 기판 분석 비디오]
   
   // sensor_image_video_certs - [위치: 메인 홈 화면 맨 하단 '품질 및 특허 인증(Certifications)' 갤러리 섹션의 인증서 이미지 7개 설정]
-  certificatesJson: '[\n  {\n    "id": "cert-iso",\n    "titleKR": "ISO 인증서",\n    "titleEN": "ISO Certificate",\n    "imageUrl": "/images/sensor_certification_i28.jpg"\n  },\n  {\n    "id": "cert-utility-model",\n    "titleKR": "실용신안등록증(온도감지센서)",\n    "titleEN": "Utility Model Registration (Temperature Sensor)",\n    "imageUrl": "/images/sensor_certification_i27.jpg"\n  },\n  {\n    "id": "cert-venture",\n    "titleKR": "벤처기업확인서",\n    "titleEN": "Venture Business Confirmation",\n    "imageUrl": "/images/sensor_certification_i26.jpg"\n  },\n  {\n    "id": "cert-rnd-center",\n    "titleKR": "기업부설연구서 인정서",\n    "titleEN": "Corporate R&D Center Recognition",\n    "imageUrl": "/images/sensor_certification_i25.jpg"\n  },\n  {\n    "id": "cert-innobiz",\n    "titleKR": "이노비즈인증서",\n    "titleEN": "Inno-Biz Certificate",\n    "imageUrl": "/images/sensor_certification_i24.jpg"\n  },\n  {\n    "id": "cert-kimm-ir",\n    "titleKR": "KIMM 인증서 - 적외선센서",\n    "titleEN": "KIMM Certificate - Infrared Sensor",\n    "imageUrl": "/images/sensor_certification_i23.jpg"\n  },\n  {\n    "id": "cert-kimm-temp",\n    "titleKR": "KIMM 인증서 - 온도센서",\n    "titleEN": "KIMM Certificate - Temperature Sensor",\n    "imageUrl": "/images/sensor_certification_i3.jpg"\n  }\n]',
+  certificatesJson: '[\n  {\n    "id": "cert-iso",\n    "titleKR": "ISO 인증서",\n    "titleEN": "ISO Certificate",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i28.jpg"\n  },\n  {\n    "id": "cert-utility-model",\n    "titleKR": "실용신안등록증(온도감지센서)",\n    "titleEN": "Utility Model Registration (Temperature Sensor)",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i27.jpg"\n  },\n  {\n    "id": "cert-venture",\n    "titleKR": "벤처기업확인서",\n    "titleEN": "Venture Business Confirmation",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i26.jpg"\n  },\n  {\n    "id": "cert-rnd-center",\n    "titleKR": "기업부설연구서 인정서",\n    "titleEN": "Corporate R&D Center Recognition",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i25.jpg"\n  },\n  {\n    "id": "cert-innobiz",\n    "titleKR": "이노비즈인증서",\n    "titleEN": "Inno-Biz Certificate",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i24.jpg"\n  },\n  {\n    "id": "cert-kimm-ir",\n    "titleKR": "KIMM 인증서 - 적외선센서",\n    "titleEN": "KIMM Certificate - Infrared Sensor",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i23.jpg"\n  },\n  {\n    "id": "cert-kimm-temp",\n    "titleKR": "KIMM 인증서 - 온도센서",\n    "titleEN": "KIMM Certificate - Temperature Sensor",\n    "imageUrl": "https://okces100-hash.github.io/my-media/sensor_certification_i3.jpg"\n  }\n]',
 };
 
 export const INITIAL_SEO_METADATA: SEOMetadata = {
@@ -169,6 +169,52 @@ export const INITIAL_SEO_METADATA: SEOMetadata = {
 
 export const INITIAL_CMS_POSTS: CMSPost[] = [
   {
+    id: 'cms-3',
+    titleKR: 'New Energy Fair Osong 2026(NEO 2026) 참가 및 초청장 안내',
+    titleEN: 'Invitation & Notice of Participation: New Energy Fair Osong 2026 (NEO 2026)',
+    contentKR: `안녕하세요, 센서나인(주)입니다.
+
+센서나인(주)이 오는 7월, 중부권 최대 규모의 차세대 에너지 전문 박람회인 ‘2026 뉴에너지 페어 오송 (NEO 2026)’에 참가합니다.
+
+이번 전시회에서 센서나인은 당사의 독보적인 고정밀 NTC·PT·K-Type 온도센서 라인업과 함께, 미래 친환경 에너지 시장을 선도할 ‘수소연소 제어 및 센싱 핵심 솔루션’을 전격 선보일 예정입니다.
+
+당사의 차세대 기술력과 혁신 제품을 직접 확인하실 수 있는 자리를 마련하였사오니, 고객사 및 파트너사 관계자분들의 많은 관심과 방문을 부탁드립니다.
+
+전시회명: 2026 뉴에너지 페어 오송 (NEO 2026)
+일시: 2026년 7월 8일(수) ~ 7월 10일(금), 3일간
+관람시간: 10:00 ~ 17:00 (입장 마감 16:30)
+장소: 청주오스코 (OSCO)
+
+첨부된 초청장을 현장에서 제시하시면 무료 입장이 가능합니다.
+안내 포스터의 QR코드를 통해 사전등록 시 더욱 신속하게 입장하실 수 있습니다.
+
+새로운 에너지 트렌드 속에서 센서나인이 제시하는 안전과 효율의 가치를 부스에서 직접 경험해 보시기 바랍니다. 감사합니다.`,
+    contentEN: `Dear Customers and Partners,
+
+This is SensorNine Co., Ltd.
+
+We are pleased to announce that SensorNine Co., Ltd. will participate in the upcoming "2026 New Energy Fair Osong (NEO 2026)" this coming July, which is the largest next-generation energy professional exhibition in the central region of Korea.
+
+At this exhibition, SensorNine will present its unique lineup of high-precision NTC, Pt, and K-Type temperature sensors, alongside our "Core Hydrogen Combustion Control and Sensing Solutions" designed to lead the future of the eco-friendly green energy market.
+
+We have prepared a space where you can directly experience our next-generation technology and innovative products. We look forward to the interest and visits of our valued clients and partners.
+
+Exhibition: 2026 New Energy Fair Osong (NEO 2026)
+Date: July 8 (Wed) – July 10 (Fri), 2026 (3 days)
+Viewing Hours: 10:00 – 17:00 (Last Admission at 16:30)
+Venue: Cheongju OSCO (OSCO)
+
+You can enter for free by presenting the attached invitation at the venue.
+You can also enter more quickly by pre-registering through the QR code on the guidance poster.
+
+We hope you will experience the value of safety and efficiency presented by SensorNine amidst the new energy trends directly at our booth. Thank you.`,
+    categoryKR: '공지사항',
+    categoryEN: 'Notice',
+    date: '2026년 06월 30일',
+    author: '관리자',
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_news_i74.jpg',
+  },
+  {
     id: 'cms-1',
     titleKR: '센서나인(주) 공식 홈페이지 리뉴얼 오픈 안내',
     titleEN: 'Notice of SensorNine Co., Ltd. Official Website Renewal',
@@ -178,7 +224,7 @@ export const INITIAL_CMS_POSTS: CMSPost[] = [
     categoryEN: 'Notice',
     date: '2026년 06월 04일',
     author: '관리자',
-    imageUrl: '/images/sensor_news_i33.jpg',
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_news_i33.jpg',
   },
   {
     id: 'cms-2',
@@ -236,12 +282,12 @@ Thank you.`,
     categoryEN: 'Notice',
     date: '2025년 12월 07일',
     author: '관리자',
-    imageUrl: '/images/sensor_news_i29.jpg',
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_news_i29.jpg',
     images: [
-      '/images/sensor_news_i29.jpg',
-      '/images/sensor_news_i30.jpg',
-      '/images/sensor_news_i31.jpg',
-      '/images/sensor_news_i32.jpg'
+      'https://okces100-hash.github.io/my-media/sensor_news_i29.jpg',
+      'https://okces100-hash.github.io/my-media/sensor_news_i30.jpg',
+      'https://okces100-hash.github.io/my-media/sensor_news_i31.jpg',
+      'https://okces100-hash.github.io/my-media/sensor_news_i32.jpg'
     ]
   }
 ];
@@ -250,7 +296,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
   // =========================================================================
   // [제품 소개 이미지 및 브로슈어 수정 안내]
   // 1. 이미지: 각 제품 객체 아래에 `imageUrl: '이미지경로'`를 입력하여 이미지를 설정할 수 있습니다.
-  //    예시: imageUrl: '/images/products/my-product-1.jpg' 기입 시 해당 이미지가 출력됩니다.
+  //    예시: imageUrl: 'https://okces100-hash.github.io/my-media/products/my-product-1.jpg' 기입 시 해당 이미지가 출력됩니다.
   //          기본적으로 비워두거나 생략하면 각 카테고리에 맞는 고화질 벡터 아이콘이 자동으로 표시됩니다.
   // 2. 브로슈어: 구글 드라이브 공유 주소나 카탈로그 파일 링크를 `brochureUrl: '공유링크'` 로 넣어주시면
   //    제품군 카드와 상세 사양 표에 자동으로 "브로슈어 보기" 버튼이 렌더링됩니다.
@@ -271,7 +317,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '지중 열화 관리, 지열 냉난방 시스템 매립형 신뢰성 센싱',
     appEN: 'Geothermal heating & cooling systems ground burial sensing',
     imageAlt: '지열센서',
-    imageUrl: '/images/sensor_products_i34.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/products/sn-geo-14.png')를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i34.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소(예: 'https://okces100-hash.github.io/my-media/products/sn-geo-14.png')를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입의 예시]
   },
   {
@@ -287,7 +333,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '상업용 시스템에어컨 증발기 및 배관 흡입 온도 모니터링',
     appEN: 'Commercial system air conditioner evaporator temperature tracking',
     imageAlt: '에어컨용 온도센서',
-    imageUrl: '/images/sensor_products_i35.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i35.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -303,7 +349,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공조기 하우징 내벽 고정, 모터 프레임 외부 열전달 모니터링',
     appEN: 'HVAC chamber interior casing, motor surface thermal supervision',
     imageAlt: '브라켓 체결용 온도센서',
-    imageUrl: '/images/sensor_products_i36.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i36.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -319,7 +365,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '산업용 열 교환 매니폴드, 대류수 순환 압력 라인 피팅',
     appEN: 'Industrial heat exchanger manifolds, flow convection lines',
     imageAlt: '이중관 소켓 체결용 온도센서',
-    imageUrl: '/images/sensor_products_i37.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i37.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1WxbRKLp3fpRNTdCvi41b-CXrdxp4lRC2/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -335,7 +381,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가정용 보일러 냉온수 동관 배관 밀착 스냅 설치',
     appEN: 'Home boiler domestic water copper pipes snap attachment',
     imageAlt: '클립형 온도센서',
-    imageUrl: '/images/sensor_products_i38.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i38.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IeOvG4f24-w27iHLMGS0Gh7lH8c6k4M8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -351,7 +397,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '소형 항온수조 챔버 가동 지표, HVAC 내부 대류 제어',
     appEN: 'Chamber water bath monitoring, internal air flow HVAC measurement',
     imageAlt: '일반 온도센서',
-    imageUrl: '/images/sensor_products_i39.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i39.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -367,7 +413,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '일반 가전 기기 제어반 온도 검출, 덕트 공정 수집',
     appEN: 'General home appliances electronics casing, duct sensing systems',
     imageAlt: '일반 온도센서',
-    imageUrl: '/images/sensor_products_i40.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i40.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -383,7 +429,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '의료기기 단순 소모품, 냉장고 김치 장독 제어 센싱',
     appEN: 'Simple medical storage cabinets, cooling appliances temperature control',
     imageAlt: '일반 온도센서',
-    imageUrl: '/images/sensor_products_i41.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i41.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -399,7 +445,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가스 압축 컴프레셔 측벽 하우징, 엔진 크랭크케이스',
     appEN: 'Air compressor sidewall housing, engine crankcase thermal monitoring',
     imageAlt: '나사 체결용 온도센서 PF 1/8',
-    imageUrl: '/images/sensor_products_i42.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i42.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -415,7 +461,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '오토 클레이브 내화 기기 결합, 순환 열수 주입 배관 입구',
     appEN: 'Autoclave pressure chambers, hot water distribution pipe inlets',
     imageAlt: '나사 체결용 온도센서 PT 1/4',
-    imageUrl: '/images/sensor_products_i43.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i43.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -431,7 +477,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공조 히터 방열 핀 표면 나사 직접 체결 제어',
     appEN: 'HVAC heater radiation fins direct-screw temperature assembly',
     imageAlt: '나사 체결용 온도센서 PT 1/4',
-    imageUrl: '/images/sensor_products_i44.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i44.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1IUClw9PS_witTOGCktCJcbENJCmgWIaN/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -449,7 +495,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '발전 설비 주 스팀 수송 전용관, 석유 화학 플랜트 고온 순출액 관',
     appEN: 'Power plant steam pipeline monitoring, petrochemical plant high-flow lines',
     imageAlt: '대형 배관용 온도센서',
-    imageUrl: '/images/sensor_products_i45.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i45.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1VerXoLkBTItbC9K1PnoQZdCVIb8zVJUH/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -465,7 +511,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가정용 보일러 분배기 상하수관, 냉각 제어 루프 배관',
     appEN: 'Residential boiler circulation manifolds, water cooler circulation pipe loops',
     imageAlt: '소형 배관용 온도센서',
-    imageUrl: '/images/sensor_products_i46.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i46.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1ueFkurVzlDAyuyx4WihqEPpHXt44KvHG/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -483,7 +529,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '빌딩 스마트 공조 외풍 제어용, 스마트 농가 시설 원정 온도 검사',
     appEN: 'Commercial building outside air damper loops, smart farm greenhouse monitoring',
     imageAlt: '외기용 온도센서',
-    imageUrl: '/images/sensor_products_i47.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i47.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1TX8Q8PRp7Guggy2YJBbC9KrJKnHK9TBq/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -499,7 +545,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '정밀 전산 서버실 랙 장비 내부 공기 흡입구 틈새 마운트',
     appEN: 'Server rack cooling intake vent mounting, dynamic climate cabinet control',
     imageAlt: '실내용 와이어 센서',
-    imageUrl: '/images/sensor_products_i48.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i48.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -515,7 +561,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '상업 오피스 빌딩 중앙 집중식 난방 방 온도 제약 장비',
     appEN: 'Commercial workspace interior thermostat, climate-control ceiling vents',
     imageAlt: '실내용 리드 센서',
-    imageUrl: '/images/sensor_products_i49.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i49.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -533,7 +579,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '연구소 저온 냉동 보관 설비, 산업 스팀 라인 극오차 교정',
     appEN: 'Extremely low biochem cryo-chambers, steam calibration accuracy units',
     imageAlt: 'PT100 3선식 PT 1/2',
-    imageUrl: '/images/sensor_products_i50.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i50.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1wFNcNHhY78vtiEpLxj8RcV0i926rcONs/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -549,7 +595,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공조기 히팅 열교환 덕트, 플랜트 오일 순환 매니폴드 주 탱크',
     appEN: 'Auxiliary duct coil heat loop detectors, industrial hydraulic systems',
     imageAlt: 'PT100 3선식 PT 1/4',
-    imageUrl: '/images/sensor_products_i51.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i51.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1wFNcNHhY78vtiEpLxj8RcV0i926rcONs/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -565,7 +611,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '전기로 고열 노외 통제, 도자 소결 전력실 상시 진단',
     appEN: 'High-temp smelting electrical kilns, power stations heavy chambers',
     imageAlt: 'K-TYPE 센서 PT 1/2',
-    imageUrl: '/images/sensor_products_i52.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i52.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1XQtoftA8hFaOC5dK9-VwdR7IdwBHkZd8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -581,7 +627,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '플라스틱 압출기 가열 배럴 외부, 사출 금형 슬링 온도 지표',
     appEN: 'Plastic extrusion hot barrels, high-speed injection molds monitoring',
     imageAlt: 'K-TYPE 센서 PT 1/4',
-    imageUrl: '/images/sensor_products_i53.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i53.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1XQtoftA8hFaOC5dK9-VwdR7IdwBHkZd8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -597,7 +643,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '산업용 대용량 건조기 덕트 매립, 고중량 프레스 성형 금형',
     appEN: 'Large-scale industrial dryers venting ducts, heavy press casting',
     imageAlt: 'K-TYPE 브라켓형',
-    imageUrl: '/images/sensor_products_i54.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i54.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1XQtoftA8hFaOC5dK9-VwdR7IdwBHkZd8/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -613,7 +659,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '온풍 난방기 화재 예방 배기 과열 셧다운 차단기',
     appEN: 'Industrial air heater exhaust fire safety override cutoff switch',
     imageAlt: '수동 바이메탈',
-    imageUrl: '/images/sensor_products_i55.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i55.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -629,7 +675,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '고속 열선 히터 전력 안정, 냉난방 모터 배압 차전 필터',
     appEN: 'High-speed radiant wire power control, HVAC blower motor protection',
     imageAlt: '자동 바이메탈',
-    imageUrl: '/images/sensor_products_i56.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i56.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -645,7 +691,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '가정용 전기 오븐 안쪽 조절실, 대형 상업 식기세척 건조기 브레이커',
     appEN: 'High-power compact electric stoves, commercial hot drying breakers',
     imageAlt: '세라믹 바이메탈',
-    imageUrl: '/images/sensor_products_i57.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i57.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -663,7 +709,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '반도체 세정조 식각 슬러리 레벨 보존 정밀 수위 측정',
     appEN: 'Semiconductor clean tanks acid-slurry level tracking',
     imageAlt: '수위감지센서 PT 1/4',
-    imageUrl: '/images/sensor_products_i60.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i60.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -679,7 +725,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '중형 빌딩 오배수 정화 수배조 수위 레벨 스캐닝',
     appEN: 'Wastewater drainage collecting sinks, greywater sumps',
     imageAlt: '수위감지센서 PT 1/4',
-    imageUrl: '/images/sensor_products_i61.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i61.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -695,7 +741,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '정수 장비 가습 세척 내부 임시 정밀 수배수 스탠드',
     appEN: 'Water purification humidifying chambers temporary mount',
     imageAlt: '클립형 수위센서',
-    imageUrl: '/images/sensor_products_i62.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i62.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -711,7 +757,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '일반 정수 탱크 세척 조내 실시간 넘침 수용 가동 검사',
     appEN: 'Water purifiers storage tanks smart anti-flooding overflow alarm',
     imageAlt: '클립형 수위센서',
-    imageUrl: '/images/sensor_products_i63.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i63.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -727,7 +773,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '고온 압력 가열 스팀 보일러 내부 탕수 레벨 제어',
     appEN: 'Pressurized high-temp steam boilers internal hot-water level control',
     imageAlt: '고온용 수위감지센서',
-    imageUrl: '/images/sensor_products_i64.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i64.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -743,7 +789,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공장 공업 용수 유류 분리 저장실, 농업 펌프장 순찰',
     appEN: 'Industrial oil separator reservoirs, farming pumping canals',
     imageAlt: '수위감지센서 PT 1/2',
-    imageUrl: '/images/sensor_products_i65.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i65.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -761,7 +807,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '수소 충전소 디스펜서, 가스 연소 설비 역화 감지 및 차단 밸브 연동',
     appEN: 'Hydrogen charging dispensers, gas combustion flashback detection & valve control',
     imageAlt: '수소 역화감지센서',
-    imageUrl: '/images/sensor_products_i59_2.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i59_2.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -779,7 +825,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '보일러 연소 제어 화염 감시, 가스 연소 설비 안전 연동',
     appEN: 'Boiler combustion control flame monitoring, gas appliance safety interlock',
     imageAlt: '불꽃감지센서_반도체방식_L형',
-    imageUrl: '/images/sensor_products_i58.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i58.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1oyfrkCbONIA3730-S-a4mQky7QuZI6jP/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -795,7 +841,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '공간이 협소한 가스 온수기, 버너 노즐부 점화 직접 감지',
     appEN: 'Compact gas water heaters, direct burner nozzle ignition detection',
     imageAlt: '불꽃감지센서 와이어형',
-    imageUrl: '/images/sensor_products_i59.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i59.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1bsVy_SdbAzIRYDesQJMObaoF-c1NKuUp/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -811,7 +857,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '산업용 대형 연소로, 유리/금속 열처리 화염 모니터링, 방폭 영역 예방',
     appEN: 'Industrial large furnaces, glass/metal heat-treatment flame monitoring',
     imageAlt: '화염감지센서',
-    imageUrl: '/images/sensor_products_i59_1.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i59_1.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1odLsR5zvdeLqv6lp6rlOgDRiLfmRVEMg/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
 
@@ -829,7 +875,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '산업용 대형 연소기, 상업용 고용량 온수기 고전압 점화',
     appEN: 'Industrial large burners, commercial high-capacity water heater ignition',
     imageAlt: '점화트랜스 대형',
-    imageUrl: '/images/sensor_products_i71.png',
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i71.png',
     brochureUrl: 'https://drive.google.com/file/d/1qaaEE_xVH3cbz4XBO7FqBnWu7gu6ylOQ/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
     videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
   },
@@ -846,7 +892,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '중형 가정용/상업용 가스 보일러, 버너 버스팅 점화 제어',
     appEN: 'Medium residential/commercial gas boilers, burner bursting controls',
     imageAlt: '점화트랜스 중형',
-    imageUrl: '/images/sensor_products_i72.png',
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i72.png',
     brochureUrl: 'https://drive.google.com/file/d/1qaaEE_xVH3cbz4XBO7FqBnWu7gu6ylOQ/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
     videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
   },
@@ -863,7 +909,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '소형 친환경 가정용 가스 프리믹스 보일러 점화 플러그 방전',
     appEN: 'Small eco-friendly residential pre-mix gas boiler sparkling discharge',
     imageAlt: '점화트랜스 소형',
-    imageUrl: '/images/sensor_products_i73.png',
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i73.png',
     brochureUrl: 'https://drive.google.com/file/d/1olzZLKzoHcZwuMUVw20Xk1EqEkixZ-ys/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
     videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
   },
@@ -882,7 +928,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '온도 센서 손상 방지 가이드, 정체 유체 배관 직접 매몰 체결',
     appEN: 'Prevents physical sensor fluid erosion, direct well pipeline burial',
     imageAlt: '이중관 온도센서 케이스',
-    imageUrl: '/images/sensor_products_i66.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i66.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -898,7 +944,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '다공성 대류 씰 내부 센서 조립 시 외형 포팅 웰',
     appEN: 'General multi-point thermocouple casing assembly, potting well',
     imageAlt: '온도센서 케이스',
-    imageUrl: '/images/sensor_products_i67.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i67.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: 'https://drive.google.com/file/d/1WxbRKLp3fpRNTdCvi41b-CXrdxp4lRC2/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -914,7 +960,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '전도 열전달 극대화 기기 고온 마운트, 배관 표면 밀착 소켓',
     appEN: 'Maximizing surface thermal conduction speed, radiator side socket',
     imageAlt: '온도센서 황동 케이스',
-    imageUrl: '/images/sensor_products_i68.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i68.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -930,7 +976,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '강산성 세정 탱크 보호 덕트, 염분 바다 해수 측정관',
     appEN: 'Strong acids process shield conduit, marine saltwater storage guide',
     imageAlt: 'SUS 온도센서 케이스',
-    imageUrl: '/images/sensor_products_i69.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i69.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
@@ -946,7 +992,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appKR: '기존 배관 배관 나사산 규격 변환, 소형 센서 탈착 탭 보존',
     appEN: 'Reducing pipeline tapping diameter sizes, rapid sensor swaps',
     imageAlt: '온도센서 소켓',
-    imageUrl: '/images/sensor_products_i70.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i70.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
     brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   }
 ];
@@ -1055,7 +1101,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
   // =========================================================================
   // [장비 보유 현황 이미지 수정 안내]
   // 각 장비 객체 아래에 `imageUrl: '이미지경로'`를 입력하여 이미지를 설정할 수 있습니다.
-  // 예시: imageUrl: '/images/equipment/my-eq-1.jpg' 기입 시 해당 이미지가 출력됩니다.
+  // 예시: imageUrl: 'https://okces100-hash.github.io/my-media/equipment/my-eq-1.jpg' 기입 시 해당 이미지가 출력됩니다.
   // 기본적으로 비워두거나 생략하면 "보유 장비 실물 사진 준비중" 안내 카드가 표시됩니다.
   // =========================================================================
   {
@@ -1070,7 +1116,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '계측/분석',
     categoryEN: 'Measurement Scanner',
-    imageUrl: '/images/sensor_products_i4.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소(예: '/images/equipment/eq-1.png')를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i4.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소(예: 'https://okces100-hash.github.io/my-media/equipment/eq-1.png')를 입력하세요.
   },
   {
     id: 'eq-2',
@@ -1084,7 +1130,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '검사 설비',
     categoryEN: 'Density Verification',
-    imageUrl: '/images/sensor_products_i5.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i5.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-3',
@@ -1098,7 +1144,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '안전성 테스트',
     categoryEN: 'Pressure Leak Testing',
-    imageUrl: '/images/sensor_products_i13.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i13.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-4',
@@ -1112,7 +1158,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 4,
     categoryKR: '계측 장비',
     categoryEN: 'Real-time Signal Indicator',
-    imageUrl: '/images/sensor_products_i14.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i14.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-5',
@@ -1126,7 +1172,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '생산 조립',
     categoryEN: 'Automated Liquid Dispensing',
-    imageUrl: '/images/sensor_products_i6.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i6.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-6',
@@ -1140,7 +1186,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '환경 건조',
     categoryEN: 'Vacuum Baking',
-    imageUrl: '/images/sensor_products_i7.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i7.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-7',
@@ -1154,7 +1200,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '환경 건조',
     categoryEN: 'Convection Drying',
-    imageUrl: '/images/sensor_products_i17.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i17.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-8',
@@ -1168,7 +1214,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 3,
     categoryKR: '교정 설비',
     categoryEN: 'Liquids Calibration Bath',
-    imageUrl: '/images/sensor_products_i8.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i8.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-9',
@@ -1182,7 +1228,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '생산 조립',
     categoryEN: 'Ultrasonic Plastic Welding',
-    imageUrl: '/images/sensor_products_i9.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i9.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-10',
@@ -1196,7 +1242,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 2,
     categoryKR: '생산 조립',
     categoryEN: 'Vacuum Air Extraction',
-    imageUrl: '/images/sensor_products_i21.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i21.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-11',
@@ -1210,7 +1256,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 3,
     categoryKR: '생산 조립',
     categoryEN: 'Micro-Ultrasonic Cleaning',
-    imageUrl: '/images/sensor_products_i22.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i22.png', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-12',
@@ -1224,7 +1270,7 @@ export const EQUIPMENT_LIST: EquipmentSpec[] = [
     count: 1,
     categoryKR: '정밀 가공',
     categoryEN: 'Automated Tube Slicing',
-    imageUrl: '/images/sensor_products_i11.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
+    imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i11.jpg', // ◀ [장비 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
   },
   {
     id: 'eq-13',

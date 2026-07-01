@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { AppState, PageId, Language, CMSPost, ProductSpec, EquipmentSpec, Certificate } from '../types';
 import { getVideo } from './videoDb';
+import { KakaoMap } from './KakaoMap';
 import { PRODUCTS_LIST as STATIC_PRODUCTS_LIST, CERTIFICATES_LIST, TIMELINE_ITEMS, EQUIPMENT_LIST as STATIC_EQUIPMENT_LIST } from '../data';
 
 interface BrandLogoProps {
@@ -252,7 +253,7 @@ function ScrollLinkedHeroAndVideo({
         }}
         referrerPolicy="no-referrer"
       >
-        <source src={resolvedVideos['rdHero'] || customContent.rdHeroVideoUrl || "/videos/sensor_R&D_v2.mp4" /* sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지 최상단 대형 메인 비디오 배경 (기계 로봇팔 장치 동작 영상)] */} type="video/mp4" />
+        <source src={resolvedVideos['rdHero'] || customContent.rdHeroVideoUrl || "https://okces100-hash.github.io/my-media/sensor_R&D_v2.mp4" /* sensor_image_video_hero - [위치: '연구개발(R&D)' 페이지 최상단 대형 메인 비디오 배경 (기계 로봇팔 장치 동작 영상)] */} type="video/mp4" />
       </video>
 
       {/* Text Container Box on Top - Non-reactive and fully visible statics */}
@@ -349,6 +350,112 @@ export default function WebsiteView({
   const [equipmentFilter, setEquipmentFilter] = useState<string>('All');
   const [selectedEquipmentId, setSelectedEquipmentId] = useState<string>('eq-1');
 
+  const renderEquipmentDetail = (eq: EquipmentSpec) => {
+    if (!eq) return null;
+    return (
+      <div className="bg-white rounded-xl border border-slate-200/90 shadow-md overflow-hidden flex flex-col h-full animate-fade-in" style={{ contentVisibility: 'auto' }}>
+        {/* Top Title Bar */}
+        <div className="bg-slate-900 text-slate-400 px-6 py-4 flex justify-between items-center border-b border-slate-800 shrink-0">
+          <div className="space-y-0.5 text-left">
+            <span className="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">
+              {isKR ? '보유 가동 설비 현황 사양' : 'EQUIPMENT SYSTEM METRICS'}
+            </span>
+            <span className="text-white text-xs font-mono font-bold tracking-tight">
+              {eq.model} // SENSOR9_FACILITY_{eq.id.toUpperCase()}
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-green-400 font-bold flex items-center gap-1.5 bg-green-950/55 px-2.5 py-1 rounded border border-green-800/40 shrink-0">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+            OP_NORMAL
+          </span>
+        </div>
+
+        {/* Photo Representation / Equipment Status Image Area */}
+        <div className="bg-white aspect-video w-full relative sm:h-80 flex items-center justify-center p-6 select-none overflow-hidden shrink-0 border-b border-slate-200">
+          {eq.imageUrl ? (
+            <div className="relative w-full h-full flex items-center justify-center bg-transparent overflow-hidden">
+              <img 
+                src={eq.imageUrl} 
+                alt={eq.nameKR} 
+                className="w-full h-full object-contain max-h-[280px] rounded-lg shadow-sm" 
+                referrerPolicy="no-referrer"
+              />
+              <span className="absolute bottom-3 left-3 bg-slate-900 text-white font-mono text-[9px] px-2 py-0.5 rounded border border-slate-700/50">
+                📷 {isKR ? '실물 사진 등록 완료' : 'Verified Device Photo'}
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center text-center space-y-3.5 p-6 border-2 border-dashed border-slate-200 rounded-xl bg-white/70 max-w-sm mx-auto">
+              <div className="p-3.5 bg-slate-100 rounded-full text-slate-400">
+                <Camera size={26} strokeWidth={1.5} />
+              </div>
+              <div className="space-y-1">
+                <p className="font-bold text-xs text-slate-700">
+                  {isKR ? '보유 장비 실물 사진 준비중' : 'Equipment Photo Pending'}
+                </p>
+                <p className="text-[10px] text-slate-400 leading-relaxed max-w-[240px]">
+                  {isKR 
+                    ? '이 공정 장비의 실물 작동 사진 및 부품 실사 이미지는 순차적으로 업데이트 중입니다.' 
+                    : 'Real operational photographs of our manufacturing or testing system are currently being processed.'}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Content details block */}
+        <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between text-left">
+          <div className="space-y-5">
+            <div>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                {isKR ? '설비 카테고리 / 현황 사양' : 'CLASSIFICATION SPECIFICATION'}
+              </span>
+              <div className="flex flex-wrap items-center gap-2 mt-1">
+                <span className="text-xs font-bold text-slate-800 bg-slate-100 rounded px-2.5 py-1">
+                  {isKR ? eq.categoryKR : eq.categoryEN}
+                </span>
+                <span className="text-xs font-mono font-bold text-blue-600 bg-blue-50 border border-blue-100 rounded px-2.5 py-1">
+                  {isKR ? eq.specKR : eq.specEN}
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+                {isKR ? eq.nameKR : eq.nameEN}
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                {isKR ? eq.descKR : eq.descEN}
+              </p>
+            </div>
+          </div>
+
+          {/* Extra info metrics footer */}
+          <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+            <div className="flex items-center gap-4 text-xs">
+              <div className="space-y-0.5 text-left">
+                <span className="text-[10px] text-slate-400 font-bold block">{isKR ? '보유 수량' : 'QUANTITY'}</span>
+                <span className="font-bold text-slate-800">{isKR ? `${eq.count} 대 상시 가동 중` : `${eq.count} Units Active`}</span>
+              </div>
+              <div className="border-l border-slate-200 pl-4 space-y-0.5 text-left">
+                <span className="text-[10px] text-slate-400 font-bold block">{isKR ? '안정성 등급' : 'CERT LEVEL'}</span>
+                <span className="font-mono font-bold text-green-600">ITS-90 MASTER CAL</span>
+              </div>
+            </div>
+
+            <button 
+              onClick={() => onPageChange('contact')}
+              className="text-xs font-bold border border-slate-300 hover:border-slate-800 rounded px-4 py-2 bg-slate-50 hover:bg-slate-100 transition-colors flex items-center gap-1.5 self-stretch sm:self-auto justify-center"
+            >
+              <span>{isKR ? '원형/맞춤공정 문의' : 'Inquire Facility Spec'}</span>
+              <ArrowRight size={12} />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Hero Product Showcase Carousel State
   const [virtualIndex, setVirtualIndex] = useState<number>(1); // 1-4 correspond to slides 1-4, 0 is Clone of 4, 5 is Clone of 1
   const [isTransitionDisabled, setIsTransitionDisabled] = useState<boolean>(false);
@@ -356,6 +463,16 @@ export default function WebsiteView({
   const [slideProgress, setSlideProgress] = useState<number>(0);
 
   const heroSlideIndex = virtualIndex === 0 ? 3 : virtualIndex === 5 ? 0 : virtualIndex - 1;
+
+  const handlePrevSlide = () => {
+    if (virtualIndex <= 0 || virtualIndex >= 5) return;
+    setVirtualIndex((prev) => prev - 1);
+  };
+
+  const handleNextSlide = () => {
+    if (virtualIndex <= 0 || virtualIndex >= 5) return;
+    setVirtualIndex((prev) => prev + 1);
+  };
 
   // Drag/Swipe Gesture Refs & Handlers
   const dragStartRef = React.useRef<number | null>(null);
@@ -385,10 +502,10 @@ export default function WebsiteView({
     // Threshold of 60px to trigger transition
     if (diff > 60) {
       // Swipe Right -> View Prev Slide
-      setVirtualIndex((prev) => prev - 1);
+      handlePrevSlide();
     } else if (diff < -60) {
       // Swipe Left -> View Next Slide
-      setVirtualIndex((prev) => prev + 1);
+      handleNextSlide();
     }
     dragStartRef.current = null;
     setIsDragging(false);
@@ -457,7 +574,7 @@ export default function WebsiteView({
 
   // 1. Progress ticking interval (purely updates slideProgress from 0 to 100)
   useEffect(() => {
-    if (!heroSlidePlaying) return;
+    if (!heroSlidePlaying || virtualIndex === 0 || virtualIndex === 5) return;
     
     const intervalTime = 50; // ms
     const totalDuration = 5000; // 5 seconds
@@ -474,15 +591,17 @@ export default function WebsiteView({
     }, intervalTime);
 
     return () => clearInterval(interval);
-  }, [heroSlidePlaying]);
+  }, [heroSlidePlaying, virtualIndex]);
 
   // 2. Separate side-effect when progress reaches 100
   useEffect(() => {
     if (slideProgress >= 100) {
-      setVirtualIndex((prevIdx) => prevIdx + 1);
+      if (virtualIndex > 0 && virtualIndex < 5) {
+        setVirtualIndex((prevIdx) => prevIdx + 1);
+      }
       setSlideProgress(0);
     }
-  }, [slideProgress]);
+  }, [slideProgress, virtualIndex]);
 
   // 3. Reset progress when user manually changes slide
   useEffect(() => {
@@ -1089,7 +1208,7 @@ export default function WebsiteView({
                         <div 
                           className="flex flex-row w-full"
                           style={{ 
-                            transform: `translate3d(calc(-${virtualIndex * 100}% + ${dragOffset}px), 0, 0)`,
+                            transform: `translate3d(calc(-${Math.max(0, Math.min(5, virtualIndex)) * 100}% + ${dragOffset}px), 0, 0)`,
                             transition: isDragging || isTransitionDisabled ? 'none' : 'transform 500ms ease-out'
                           }}
                         >
@@ -1145,7 +1264,9 @@ export default function WebsiteView({
                                             type="button"
                                             onClick={(e) => {
                                               e.stopPropagation();
-                                              setVirtualIndex(dotIdx + 1);
+                                              if (virtualIndex > 0 && virtualIndex < 5) {
+                                                setVirtualIndex(dotIdx + 1);
+                                              }
                                             }}
                                             className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
                                               heroSlideIndex === dotIdx
@@ -1232,7 +1353,7 @@ export default function WebsiteView({
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setVirtualIndex((prev) => prev - 1);
+                      handlePrevSlide();
                     }}
                     className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 hover:bg-white border border-slate-200/50 shadow-md text-slate-700 flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
                     aria-label="Previous Slide"
@@ -1245,7 +1366,7 @@ export default function WebsiteView({
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setVirtualIndex((prev) => prev + 1);
+                      handleNextSlide();
                     }}
                     className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 hover:bg-white border border-slate-200/50 shadow-md text-slate-700 flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
                     aria-label="Next Slide"
@@ -1475,58 +1596,61 @@ export default function WebsiteView({
                     const displayList = featuredList.length >= 3 ? featuredList.slice(0, 3) : PRODUCTS_LIST.slice(0, 3);
 
                     return displayList.map((prod) => (
-                      <div key={prod.model} className="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-lg hover:border-slate-300 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+                      <div key={prod.model} className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-slate-300 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
                         <div>
                           {/* Image Box: Enlarge the picture beautifully */}
-                          <div className="w-full h-44 bg-gradient-to-b from-slate-50 to-slate-100/40 border border-slate-100 rounded-lg overflow-hidden flex items-center justify-center p-4 relative mb-4 shadow-3xs select-none">
+                          <div className="relative aspect-video w-full bg-white border-b border-slate-100 flex items-center justify-center overflow-hidden select-none">
                             {prod.imageUrl ? (
                               <img
                                 src={prod.imageUrl}
                                 alt={isKR ? prod.nameKR : prod.nameEN}
-                                className="max-w-full max-h-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500 ease-out"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                                 referrerPolicy="no-referrer"
                               />
                             ) : (
-                              <div className="flex flex-col items-center justify-center text-slate-300 gap-2 group-hover:text-slate-400 transition-colors">
+                              <div className="flex flex-col items-center justify-center text-slate-300 gap-2 group-hover:text-slate-400 transition-colors p-4">
                                 <Thermometer className="w-10 h-10 stroke-[1.5]" />
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-mono">SENSOR NINE SPEC</span>
                               </div>
                             )}
                           </div>
 
-                          <div className="flex justify-between items-center mb-3">
-                            <span className="text-[10px] font-mono font-extrabold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md">
-                              {prod.model}
-                            </span>
-                            <span className="text-[10px] font-black px-2.5 py-0.5 rounded-md tracking-wider uppercase" style={{ backgroundColor: secondaryColor + '10', color: secondaryColor }}>
-                              {prod.category} Sensor
-                            </span>
-                          </div>
-                          
-                          <h3 className="font-extrabold text-base text-slate-900 group-hover:text-blue-600 transition-colors mb-3 line-clamp-1">
-                            {isKR ? prod.nameKR : prod.nameEN}
-                          </h3>
-                          
-                          <div className="space-y-2 border-t border-b border-rose-100/40 py-3 mb-4">
-                            <div className="flex justify-between text-xs">
-                              <span className="text-slate-400 font-medium">{isKR ? '측정 범위' : 'Temp Range'}</span>
-                              <span className="font-mono font-bold text-slate-700">{prod.range}</span>
+                          <div className="p-5 pb-0">
+                            <div className="flex justify-between items-center mb-3">
+                              <span className="text-[10px] font-mono font-extrabold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md">
+                                {prod.model}
+                              </span>
+                              <span className="text-[10px] font-black px-2.5 py-0.5 rounded-md tracking-wider uppercase" style={{ backgroundColor: secondaryColor + '10', color: secondaryColor }}>
+                                {prod.category} Sensor
+                              </span>
                             </div>
-                            <div className="flex justify-between text-xs">
-                              <span className="text-slate-400 font-medium">{isKR ? '보증 정확도' : 'Accuracy'}</span>
-                              <span className="font-mono font-black text-slate-950">{prod.accuracy}</span>
-                            </div>
-                            <div className="flex justify-between text-xs">
-                              <span className="text-slate-400 font-medium">{isKR ? '설계 공법' : 'Structure'}</span>
-                              <span className="text-slate-700 truncate max-w-44 text-right font-medium">{isKR ? prod.ratingKR : prod.ratingEN}</span>
+                            
+                            <h3 className="font-extrabold text-base text-slate-900 group-hover:text-blue-600 transition-colors mb-3 line-clamp-1">
+                              {isKR ? prod.nameKR : prod.nameEN}
+                            </h3>
+                            
+                            <div className="space-y-2 border-t border-b border-rose-100/40 py-3 mb-4">
+                              <div className="flex justify-between text-xs">
+                                <span className="text-slate-400 font-medium">{isKR ? '측정 범위' : 'Temp Range'}</span>
+                                <span className="font-mono font-bold text-slate-700">{prod.range}</span>
+                              </div>
+                              <div className="flex justify-between text-xs">
+                                <span className="text-slate-400 font-medium">{isKR ? '보증 정확도' : 'Accuracy'}</span>
+                                <span className="font-mono font-black text-slate-950">{prod.accuracy}</span>
+                              </div>
+                              <div className="flex justify-between text-xs">
+                                <span className="text-slate-400 font-medium">{isKR ? '설계 공법' : 'Structure'}</span>
+                                <span className="text-slate-700 truncate max-w-44 text-right font-medium">{isKR ? prod.ratingKR : prod.ratingEN}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
 
-                        <div className="mt-2 flex items-center justify-between pt-2 border-t border-slate-50">
-                          <span className="text-[10px] text-slate-400 font-semibold truncate max-w-40">
-                            {isKR ? prod.appKR : prod.appEN}
-                          </span>
+                        <div className="p-5 pt-0">
+                          <div className="mt-2 flex items-center justify-between pt-2 border-t border-slate-50">
+                            <span className="text-[10px] text-slate-400 font-semibold truncate max-w-40">
+                              {isKR ? prod.appKR : prod.appEN}
+                            </span>
                           <button 
                             onClick={() => {
                               onPageChange('products');
@@ -1553,7 +1677,8 @@ export default function WebsiteView({
                           </button>
                         </div>
                       </div>
-                    ));
+                    </div>
+                  ));
                   })()}
                 </div>
               </section>
@@ -1736,12 +1861,26 @@ export default function WebsiteView({
                   {/* Slide-in horizontally linked to the scroll position progress */}
                   <ScrollLinkedSlide direction="right">
                     <div className="relative group max-w-full rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-slate-50">
-                      <img 
-                        src={customContent.aboutImageUrl || '/images/sensor_company_i1.jpeg' /* sensor_image_video_about - [위치: 메인 화면의 '회사 소개(About Us)' 섹션 우측 장비/신사옥 소개 배경 이미지] */} 
-                        alt="Sensor Nine Corporate Headquarters Building" 
-                        className="w-full h-auto block group-hover:scale-105 transition-all duration-700 ease-out"
-                        referrerPolicy="no-referrer"
-                      />
+                      {((customContent.aboutImageUrl || '').toLowerCase().endsWith('.mp4') || 
+                        (customContent.aboutImageUrl || '').toLowerCase().endsWith('.webm') || 
+                        (customContent.aboutImageUrl || '').toLowerCase().endsWith('.ogg') ||
+                        (customContent.aboutImageUrl || '').includes('video')) ? (
+                        <video 
+                          src={customContent.aboutImageUrl || 'https://okces100-hash.github.io/my-media/sensor_company_v4.mp4'} 
+                          className="w-full h-auto block group-hover:scale-105 transition-all duration-700 ease-out"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        />
+                      ) : (
+                        <img 
+                          src={customContent.aboutImageUrl || 'https://okces100-hash.github.io/my-media/sensor_company_i1.jpeg' /* sensor_image_video_about - [위치: 메인 화면의 '회사 소개(About Us)' 섹션 우측 장비/신사옥 소개 배경 이미지] */} 
+                          alt="Sensor Nine Corporate Headquarters Building" 
+                          className="w-full h-auto block group-hover:scale-105 transition-all duration-700 ease-out"
+                          referrerPolicy="no-referrer"
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end p-4">
                         <span className="text-[11px] text-white font-semibold">
                           {isKR ? '센서나인(주) 사옥 전경' : 'Sensor Nine Co., Ltd. Head Facility'}
@@ -2348,59 +2487,67 @@ export default function WebsiteView({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               
               {/* Left Column: Equipment Interactive Cards List */}
-              <div className="lg:col-span-5 space-y-3 max-h-[640px] overflow-y-auto pr-1">
+              <div className="lg:col-span-5 space-y-3 lg:max-h-[640px] lg:overflow-y-auto pr-1">
                 {EQUIPMENT_LIST.filter(eq => {
                   if (equipmentFilter === 'All') return true;
                   return eq.categoryKR.includes(equipmentFilter) || eq.categoryEN.includes(equipmentFilter);
                 }).map((eq) => {
                   const isSelected = selectedEquipmentId === eq.id;
                   return (
-                    <div
-                      key={eq.id}
-                      onClick={() => setSelectedEquipmentId(eq.id)}
-                      className={`p-4 rounded-lg border text-left cursor-pointer transition-all duration-200 relative overflow-hidden group ${
-                        isSelected 
-                          ? 'bg-white border-slate-900 shadow-md ring-1 ring-slate-900/5 translate-x-1' 
-                          : 'bg-white/80 hover:bg-white border-slate-200 shadow-2xs hover:shadow-xs'
-                      }`}
-                    >
-                      {/* Left accent bar */}
-                      <div 
-                        className="absolute left-0 top-0 bottom-0 w-1 transition-all"
-                        style={{ backgroundColor: isSelected ? primaryColor : 'transparent' }}
-                      />
+                    <div key={eq.id} className="space-y-3">
+                      <div
+                        onClick={() => setSelectedEquipmentId(eq.id)}
+                        className={`p-4 rounded-lg border text-left cursor-pointer transition-all duration-200 relative overflow-hidden group ${
+                          isSelected 
+                            ? 'bg-white border-slate-900 shadow-md ring-1 ring-slate-900/5 lg:translate-x-1' 
+                            : 'bg-white/80 hover:bg-white border-slate-200 shadow-2xs hover:shadow-xs'
+                        }`}
+                      >
+                        {/* Left accent bar */}
+                        <div 
+                          className="absolute left-0 top-0 bottom-0 w-1 transition-all"
+                          style={{ backgroundColor: isSelected ? primaryColor : 'transparent' }}
+                        />
 
-                      <div className="flex justify-between items-start gap-2 pl-1">
-                        <div>
-                          <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                            {isKR ? eq.categoryKR : eq.categoryEN}
-                          </span>
-                          <h3 className="font-bold text-sm text-slate-800 tracking-tight leading-tight group-hover:text-slate-900 transition-colors">
-                            {isKR ? eq.nameKR : eq.nameEN}
-                          </h3>
-                          <span className="text-[11px] font-mono text-slate-500 font-semibold mt-1 inline-block">
-                            {eq.model}
-                          </span>
+                        <div className="flex justify-between items-start gap-2 pl-1">
+                          <div>
+                            <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
+                              {isKR ? eq.categoryKR : eq.categoryEN}
+                            </span>
+                            <h3 className="font-bold text-sm text-slate-800 tracking-tight leading-tight group-hover:text-slate-900 transition-colors">
+                              {isKR ? eq.nameKR : eq.nameEN}
+                            </h3>
+                            <span className="text-[11px] font-mono text-slate-500 font-semibold mt-1 inline-block">
+                              {eq.model}
+                            </span>
+                          </div>
+
+                          {/* Quantity Badge */}
+                          <div className="text-right shrink-0">
+                            <span 
+                              className="text-[10px] font-bold px-2 py-0.5 rounded-full inline-block"
+                              style={{ 
+                                backgroundColor: isSelected ? primaryColor + '15' : 'rgba(241, 245, 249, 1)',
+                                color: isSelected ? primaryColor : 'rgba(100, 116, 139, 1)'
+                              }}
+                            >
+                              {isKR ? `총 ${eq.count}대` : `QTY: ${eq.count}`}
+                            </span>
+                          </div>
                         </div>
 
-                        {/* Quantity Badge */}
-                        <div className="text-right shrink-0">
-                          <span 
-                            className="text-[10px] font-bold px-2 py-0.5 rounded-full inline-block"
-                            style={{ 
-                              backgroundColor: isSelected ? primaryColor + '15' : 'rgba(241, 245, 249, 1)',
-                              color: isSelected ? primaryColor : 'rgba(100, 116, 139, 1)'
-                            }}
-                          >
-                            {isKR ? `총 ${eq.count}대` : `QTY: ${eq.count}`}
-                          </span>
-                        </div>
+                        {/* Micro Specs Summary inside card */}
+                        <p className="mt-2.5 text-[11px] text-slate-600 line-clamp-1 italic border-t border-slate-100/80 pt-2 font-medium">
+                          {isKR ? eq.specKR : eq.specEN}
+                        </p>
                       </div>
 
-                      {/* Micro Specs Summary inside card */}
-                      <p className="mt-2.5 text-[11px] text-slate-600 line-clamp-1 italic border-t border-slate-100/80 pt-2 font-medium">
-                        {isKR ? eq.specKR : eq.specEN}
-                      </p>
+                      {/* Mobile Inline Detailed View: displayed directly below the clicked item, hidden on desktop */}
+                      {isSelected && (
+                        <div className="block lg:hidden mt-2 border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                          {renderEquipmentDetail(eq)}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -2415,131 +2562,17 @@ export default function WebsiteView({
                 )}
               </div>
 
-              {/* Right Column: High-fidelity Detailed View and Equipment Photo Panel */}
-              <div className="lg:col-span-7">
+              {/* Right Column: High-fidelity Detailed View and Equipment Photo Panel (Visible on Desktop only) */}
+              <div className="hidden lg:block lg:col-span-7">
                 {(() => {
                   const eq = EQUIPMENT_LIST.find(e => e.id === selectedEquipmentId) || EQUIPMENT_LIST[0];
-                  if (!eq) return null;
-
-                  return (
-                    <div className="bg-white rounded-xl border border-slate-200/90 shadow-md overflow-hidden flex flex-col h-full animate-fade-in" style={{ contentVisibility: 'auto' }}>
-                      {/* Top Title Bar */}
-                      <div className="bg-slate-900 text-slate-400 px-6 py-4 flex justify-between items-center border-b border-slate-800 shrink-0">
-                        <div className="space-y-0.5">
-                          <span className="text-[9px] uppercase tracking-widest text-slate-500 font-bold block">
-                            {isKR ? '보유 가동 설비 현황 사양' : 'EQUIPMENT SYSTEM METRICS'}
-                          </span>
-                          <span className="text-white text-xs font-mono font-bold tracking-tight">
-                            {eq.model} // SENSOR9_FACILITY_{eq.id.toUpperCase()}
-                          </span>
-                        </div>
-                        <span className="text-[10px] font-mono text-green-400 font-bold flex items-center gap-1.5 bg-green-950/55 px-2.5 py-1 rounded border border-green-800/40">
-                          <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-                          OP_NORMAL
-                        </span>
-                      </div>
-
-                      {/* Photo Representation / Equipment Status Image Area */}
-                      <div className="bg-white aspect-video w-full relative sm:h-80 flex items-center justify-center p-6 select-none overflow-hidden shrink-0 border-b border-slate-200">
-                        {eq.imageUrl ? (
-                          <div className="relative w-full h-full flex items-center justify-center bg-transparent overflow-hidden">
-                            <img 
-                              src={eq.imageUrl} 
-                              alt={eq.nameKR} 
-                              className="w-full h-full object-contain max-h-[280px] rounded-lg shadow-sm" 
-                              referrerPolicy="no-referrer"
-                            />
-                            <span className="absolute bottom-3 left-3 bg-slate-900 text-white font-mono text-[9px] px-2 py-0.5 rounded border border-slate-700/50">
-                              📷 {isKR ? '실물 사진 등록 완료' : 'Verified Device Photo'}
-                            </span>
-                          </div>
-                        ) : (
-                          <div className="flex flex-col items-center justify-center text-center space-y-3.5 p-6 border-2 border-dashed border-slate-200 rounded-xl bg-white/70 max-w-sm">
-                            <div className="p-3.5 bg-slate-100 rounded-full text-slate-400">
-                              <Camera size={26} strokeWidth={1.5} />
-                            </div>
-                            <div className="space-y-1">
-                              <p className="font-bold text-xs text-slate-700">
-                                {isKR ? '보유 장비 실물 사진 준비중' : 'Equipment Photo Pending'}
-                              </p>
-                              <p className="text-[10px] text-slate-400 leading-relaxed max-w-[240px]">
-                                {isKR 
-                                  ? '이 공정 장비의 실물 작동 사진 및 부품 실사 이미지는 순차적으로 업데이트 중입니다.' 
-                                  : 'Real operational photographs of our manufacturing or testing system are currently being processed.'}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Content details block */}
-                      <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                        <div className="space-y-5">
-                          <div>
-                            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                              {isKR ? '설비 카테고리 / 현황 사양' : 'CLASSIFICATION SPECIFICATION'}
-                            </span>
-                            <div className="flex flex-wrap items-center gap-2 mt-1">
-                              <span className="text-xs font-bold text-slate-800 bg-slate-100 rounded px-2.5 py-1">
-                                {isKR ? eq.categoryKR : eq.categoryEN}
-                              </span>
-                              <span className="text-xs font-mono font-bold text-blue-600 bg-blue-50 border border-blue-100 rounded px-2.5 py-1">
-                                {isKR ? eq.specKR : eq.specEN}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-                              {isKR ? eq.nameKR : eq.nameEN}
-                            </h2>
-                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                              {isKR ? eq.descKR : eq.descEN}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Extra info metrics footer */}
-                        <div className="mt-8 pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                          <div className="flex items-center gap-4 text-xs">
-                            <div className="space-y-0.5">
-                              <span className="text-[10px] text-slate-400 font-bold block">{isKR ? '보유 수량' : 'QUANTITY'}</span>
-                              <span className="font-bold text-slate-800">{isKR ? `${eq.count} 대 상시 가동 중` : `${eq.count} Units Active`}</span>
-                            </div>
-                            <div className="border-l border-slate-200 pl-4 space-y-0.5">
-                              <span className="text-[10px] text-slate-400 font-bold block">{isKR ? '안정성 등급' : 'CERT LEVEL'}</span>
-                              <span className="font-mono font-bold text-green-600">ITS-90 MASTER CAL</span>
-                            </div>
-                          </div>
-
-                          <button 
-                            onClick={() => onPageChange('contact')}
-                            className="text-xs font-bold border border-slate-300 hover:border-slate-800 rounded px-4 py-2 bg-slate-50 hover:bg-slate-100 transition-colors flex items-center gap-1.5"
-                          >
-                            <span>{isKR ? '원형/맞춤공정 문의' : 'Inquire Facility Spec'}</span>
-                            <ArrowRight size={12} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
+                  return renderEquipmentDetail(eq);
                 })()}
               </div>
 
             </div>
 
-            {/* Footnote summary standard calibrations */}
-            <div className="mt-12 p-6 bg-slate-100 rounded-lg border border-slate-200">
-              <h4 className="text-xs font-bold text-slate-700 uppercase tracking-widest mb-2 flex items-center gap-2">
-                <CheckCircle2 size={14} className="text-slate-800" />
-                {isKR ? '정밀도 보정 및 국가 계측 소급성 체계 표준' : 'TRACEABLE PRECISION CALIBRATION METRICS'}
-              </h4>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                {isKR 
-                  ? '센서나인(주) 가좌동 본사에 구축된 초정밀 교정 유조(Calibration Oil Bath) 및 이중 환경 챔버 장비군은 한국표준과학연구원(KRISS) 및 공인 계측 기관과의 상시 1차 기준기 ITS-90 소급 연계를 유지하여, 당사에서 공급되는 모든 NTC 써미스터 저항 오차 한도를 0.05% 이내로 엄격하게 생산 관리합니다.'
-                  : 'All calibration oil baths and shock chambers deployed in SensorNine factory are traceably interlinked with national metrology standards (ITS-90 standard). This keeps all individual custom temperature probe shipments calibrated within ±0.05% default metrics.'}
-              </p>
-            </div>
+
           </div>
         )}
 
@@ -2580,7 +2613,15 @@ export default function WebsiteView({
                   <div className="bg-slate-50 border border-slate-100/80 rounded-xl p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                     <div className="space-y-4">
                       {/* Sub tech banner image container with visual styling */}
-                      <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-slate-900 border border-slate-200 shadow-xs">
+                      <div 
+                        onClick={() => {
+                          setActiveRdVideoUrl(resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "https://okces100-hash.github.io/my-media/sensor_R&D_v3.mp4");
+                          setActiveRdVideoTitle(isKR ? (customContent.rdTech1TitleKR || '고정밀 NTC 열적외선 감지 기술') : (customContent.rdTech1TitleEN || 'High-Precision NTC Thermal Sensing'));
+                        }}
+                        className="relative aspect-video w-full rounded-lg overflow-hidden bg-slate-900 border border-slate-200 shadow-xs cursor-pointer group/video hover:scale-[1.02] transition-all duration-300"
+                        title={isKR ? '작동원리 영상 재생' : 'Watch Principle Video'}
+                        id="rd-video-container-1"
+                      >
                         <video
                           key={resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "tech1-default"}
                           autoPlay
@@ -2590,10 +2631,16 @@ export default function WebsiteView({
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         >
-                          <source src={resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "/videos/sensor_R&D_v3.mp4" /* sensor_image_video_tech1 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 1번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
+                          <source src={resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "https://okces100-hash.github.io/my-media/sensor_R&D_v3.mp4" /* sensor_image_video_tech1 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 1번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
                         </video>
+                        {/* Hover Overlay with Play Button */}
+                        <div className="absolute inset-0 bg-black/35 opacity-0 group-hover/video:opacity-100 flex items-center justify-center transition-opacity duration-300 z-10">
+                          <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-xs border border-white/40 flex items-center justify-center text-white scale-90 group-hover/video:scale-100 transition-transform duration-300 shadow-lg">
+                            <Play size={18} fill="currentColor" className="ml-0.5" />
+                          </div>
+                        </div>
                         {/* 100% unmodified video background - no dim overlays */}
-                        <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-blue-600 text-white px-2 py-0.5 rounded shadow uppercase">
+                        <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-blue-600 text-white px-2 py-0.5 rounded shadow uppercase z-10">
                           NTC THERMAL
                         </span>
                       </div>
@@ -2618,7 +2665,7 @@ export default function WebsiteView({
                       </span>
                       <button
                         onClick={() => {
-                          setActiveRdVideoUrl(resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "/videos/sensor_R&D_v3.mp4" /* sensor_image_video_tech1_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 1번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
+                          setActiveRdVideoUrl(resolvedVideos['rdTech1'] || customContent.rdTech1VideoUrl || "https://okces100-hash.github.io/my-media/sensor_R&D_v3.mp4" /* sensor_image_video_tech1_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 1번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
                           setActiveRdVideoTitle(isKR ? (customContent.rdTech1TitleKR || '고정밀 NTC 열적외선 감지 기술') : (customContent.rdTech1TitleEN || 'High-Precision NTC Thermal Sensing'));
                         }}
                         className="flex items-center gap-1 px-3 py-1 rounded text-[10px] font-bold text-white shadow-3xs cursor-pointer hover:opacity-90"
@@ -2634,7 +2681,15 @@ export default function WebsiteView({
                   <div className="bg-slate-50 border border-slate-100/80 rounded-xl p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                     <div className="space-y-4">
                       {/* Sub tech banner image container with visual styling */}
-                      <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-slate-900 border border-slate-200 shadow-xs">
+                      <div 
+                        onClick={() => {
+                          setActiveRdVideoUrl(resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4");
+                          setActiveRdVideoTitle(isKR ? (customContent.rdTech2TitleKR || '수소 및 가스 화염 노이즈 필터링 알고리즘') : (customContent.rdTech2TitleEN || 'Hydrogen & Gas Flame Noise Filtering Algorithm'));
+                        }}
+                        className="relative aspect-video w-full rounded-lg overflow-hidden bg-slate-900 border border-slate-200 shadow-xs cursor-pointer group/video hover:scale-[1.02] transition-all duration-300"
+                        title={isKR ? '알고리즘 분석 영상 재생' : 'Watch Principle Video'}
+                        id="rd-video-container-2"
+                      >
                         <video
                           key={resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "tech2-default"}
                           autoPlay
@@ -2646,8 +2701,14 @@ export default function WebsiteView({
                         >
                           <source src={resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4" /* sensor_image_video_tech2 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 2번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
                         </video>
+                        {/* Hover Overlay with Play Button */}
+                        <div className="absolute inset-0 bg-black/35 opacity-0 group-hover/video:opacity-100 flex items-center justify-center transition-opacity duration-300 z-10">
+                          <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-xs border border-white/40 flex items-center justify-center text-white scale-90 group-hover/video:scale-100 transition-transform duration-300 shadow-lg">
+                            <Play size={18} fill="currentColor" className="ml-0.5" />
+                          </div>
+                        </div>
                         {/* 100% unmodified video background - no dim overlays */}
-                        <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-[#10B981] text-white px-2 py-0.5 rounded shadow uppercase">
+                        <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-[#10B981] text-white px-2 py-0.5 rounded shadow uppercase z-10">
                           SIGNAL FILTER
                         </span>
                       </div>
@@ -2655,13 +2716,13 @@ export default function WebsiteView({
                       <div className="space-y-2">
                         <h3 className="font-extrabold text-base text-slate-900 group-hover:text-emerald-600 transition-colors">
                           {isKR 
-                            ? (customContent.rdTech2TitleKR || '스마트 노이즈 필터링 알고리즘') 
-                            : (customContent.rdTech2TitleEN || 'Smart Noise Filtering Algorithm')}
+                            ? (customContent.rdTech2TitleKR || '수소 및 가스 화염 노이즈 필터링 알고리즘') 
+                            : (customContent.rdTech2TitleEN || 'Hydrogen & Gas Flame Noise Filtering Algorithm')}
                         </h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                           {isKR 
-                            ? (customContent.rdTech2DescKR || '배관 진동 및 유류 화합물에서 발생하는 정전기적 고주파 아티팩트를 소프트웨어 필터로 전처리하여, 보정 회로를 거치지 않고도 균일하고 안정적인 실시간 시그널 출력을 보장합니다.')
-                            : (customContent.rdTech2DescEN || 'Pre-filters high-frequency vibration and electrostatic noise artifact through custom signal processing models, ensuring steady calibration outputs without complex wiring overhead.')}
+                            ? (customContent.rdTech2DescKR || '연소 기기 구동 시 배관 진동이나 불꽃 주변의 유류 화합물 노이즈를 하드웨어 및 소프트웨어 필터로 전처리합니다. 오작동을 유발하는 가짜 신호를 걸러내어, 화염감지기 및 수소화염감지 컨트롤러가 오보 없이 균일하고 안정적인 실시간 시그널 출력을 보장하도록 만듭니다.')
+                            : (customContent.rdTech2DescEN || 'Pre-filters piping vibrations and oil compound noise near the flame using hardware and software filters during combustion equipment operation. By filtering out false signals that cause malfunctions, it ensures uniform and stable real-time signal output without false alarms for flame detectors and hydrogen flame detection controllers.')}
                         </p>
                       </div>
                     </div>
@@ -2673,7 +2734,7 @@ export default function WebsiteView({
                       <button
                         onClick={() => {
                           setActiveRdVideoUrl(resolvedVideos['rdTech2'] || customContent.rdTech2VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-searching-for-data-on-a-computer-screen-41584-large.mp4" /* sensor_image_video_tech2_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 2번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
-                          setActiveRdVideoTitle(isKR ? (customContent.rdTech2TitleKR || '스마트 노이즈 필터링 알고리즘') : (customContent.rdTech2TitleEN || 'Smart Noise Filtering Algorithm'));
+                          setActiveRdVideoTitle(isKR ? (customContent.rdTech2TitleKR || '수소 및 가스 화염 노이즈 필터링 알고리즘') : (customContent.rdTech2TitleEN || 'Hydrogen & Gas Flame Noise Filtering Algorithm'));
                         }}
                         className="flex items-center gap-1 px-3 py-1 rounded text-[10px] font-bold text-white shadow-3xs cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: secondaryColor }}
@@ -2688,7 +2749,15 @@ export default function WebsiteView({
                   <div className="bg-slate-50 border border-slate-100/80 rounded-xl p-6 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                     <div className="space-y-4">
                       {/* Sub tech banner image container with visual styling */}
-                      <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-slate-900 border border-slate-200 shadow-xs">
+                      <div 
+                        onClick={() => {
+                          setActiveRdVideoUrl(resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4");
+                          setActiveRdVideoTitle(isKR ? (customContent.rdTech3TitleKR || '초소형 고내열 센서 패키징') : (customContent.rdTech3TitleEN || 'Ultra-compact High-heat Resistant Sensor Packaging'));
+                        }}
+                        className="relative aspect-video w-full rounded-lg overflow-hidden bg-slate-900 border border-slate-200 shadow-xs cursor-pointer group/video hover:scale-[1.02] transition-all duration-300"
+                        title={isKR ? '정밀공정 영상 재생' : 'Watch Principle Video'}
+                        id="rd-video-container-3"
+                      >
                         <video
                           key={resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "tech3-default"}
                           autoPlay
@@ -2700,8 +2769,14 @@ export default function WebsiteView({
                         >
                           <source src={resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4" /* sensor_image_video_tech3 - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 3번 기술 카드 배경 루프 비디오] */} type="video/mp4" />
                         </video>
+                        {/* Hover Overlay with Play Button */}
+                        <div className="absolute inset-0 bg-black/35 opacity-0 group-hover/video:opacity-100 flex items-center justify-center transition-opacity duration-300 z-10">
+                          <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-xs border border-white/40 flex items-center justify-center text-white scale-90 group-hover/video:scale-100 transition-transform duration-300 shadow-lg">
+                            <Play size={18} fill="currentColor" className="ml-0.5" />
+                          </div>
+                        </div>
                         {/* 100% unmodified video background - no dim overlays */}
-                        <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-slate-700 text-white px-2 py-0.5 rounded shadow uppercase">
+                        <span className="absolute top-2 left-2 text-[8px] font-mono font-bold bg-slate-700 text-white px-2 py-0.5 rounded shadow uppercase z-10">
                           MEMS MODULE
                         </span>
                       </div>
@@ -2709,13 +2784,13 @@ export default function WebsiteView({
                       <div className="space-y-2">
                         <h3 className="font-extrabold text-base text-slate-900 group-hover:text-blue-600 transition-colors">
                           {isKR 
-                            ? (customContent.rdTech3TitleKR || '초소형 MEMS 센서 패키징') 
-                            : (customContent.rdTech3TitleEN || 'Ultra-miniature MEMS Packaging')}
+                            ? (customContent.rdTech3TitleKR || '초소형 고내열 센서 패키징') 
+                            : (customContent.rdTech3TitleEN || 'Ultra-compact High-heat Resistant Sensor Packaging')}
                         </h3>
                         <p className="text-xs text-slate-500 leading-relaxed">
                           {isKR 
-                            ? (customContent.rdTech3DescKR || '이중 장력 차폐 마이크로 시스 케이싱 기술을 통해 극도로 미세하고 좁은 가전 부속 공간이나 배터리 팩 유압 셀 구조물 내부에 완전 밀착 실장하여 방수 및 진동 충격을 원천 방어합니다.')
-                            : (customContent.rdTech3DescEN || 'Employs micro-sheath casing techniques allowing packaging into dense electronics and battery layout grids with robust waterproofing, thermal shielding, and shock resistance.')}
+                            ? (customContent.rdTech3DescKR || '이중 장력 차폐 케이싱 기술을 통해 공간이 극도로 협소한 가전 부속품 내부나 진동이 심한 배관 등 까다로운 구조물 내부에 센서를 유격 없이 완전 밀착하여 장착합니다. 수분 침투를 완벽히 막아내는 강력한 방수 성능으로, 가혹한 진동 충격과 고열 환경 속에서도 수분으로 인한 오작동 없이 센서를 원천 보호합니다.')
+                            : (customContent.rdTech3DescEN || 'Utilizing dual-tension shielding casing technology, sensors are mounted in complete contact with no clearance inside extremely narrow appliance parts or demanding structures such as highly vibrating pipes. With powerful waterproofing performance that completely blocks moisture penetration, it fundamentally protects sensors from malfunctions caused by moisture, even under harsh vibration impacts and high-temperature environments.')}
                         </p>
                       </div>
                     </div>
@@ -2727,7 +2802,7 @@ export default function WebsiteView({
                       <button
                         onClick={() => {
                           setActiveRdVideoUrl(resolvedVideos['rdTech3'] || customContent.rdTech3VideoUrl || "https://assets.mixkit.co/videos/preview/mixkit-computer-processor-and-circuit-board-details-41582-large.mp4" /* sensor_image_video_tech3_btn - [위치: '연구개발(R&D)' 페이지 '원천 기술' 섹션의 3번 카드 우측 하단 재생 버튼 클릭 시 모달창에서 재생되는 비디오] */);
-                          setActiveRdVideoTitle(isKR ? (customContent.rdTech3TitleKR || '초소형 MEMS 센서 패키징') : (customContent.rdTech3TitleEN || 'Ultra-miniature MEMS Packaging'));
+                          setActiveRdVideoTitle(isKR ? (customContent.rdTech3TitleKR || '초소형 고내열 센서 패키징') : (customContent.rdTech3TitleEN || 'Ultra-compact High-heat Resistant Sensor Packaging'));
                         }}
                         className="flex items-center gap-1 px-3 py-1 rounded text-[10px] font-bold text-white shadow-3xs cursor-pointer hover:opacity-90"
                         style={{ backgroundColor: primaryColor }}
@@ -3056,7 +3131,7 @@ export default function WebsiteView({
                 return parsed.map((c) => ({
                   ...c,
                   imageUrl: (c.imageUrl && !c.imageUrl.startsWith('http') && !c.imageUrl.startsWith('/') && !c.imageUrl.startsWith('data:'))
-                    ? `/images/${c.imageUrl}`
+                    ? `https://okces100-hash.github.io/my-media/${c.imageUrl}`
                     : c.imageUrl
                 }));
               }
@@ -3479,19 +3554,8 @@ export default function WebsiteView({
                   </div>
                 </div>
 
-                {/* Real interactive Google Map (Embed without API key for simplicity & security) */}
-                <div className="border border-slate-200 rounded-lg overflow-hidden bg-slate-100 relative h-60 shadow-2xs">
-                  <iframe
-                    title="SensorNine Location Map"
-                    src={`https://maps.google.com/maps?q=${encodeURIComponent('인천광역시 서구 백범로 782')}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
+                {/* Real interactive Kakao/Daum Roughmap */}
+                <KakaoMap />
               </div>
 
               {/* Right Column: Contact Us Input Form */}
@@ -3778,11 +3842,11 @@ export default function WebsiteView({
                   </div>
                 </div>
               ) : selectedPost.imageUrl ? (
-                <div className="w-full aspect-[16/10] sm:aspect-[16/9] mb-4 bg-slate-100 rounded-xl overflow-hidden border border-slate-100/60 shadow-2xs">
+                <div className="w-full mb-4 bg-slate-100 rounded-xl overflow-hidden border border-slate-100/60 shadow-2xs">
                   <img
                     src={selectedPost.imageUrl}
                     alt={isKR ? selectedPost.titleKR : selectedPost.titleEN}
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto block"
                     referrerPolicy="no-referrer"
                   />
                 </div>

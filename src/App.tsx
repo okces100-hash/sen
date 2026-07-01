@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AppState, PageId, Language, Inquiry } from './types';
 import { 
   INITIAL_CUSTOM_CONTENT, 
@@ -12,9 +13,32 @@ import WebsiteView from './components/WebsiteView';
 
 const LOCAL_STORAGE_KEY = 'sensornine_state_v3';
 
+const pathToPageId = (path: string): PageId => {
+  const cleanPath = path.replace(/^\//, '').toLowerCase();
+  if (!cleanPath || cleanPath === 'home') return 'home';
+  if (cleanPath === 'about') return 'about';
+  if (cleanPath === 'products') return 'products';
+  if (cleanPath === 'equipment') return 'equipment';
+  if (cleanPath === 'rd') return 'rd';
+  if (cleanPath === 'quality') return 'quality';
+  if (cleanPath === 'notices' || cleanPath === 'notice') return 'notices';
+  if (cleanPath === 'contact') return 'contact';
+  return 'home';
+};
+
+const pageIdToPath = (page: PageId): string => {
+  if (page === 'home') return '/';
+  if (page === 'notices') return '/notice';
+  return `/${page}`;
+};
+
 export default function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   // Initialize AppState from LocalStorage if active, otherwise use defaults
   const [state, setState] = useState<AppState>(() => {
+    const initialPage = pathToPageId(window.location.pathname);
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (saved) {
@@ -22,7 +46,7 @@ export default function App() {
         // Ensure robust structure on restore
         return {
           currentLang: parsed.currentLang || 'KR',
-          currentPage: parsed.currentPage || 'home',
+          currentPage: initialPage,
           previewMode: parsed.previewMode || 'desktop',
           styling: {
             primaryColor: parsed.styling?.primaryColor || '#2563EB',
@@ -44,7 +68,7 @@ export default function App() {
 
     return {
       currentLang: 'KR',
-      currentPage: 'home',
+      currentPage: initialPage,
       previewMode: 'desktop',
       styling: {
         primaryColor: '#2563EB',
@@ -70,6 +94,14 @@ export default function App() {
     }
   }, [state]);
 
+  // Sync state.currentPage with URL pathname (important for browser back/forward buttons)
+  useEffect(() => {
+    const pageFromPath = pathToPageId(location.pathname);
+    if (state.currentPage !== pageFromPath) {
+      setState(prev => ({ ...prev, currentPage: pageFromPath }));
+    }
+  }, [location.pathname]);
+
   // Sync document title with SEO meta title based on current language
   useEffect(() => {
     try {
@@ -81,7 +113,13 @@ export default function App() {
 
   // Page Switcher
   const handlePageChange = (page: PageId) => {
-    setState(prev => ({ ...prev, currentPage: page }));
+    const targetPath = pageIdToPath(page);
+    if (location.pathname !== targetPath) {
+      navigate(targetPath);
+    } else {
+      // Just in case same path, update state currentPage
+      setState(prev => ({ ...prev, currentPage: page }));
+    }
   };
 
   // Language Switcher
