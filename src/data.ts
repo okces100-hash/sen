@@ -877,7 +877,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     imageAlt: '점화트랜스 대형',
     imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i71.png',
     brochureUrl: 'https://drive.google.com/file/d/1qaaEE_xVH3cbz4XBO7FqBnWu7gu6ylOQ/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
-    videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
+    videoUrl: 'https://drive.google.com/file/d/1jUBUTIhR8hlWLcVsGgEESVxF6NhmmrEQ/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
   },
   {
     id: 'prod-ign-medium',
@@ -894,7 +894,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     imageAlt: '점화트랜스 중형',
     imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i72.png',
     brochureUrl: 'https://drive.google.com/file/d/1qaaEE_xVH3cbz4XBO7FqBnWu7gu6ylOQ/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
-    videoUrl: 'https://drive.google.com/file/d/1TQbG7mTMapNrQr8xMy0ENT0xp7pmyUr2/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
+    videoUrl: 'https://drive.google.com/file/d/1jUBUTIhR8hlWLcVsGgEESVxF6NhmmrEQ/view?usp=drive_link', // ◀ [구글 드라이브 동작 영상 주소 기입]: 여기에 해당 제품 동작 영상 주소를 입력하세요.
   },
   {
     id: 'prod-ign-small',
@@ -945,7 +945,7 @@ export const PRODUCTS_LIST: ProductSpec[] = [
     appEN: 'General multi-point thermocouple casing assembly, potting well',
     imageAlt: '온도센서 케이스',
     imageUrl: 'https://okces100-hash.github.io/my-media/sensor_products_i67.png', // ◀ [제품 이미지 경로 수정]: 여기에 이미지 주소를 입력하세요.
-    brochureUrl: 'https://drive.google.com/file/d/1WxbRKLp3fpRNTdCvi41b-CXrdxp4lRC2/view?usp=drive_link', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
+    brochureUrl: '', // ◀ [구글 드라이브 브로슈어 주소 기입]: 여기에 해당 제품 브로슈어 주소를 입력하세요.
   },
   {
     id: 'prod-case-b3',

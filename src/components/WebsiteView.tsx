@@ -668,11 +668,11 @@ export default function WebsiteView({
       case '외기용온도센서':
         return (cat.includes('외기') || name.includes('외기') || model.includes('out')) && !name.includes('실내') && !model.includes('in-');
       case '실내온도센서':
-        return cat.includes('실내') || name.includes('실내') || model.includes('in-');
+        return (cat.includes('실내') || name.includes('실내') || model.includes('in-')) && !name.includes('외기') && !model.includes('out');
       case 'K-TYPE센서':
-        return cat.includes('k-type') || name.includes('k-type') || model.includes('ktype') || name.includes('pt100') || model.includes('pt100');
+        return (cat.includes('k-type') || name.includes('k-type') || model.includes('ktype') || name.includes('pt100') || model.includes('pt100')) && !name.includes('바이메탈') && !model.includes('bim');
       case '바이메탈센서':
-        return cat.includes('바이메탈') || name.includes('바이메탈') || model.includes('bim');
+        return (cat.includes('바이메탈') || name.includes('바이메탈') || model.includes('bim')) && !name.includes('pt100') && !model.includes('pt100') && !name.includes('k-type') && !model.includes('ktype');
       case '불꽃/화염 감지센서':
         return cat.includes('불꽃') || cat.includes('화염') || name.includes('불꽃') || name.includes('화염') || model.includes('flame') || model.includes('flm');
       case '역화감지센서':
@@ -705,13 +705,13 @@ export default function WebsiteView({
     if (cat.includes('외기') || name.includes('외기') || model.includes('out')) {
       return isKR ? '외기용온도센서' : 'Outdoor Temp Sensor';
     }
-    if (cat.includes('실내')) {
+    if (cat.includes('실내') && !name.includes('외기') && !model.includes('out')) {
       return isKR ? '실내온도센서' : 'Indoor Temp Sensor';
     }
-    if (cat.includes('k-type') || name.includes('k-type') || model.includes('ktype') || name.includes('pt100') || model.includes('pt100')) {
+    if ((cat.includes('k-type') || name.includes('k-type') || model.includes('ktype') || name.includes('pt100') || model.includes('pt100')) && !name.includes('바이메탈') && !model.includes('bim')) {
       return isKR ? 'K-TYPE센서' : 'K-Type Sensor';
     }
-    if (cat.includes('바이메탈') || name.includes('바이메탈') || model.includes('bim')) {
+    if ((cat.includes('바이메탈') || name.includes('바이메탈') || model.includes('bim')) && !name.includes('pt100') && !model.includes('pt100') && !name.includes('k-type') && !model.includes('ktype')) {
       return isKR ? '바이메탈센서' : 'Bi-Metal Sensor';
     }
     if (cat.includes('불꽃') || cat.includes('화염') || name.includes('불꽃') || name.includes('화염') || model.includes('flame') || model.includes('flm')) {
@@ -2206,16 +2206,18 @@ export default function WebsiteView({
 
                         {/* Footer Actions */}
                         <div className="p-4 pt-3 border-t border-slate-100 mt-2 bg-slate-50/40 flex flex-col gap-2">
-                          <a
-                            href={prod.brochureUrl || 'https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J?usp=sharing'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full h-8 rounded text-center text-[11px] font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all flex items-center justify-center gap-1 cursor-pointer select-none border border-transparent shadow-xs"
-                            id={`btn-brochure-${prod.model}`}
-                          >
-                            <FileText size={12} strokeWidth={2.5} />
-                            {isKR ? '브로슈어 보기' : 'View Brochure'}
-                          </a>
+                          {prod.brochureUrl && (
+                            <a
+                              href={prod.brochureUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full h-8 rounded text-center text-[11px] font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all flex items-center justify-center gap-1 cursor-pointer select-none border border-transparent shadow-xs"
+                              id={`btn-brochure-${prod.model}`}
+                            >
+                              <FileText size={12} strokeWidth={2.5} />
+                              {isKR ? '브로슈어 보기' : 'View Brochure'}
+                            </a>
+                          )}
                           {prod.videoUrl !== undefined && (
                             <a
                               href={prod.videoUrl || 'https://drive.google.com'}
@@ -2305,16 +2307,18 @@ export default function WebsiteView({
                             </td>
                             <td className="p-4 pr-6 text-center whitespace-nowrap">
                               <div className="flex flex-col items-center justify-center gap-1">
-                                <a
-                                  href={prod.brochureUrl || 'https://drive.google.com/drive/folders/1A2B3C4D5E6F7G8H9I0J?usp=sharing'}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-800 hover:text-blue-600 border border-slate-200 hover:border-blue-400 bg-white hover:bg-slate-50 shadow-3xs rounded px-2 py-1 transition-all cursor-pointer w-16 justify-center"
-                                  id={`table-brochure-${prod.model}`}
-                                >
-                                  <FileText size={11} strokeWidth={2.5} />
-                                  <span>{isKR ? '보기' : 'View'}</span>
-                                </a>
+                                {prod.brochureUrl && (
+                                  <a
+                                    href={prod.brochureUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-800 hover:text-blue-600 border border-slate-200 hover:border-blue-400 bg-white hover:bg-slate-50 shadow-3xs rounded px-2 py-1 transition-all cursor-pointer w-16 justify-center"
+                                    id={`table-brochure-${prod.model}`}
+                                  >
+                                    <FileText size={11} strokeWidth={2.5} />
+                                    <span>{isKR ? '보기' : 'View'}</span>
+                                  </a>
+                                )}
                                 {prod.videoUrl !== undefined && (
                                   <a
                                     href={prod.videoUrl || 'https://drive.google.com'}
@@ -3553,7 +3557,7 @@ export default function WebsiteView({
                     </p>
                     <p className="flex items-center gap-2.5">
                       <Mail size={16} className="text-slate-400 shrink-0" />
-                      <span>Email: sensor9@hanmail.net</span>
+                      <span>Email: sensor9@sensor9.co.kr</span>
                     </p>
                   </div>
                 </div>
@@ -3734,7 +3738,7 @@ export default function WebsiteView({
                     <span className="hidden sm:inline text-slate-800">|</span>
                     <span><strong>Fax</strong>: 032.578.9026</span>
                     <span className="hidden sm:inline text-slate-800">|</span>
-                    <span><strong>E-mail</strong>: sensor9@hanmail.net</span>
+                    <span><strong>E-mail</strong>: sensor9@sensor9.co.kr</span>
                   </div>
                 ) : (
                   <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-x-4 gap-y-1 w-full">
@@ -3750,7 +3754,7 @@ export default function WebsiteView({
                     <span className="hidden sm:inline text-slate-800">|</span>
                     <span><strong>Fax</strong>: +82-32-578-9026</span>
                     <span className="hidden sm:inline text-slate-800">|</span>
-                    <span><strong>E-mail</strong>: sensor9@hanmail.net</span>
+                    <span><strong>E-mail</strong>: sensor9@sensor9.co.kr</span>
                   </div>
                 )}
               </div>
